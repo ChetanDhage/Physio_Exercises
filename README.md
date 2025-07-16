@@ -75,10 +75,6 @@ This project is a comprehensive web platform designed for physiotherapy exercise
 
 - Optimized for better search engine visibility.
 
-### Mobile Application
-
-- A dedicated mobile application for patients to access exercise routines and appointments.
-
 ## Technologies Used
 
 - **Frontend:** (To be updated — e.g., React, HTML, CSS, etc.)
