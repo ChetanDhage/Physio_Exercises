@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <!-- Background -->
+  <rect width="300" height="200" rx="15" fill="#f5f5f5"/>
+  
+  <!-- Package Icon -->
+  <rect x="100" y="40" width="100" height="80" rx="10" fill="#2196F3"/>
+  <text x="150" y="85" font-family="Arial" font-size="16" text-anchor="middle" fill="white">6 MONTHS</text>
+  <text x="150" y="105" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="white">$249</text>
+  
+  <!-- Checkmark -->
+  <circle cx="150" cy="150" r="20" fill="#4CAF50"/>
+  <path d="M140,150 L147,157 L160,144" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Savings Badge -->
+  <g transform="translate(210, 50) rotate(15)">
+    <rect x="0" y="0" width="60" height="25" rx="12.5" fill="#FF9800"/>
+    <text x="30" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">SAVE 15%</text>
+  </g>
+  
+  <!-- Features -->
+  <g transform="translate(50, 140)">
+    <circle cx="5" cy="5" r="3" fill="#2196F3"/>
+    <circle cx="5" cy="20" r="3" fill="#2196F3"/>
+    <circle cx="5" cy="35" r="3" fill="#2196F3"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="150" y="25" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Half-Yearly Package</text>
+</svg>
