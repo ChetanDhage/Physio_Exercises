@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Subscription Package | Fitness Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .package-details {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .package-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .package-header h1 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        
+        .price-tag {
+            font-size: 48px;
+            font-weight: 700;
+            color: #333;
+            margin: 20px 0;
+        }
+        
+        .price-tag small {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .features-list {
+            margin: 30px 0;
+        }
+        
+        .features-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .payment-options {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .payment-options h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-method {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            width: 120px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: #4CAF50;
+            transform: translateY(-5px);
+        }
+        
+        .payment-method svg {
+            margin-bottom: 10px;
+        }
+        
+        .payment-method p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .subscribe-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .subscribe-btn:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="logo.svg" alt="Fitness Center Logo">
+            <h1>FITNESS CENTER</h1>
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="index.html#about">ABOUT</a>
+            <a href="index.html#exercises">EXERCISES</a>
+            <a href="index.html#packages" class="active">PACKAGES</a>
+            <a href="index.html#testimonials">TESTIMONIALS</a>
+            <a href="index.html#appointment">APPOINTMENT</a>
+            <a href="index.html#blog">BLOG</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="package-details">
+            <div class="package-header">
+                <h1>MONTHLY SUBSCRIPTION</h1>
+                <p>Perfect for those who want to try our services without a long-term commitment</p>
+                <div class="price-tag">₹3,675 <small>/month</small></div>
+            </div>
+            
+            <div class="features-list">
+              
+                <ul>
+                   
+                </ul>
+            </div>
+            
+            <div class="payment-options">
+                <h3>Choose Your Payment Method</h3>
+                <div class="payment-methods">
+                    <!-- Google Pay -->
+                    <div class="payment-method" data-method="googlepay">
+                        <svg width="50" height="50" viewBox="0 0 50 50">
+                            <rect width="50" height="50" rx="10" fill="#ffffff"/>
+                            <path d="M25,10 L40,10 L40,40 L10,40 L10,25 C10,16.7157288 16.7157288,10 25,10 Z" fill="#4285F4"/>
+                            <path d="M25,10 L10,25 L10,10 L25,10 Z" fill="#EA4335"/>
+                            <path d="M10,25 L25,40 L10,40 L10,25 Z" fill="#FBBC05"/>
+                            <path d="M25,40 L40,25 L40,40 L25,40 Z" fill="#34A853"/>
+                        </svg>
+                        <p>Google Pay</p>
+                    </div>
+                    
+                    <!-- PhonePe -->
+                    <div class="payment-method" data-method="phonepe">
+                        <svg width="50" height="50" viewBox="0 0 50 50">
+                            <rect width="50" height="50" rx="10" fill="#5f259f"/>
+                            <circle cx="25" cy="20" r="7" fill="white"/>
+                            <rect x="22" y="28" width="6" height="12" rx="2" fill="white"/>
+                        </svg>
+                        <p>PhonePe</p>
+                    </div>
+                    
+                    <!-- Credit Card -->
+                    <div class="payment-method" data-method="creditcard">
+                        <svg width="50" height="50" viewBox="0 0 50 50">
+                            <rect width="50" height="50" rx="10" fill="#ffffff"/>
+                            <rect x="10" y="15" width="30" height="20" rx="3" fill="#1a1a1a"/>
+                            <rect x="15" y="25" width="20" height="3" fill="#f0f0f0"/>
+                            <rect x="15" y="20" width="5" height="3" fill="#f0f0f0"/>
+                        </svg>
+                        <p>Credit Card</p>
+                    </div>
+                    
+                    <!-- PayPal -->
+                    <div class="payment-method" data-method="paypal">
+                        <svg width="50" height="50" viewBox="0 0 50 50">
+                            <rect width="50" height="50" rx="10" fill="#ffffff"/>
+                            <path d="M15,20 C15,15 18,12 23,12 L30,12 C35,12 37,15 35,20 L33,30 C32,33 30,35 25,35 L20,35 L18,45 L13,45 L15,35 C12,35 10,33 12,28 L15,20 Z" fill="#003087"/>
+                            <path d="M20,15 C20,12 22,10 25,10 L32,10 C35,10 37,12 35,15 L33,25 C32,28 30,30 25,30 L20,30 L18,40 L13,40 L15,30 C12,30 10,28 12,25 L20,15 Z" fill="#009cde" transform="translate(2, 0)"/>
+                        </svg>
+                        <p>PayPal</p>
+                    </div>
+                </div>
+                
+                <!-- Payment Forms -->
+                <div class="payment-forms">
+                    <!-- Google Pay Form -->
+                    <div class="payment-form" id="googlepay-form">
+                        <h4>Google Pay Payment</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="gpay-email">Email</label>
+                                <input type="email" id="gpay-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gpay-phone">Phone Number</label>
+                                <input type="tel" id="gpay-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gpay-upi">UPI ID</label>
+                                <input type="text" id="gpay-upi" placeholder="example@upi" required>
+                            </div>
+                            <button type="submit" class="payment-submit-btn">Pay ₹3,675</button>
+                        </form>
+                    </div>
+                    
+                    <!-- PhonePe Form -->
+                    <div class="payment-form" id="phonepe-form">
+                        <h4>PhonePe Payment</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="phonepe-email">Email</label>
+                                <input type="email" id="phonepe-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phonepe-phone">Phone Number</label>
+                                <input type="tel" id="phonepe-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phonepe-upi">UPI ID</label>
+                                <input type="text" id="phonepe-upi" placeholder="example@ybl" required>
+                            </div>
+                            <button type="submit" class="payment-submit-btn">Pay ₹3,675</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Credit Card Form -->
+                    <div class="payment-form" id="creditcard-form">
+                        <h4>Credit Card Payment</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="cc-name">Cardholder Name</label>
+                                <input type="text" id="cc-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cc-number">Card Number</label>
+                                <input type="text" id="cc-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cc-expiry">Expiry Date</label>
+                                    <input type="text" id="cc-expiry" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cc-cvv">CVV</label>
+                                    <input type="text" id="cc-cvv" placeholder="XXX" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cc-email">Email</label>
+                                <input type="email" id="cc-email" required>
+                            </div>
+                            <button type="submit" class="payment-submit-btn">Pay ₹3,675</button>
+                        </form>
+                    </div>
+                    
+                    <!-- PayPal Form -->
+                    <div class="payment-form" id="paypal-form">
+                        <h4>PayPal Payment</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="paypal-email">PayPal Email</label>
+                                <input type="email" id="paypal-email" required>
+                            </div>
+                            <p class="form-info">You will be redirected to PayPal to complete your payment.</p>
+                            <button type="submit" class="payment-submit-btn">Pay with PayPal</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="payment-success" style="display: none;">
+                <div class="success-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle cx="40" cy="40" r="38" fill="white" stroke="#4CAF50" stroke-width="4"/>
+                        <path d="M25 40 L35 50 L55 30" stroke="#4CAF50" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Payment Successful!</h3>
+                <p>Thank you for subscribing to our Monthly Package.</p>
+                <p>Your subscription is now active and will expire on <span class="expiry-date"></span>.</p>
+                <p>A confirmation email has been sent to your email address.</p>
+                <a href="index.html" class="btn">Return to Home</a>
+            </div>
+            
+            <a href="#" class="subscribe-btn">SUBSCRIBE NOW</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.svg" alt="Fitness Center Logo">
+                <h2>FITNESS CENTER</h2>
+                <p>Your journey to a healthier life starts here</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#exercises">Exercises</a>
+                <a href="index.html#packages">Packages</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><strong>Address:</strong> 123 Fitness Street, Healthy City</p>
+                <p><strong>Phone:</strong> (123) 456-7890</p>
+                <p><strong>Email:</strong> info@fitnesscenter.com</p>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">YT</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Fitness Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Citizens Exercises - PHYSIO EXERCISES</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/150x150" alt="PhysioFit Logo" class="logo">
+            <div class="header-text">
+                <h1>PHYSIO EXERCISES</h1>
+                <p>Senior Citizens Exercise Program</p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <a href="index.html#appointment" class="btn book-btn">BOOK APPOINTMENT</a>
+            <a href="index.html#exercises" class="btn">BACK TO EXERCISES</a>
+        </div>
+    </header>
+
+    <!-- Senior Exercises Section -->
+    <section id="senior-exercises" class="exercises-detail-section">
+        <h2>SENIOR CITIZENS EXERCISES</h2>
+        <p class="section-intro">These exercises are specifically designed for senior citizens to improve mobility, balance, and overall well-being. Always consult with your healthcare provider before starting any new exercise program.</p>
+        
+        <div class="exercise-grid">
+            <!-- Exercise 1 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for chair sit-to-stand exercise -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chair -->
+                        <rect x="50" y="150" width="100" height="10" fill="#8B4513"/>
+                        <rect x="60" y="160" width="10" height="40" fill="#8B4513"/>
+                        <rect x="130" y="160" width="10" height="40" fill="#8B4513"/>
+                        <!-- Person sitting (initial position) -->
+                        <circle cx="100" cy="110" r="20" fill="#FFD700" class="person-head"/>
+                        <line x1="100" y1="130" x2="100" y2="170" stroke="#FFD700" stroke-width="10" class="person-body"/>
+                        <line x1="100" y1="140" x2="70" y2="160" stroke="#FFD700" stroke-width="8" class="person-arm-left"/>
+                        <line x1="100" y1="140" x2="130" y2="160" stroke="#FFD700" stroke-width="8" class="person-arm-right"/>
+                        <line x1="100" y1="170" x2="80" y2="150" stroke="#FFD700" stroke-width="8" class="person-leg-left"/>
+                        <line x1="100" y1="170" x2="120" y2="150" stroke="#FFD700" stroke-width="8" class="person-leg-right"/>
+                        
+                        <style>
+                            @keyframes standUp {
+                                0% { transform: translateY(0); }
+                                50% { transform: translateY(-30px); }
+                                100% { transform: translateY(0); }
+                            }
+                            .person-head, .person-body, .person-arm-left, .person-arm-right, .person-leg-left, .person-leg-right {
+                                animation: standUp 4s infinite;
+                            }
+                        </style>
+                    </svg>
+                </div>
+                <h3>Chair Sit-to-Stand</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Improves leg strength and balance</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Sit in a sturdy chair with feet flat on the floor</li>
+                        <li>Lean slightly forward and stand up slowly</li>
+                        <li>Slowly sit back down with control</li>
+                        <li>Repeat 10 times, rest, then do another set if possible</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Use armrests for support if needed</p>
+                </div>
+            </div>
+
+            <!-- Exercise 2 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for wall push-ups -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Wall -->
+                        <rect x="30" y="30" width="20" height="170" fill="#D3D3D3"/>
+                        <!-- Person doing wall push-ups -->
+                        <circle cx="120" cy="80" r="20" fill="#FFD700" class="wall-head"/>
+                        <line x1="120" y1="100" x2="120" y2="150" stroke="#FFD700" stroke-width="10" class="wall-body"/>
+                        <line x1="120" y1="110" x2="50" y2="90" stroke="#FFD700" stroke-width="8" class="wall-arm-left"/>
+                        <line x1="120" y1="110" x2="50" y2="110" stroke="#FFD700" stroke-width="8" class="wall-arm-right"/>
+                        <line x1="120" y1="150" x2="150" y2="190" stroke="#FFD700" stroke-width="8" class="wall-leg-left"/>
+                        <line x1="120" y1="150" x2="170" y2="190" stroke="#FFD700" stroke-width="8" class="wall-leg-right"/>
+                        
+                        <style>
+                            @keyframes pushWall {
+                                0% { transform: translateX(0); }
+                                50% { transform: translateX(15px); }
+                                100% { transform: translateX(0); }
+                            }
+                            .wall-head, .wall-body, .wall-leg-left, .wall-leg-right {
+                                animation: pushWall 3s infinite;
+                            }
+                            @keyframes pushArms {
+                                0% { transform: scaleX(1); }
+                                50% { transform: scaleX(0.7); }
+                                100% { transform: scaleX(1); }
+                            }
+                            .wall-arm-left, .wall-arm-right {
+                                transform-origin: 120px 110px;
+                                animation: pushArms 3s infinite;
+                            }
+                        </style>
+                    </svg>
+                </div>
+                <h3>Wall Push-Ups</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Strengthens arms, chest, and shoulders</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Stand facing a wall, arms length away</li>
+                        <li>Place hands on the wall at shoulder height</li>
+                        <li>Bend elbows to bring your body toward the wall</li>
+                        <li>Push back to starting position</li>
+                        <li>Repeat 10-15 times</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Adjust distance from wall for difficulty</p>
+                </div>
+            </div>
+
+            <!-- Exercise 3 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for ankle circles -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chair -->
+                        <rect x="50" y="100" width="100" height="10" fill="#8B4513"/>
+                        <rect x="60" y="110" width="10" height="90" fill="#8B4513"/>
+                        <rect x="130" y="110" width="10" height="90" fill="#8B4513"/>
+                        <!-- Person sitting -->
+                        <circle cx="100" cy="60" r="20" fill="#FFD700"/>
+                        <line x1="100" y1="80" x2="100" y2="120" stroke="#FFD700" stroke-width="10"/>
+                        <line x1="100" y1="90" x2="70" y2="110" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="100" y1="90" x2="130" y2="110" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="100" y1="120" x2="80" y2="150" stroke="#FFD700" stroke-width="8"/>
+                        <!-- Animated foot -->
+                        <line x1="100" y1="120" x2="130" y2="140" stroke="#FFD700" stroke-width="8" class="ankle-leg"/>
+                        <circle cx="140" cy="145" r="10" fill="#FFD700" class="ankle-foot">
+                            <animateTransform 
+                                attributeName="transform" 
+                                attributeType="XML" 
+                                type="rotate" 
+                                from="0 130 140" 
+                                to="360 130 140" 
+                                dur="3s" 
+                                repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
+                </div>
+                <h3>Ankle Circles</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Improves ankle mobility and circulation</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Sit in a chair with feet flat on the floor</li>
+                        <li>Lift one foot slightly off the ground</li>
+                        <li>Rotate your ankle in a circular motion 10 times clockwise</li>
+                        <li>Rotate 10 times counterclockwise</li>
+                        <li>Repeat with the other foot</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Support leg with hands if needed</p>
+                </div>
+            </div>
+
+            <!-- Exercise 4 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for seated marching -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chair -->
+                        <rect x="50" y="150" width="100" height="10" fill="#8B4513"/>
+                        <rect x="60" y="160" width="10" height="40" fill="#8B4513"/>
+                        <rect x="130" y="160" width="10" height="40" fill="#8B4513"/>
+                        <!-- Person sitting -->
+                        <circle cx="100" cy="80" r="20" fill="#FFD700"/>
+                        <line x1="100" y1="100" x2="100" y2="140" stroke="#FFD700" stroke-width="10"/>
+                        <line x1="100" y1="110" x2="70" y2="130" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="100" y1="110" x2="130" y2="130" stroke="#FFD700" stroke-width="8"/>
+                        <!-- Animated legs -->
+                        <line x1="100" y1="140" x2="80" y2="170" stroke="#FFD700" stroke-width="8" class="march-leg-left">
+                            <animate 
+                                attributeName="y2" 
+                                values="170;140;170" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="140" x2="120" y2="170" stroke="#FFD700" stroke-width="8" class="march-leg-right">
+                            <animate 
+                                attributeName="y2" 
+                                values="170;170;140;170;170" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                    </svg>
+                </div>
+                <h3>Seated Marching</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Improves hip flexibility and core strength</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Sit tall in a chair with feet flat on the floor</li>
+                        <li>Lift one knee up toward the ceiling, then lower it</li>
+                        <li>Alternate lifting each knee in a marching motion</li>
+                        <li>Continue for 30-60 seconds</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Hold onto chair for stability if needed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Demonstrations Section -->
+    <section id="video-demos" class="video-section">
+        <h2>VIDEO DEMONSTRATIONS</h2>
+        <p class="section-intro">Watch these animated demonstrations to ensure proper form and technique.</p>
+        
+        <div class="video-container">
+            <!-- Video placeholders with animated SVGs -->
+            <div class="video-card">
+                <div class="video-placeholder">
+                    <!-- SVG animation for balance exercises -->
+                    <svg width="100%" height="100%" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line -->
+                        <line x1="50" y1="180" x2="250" y2="180" stroke="#333" stroke-width="2"/>
+                        <!-- Person balancing -->
+                        <circle cx="150" cy="60" r="20" fill="#FFD700"/>
+                        <line x1="150" y1="80" x2="150" y2="140" stroke="#FFD700" stroke-width="10"/>
+                        <line x1="150" y1="100" x2="120" y2="120" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="150" y1="100" x2="180" y2="120" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="150" y1="140" x2="130" y2="180" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="150" y1="140" x2="170" y2="140" stroke="#FFD700" stroke-width="8" class="balance-leg">
+                            <animate 
+                                attributeName="x2" 
+                                values="170;190;170" 
+                                dur="3s" 
+                                repeatCount="indefinite"/>
+                            <animate 
+                                attributeName="y2" 
+                                values="140;160;140" 
+                                dur="3s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <!-- Play button overlay -->
+                        <circle cx="150" cy="100" r="30" fill="rgba(255,255,255,0.7)"/>
+                        <polygon points="140,85 140,115 170,100" fill="#333"/>
+                    </svg>
+                </div>
+                <h3>Balance Exercises Series</h3>
+                <p>A comprehensive guide to improving balance and preventing falls.</p>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-placeholder">
+                    <!-- SVG animation for stretching exercises -->
+                    <svg width="100%" height="100%" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line -->
+                        <line x1="50" y1="180" x2="250" y2="180" stroke="#333" stroke-width="2"/>
+                        <!-- Person stretching -->
+                        <circle cx="150" cy="60" r="20" fill="#FFD700"/>
+                        <line x1="150" y1="80" x2="150" y2="130" stroke="#FFD700" stroke-width="10"/>
+                        <line x1="150" y1="100" x2="100" y2="90" stroke="#FFD700" stroke-width="8" class="stretch-arm-left">
+                            <animate 
+                                attributeName="x2" 
+                                values="100;80;100" 
+                                dur="4s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="150" y1="100" x2="200" y2="90" stroke="#FFD700" stroke-width="8" class="stretch-arm-right">
+                            <animate 
+                                attributeName="x2" 
+                                values="200;220;200" 
+                                dur="4s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="150" y1="130" x2="120" y2="180" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="150" y1="130" x2="180" y2="180" stroke="#FFD700" stroke-width="8"/>
+                        <!-- Play button overlay -->
+                        <circle cx="150" cy="100" r="30" fill="rgba(255,255,255,0.7)"/>
+                        <polygon points="140,85 140,115 170,100" fill="#333"/>
+                    </svg>
+                </div>
+                <h3>Gentle Stretching Routine</h3>
+                <p>Essential stretches to maintain flexibility and reduce stiffness.</p>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-placeholder">
+                    <!-- SVG animation for chair yoga -->
+                    <svg width="100%" height="100%" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chair -->
+                        <rect x="120" y="150" width="80" height="10" fill="#8B4513"/>
+                        <rect x="130" y="160" width="10" height="20" fill="#8B4513"/>
+                        <rect x="180" y="160" width="10" height="20" fill="#8B4513"/>
+                        <!-- Person doing chair yoga -->
+                        <circle cx="160" cy="70" r="20" fill="#FFD700"/>
+                        <line x1="160" y1="90" x2="160" y2="130" stroke="#FFD700" stroke-width="10"/>
+                        <line x1="160" y1="100" x2="120" y2="120" stroke="#FFD700" stroke-width="8" class="yoga-arm-left">
+                            <animate 
+                                attributeName="y2" 
+                                values="120;80;120" 
+                                dur="5s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="160" y1="100" x2="200" y2="120" stroke="#FFD700" stroke-width="8" class="yoga-arm-right">
+                            <animate 
+                                attributeName="y2" 
+                                values="120;80;120" 
+                                dur="5s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="160" y1="130" x2="140" y2="150" stroke="#FFD700" stroke-width="8"/>
+                        <line x1="160" y1="130" x2="180" y2="150" stroke="#FFD700" stroke-width="8"/>
+                        <!-- Play button overlay -->
+                        <circle cx="160" cy="100" r="30" fill="rgba(255,255,255,0.7)"/>
+                        <polygon points="150,85 150,115 180,100" fill="#333"/>
+                    </svg>
+                </div>
+                <h3>Chair Yoga for Seniors</h3>
+                <p>Gentle yoga poses that can be performed while seated.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Guidelines Section -->
+    <section id="safety" class="safety-section">
+        <h2>SAFETY GUIDELINES</h2>
+        <div class="safety-content">
+            <div class="safety-icon">
+                <!-- SVG safety icon -->
+                <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="38" fill="none" stroke="#FF6B6B" stroke-width="4"/>
+                    <text x="40" y="55" font-family="Arial" font-size="50" text-anchor="middle" fill="#FF6B6B">!</text>
+                </svg>
+            </div>
+            <div class="safety-tips">
+                <h3>Before You Begin</h3>
+                <ul>
+                    <li>Consult with your healthcare provider before starting any new exercise program</li>
+                    <li>Ensure you have a sturdy chair and clear space around you</li>
+                    <li>Wear comfortable, non-slip shoes</li>
+                    <li>Have water nearby to stay hydrated</li>
+                    <li>Stop immediately if you experience pain, dizziness, or shortness of breath</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://via.placeholder.com/100x100" alt="PhysioFit Logo">
+                <h3>PHYSIO EXERCISES</h3>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#exercises">Exercises</a></li>
+                    <li><a href="index.html#packages">Packages</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@physioexercises.com</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Address: 123 Fitness Street, Health City</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">TW</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 PHYSIO EXERCISES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Details - PHYSIO EXERCISES</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Doctor Page Styles */
+        .doctor-hero {
+            background: linear-gradient(to right, #0070c0, #00a0e9);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doctor-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://via.placeholder.com/1920x500');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .doctor-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .doctor-hero h1 {
+            margin: 0;
+            font-size: 42px;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .doctor-hero p {
+            margin: 15px 0 0;
+            font-size: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .doctor-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            color: #0070c0;
+            font-size: 28px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #0070c0;
+        }
+
+        .doctor-section {
+            margin-bottom: 70px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+        }
+
+        .doctor-profile {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .doctor-image {
+            width: 350px;
+            height: 450px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .doctor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            flex: 1;
+        }
+
+        .doctor-info h3 {
+            margin-top: 0;
+            font-size: 26px;
+            color: #0070c0;
+        }
+
+        .doctor-credentials {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 16px;
+            padding-left: 10px;
+            border-left: 3px solid #0070c0;
+        }
+
+        .doctor-bio p {
+            margin-bottom: 18px;
+            line-height: 1.7;
+            color: #444;
+            font-size: 16px;
+        }
+
+        /* Studio Section Styles */
+        .studio-section {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+        
+        .studio-section p {
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .studio-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:nth-child(1) {
+            background-image: url('https://via.placeholder.com/400x200?text=Reception');
+        }
+
+        .gallery-item:nth-child(2) {
+            background-image: url('https://via.placeholder.com/400x200?text=Treatment+Room');
+        }
+
+        .gallery-item:nth-child(3) {
+            background-image: url('https://via.placeholder.com/400x200?text=Exercise+Area');
+        }
+
+        .gallery-item:nth-child(4) {
+            background-image: url('https://via.placeholder.com/400x200?text=Rehabilitation+Zone');
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        /* Certifications Styles */
+        .certifications {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .certification-list {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .certification-list li {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid #0070c0;
+        }
+
+        .certification-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .certification-list li:before {
+            content: '✓';
+            color: white;
+            background-color: #0070c0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Accolades Styles */
+        .accolades {
+            margin-top: 60px;
+        }
+
+        .accolade-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .accolade-item {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #0070c0;
+        }
+
+        .accolade-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .accolade-item h4 {
+            color: #0070c0;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .accolade-date {
+            display: inline-block;
+            font-size: 14px;
+            color: #fff;
+            background-color: #0070c0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Navigation Styles */
+        .page-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 25px;
+            background-color: #0070c0;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 8px rgba(0, 112, 192, 0.3);
+        }
+
+        .back-button:hover {
+            background-color: #005999;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 112, 192, 0.4);
+        }
+
+        /* Responsive Styles */
+         @media (max-width: 992px) {
+             .section-title {
+                 font-size: 24px;
+             }
+ 
+             .certification-list, .accolade-items {
+                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+             }
+ 
+             .studio-gallery {
+                 grid-template-columns: repeat(2, 1fr);
+             }
+         }
+
+         @media (max-width: 768px) {
+             .doctor-hero h1 {
+                 font-size: 32px;
+             }
+
+             .doctor-profile {
+                 flex-direction: column;
+             }
+
+             .doctor-image {
+                 width: 100%;
+                 height: 350px;
+                 margin-bottom: 30px;
+             }
+
+             .doctor-section {
+                 padding: 30px 20px;
+             }
+
+             .studio-gallery {
+                 grid-template-columns: 1fr;
+                 gap: 15px;
+             }
+
+             .gallery-item {
+                 height: 180px;
+             }
+
+             .accolade-items {
+                 grid-template-columns: 1fr;
+             }
+         }
+
+         @media (max-width: 480px) {
+             .doctor-hero {
+                 padding: 60px 15px;
+             }
+
+             .doctor-hero h1 {
+                 font-size: 28px;
+             }
+
+             .doctor-content {
+                 padding: 40px 15px;
+             }
+
+             .doctor-section {
+                 padding: 25px 15px;
+             }
+
+             .section-title {
+                 font-size: 22px;
+             }
+
+             .certification-list li {
+                 padding: 12px;
+             }
+         }
+        
+
+        
+        @media (max-width: 576px) {
+            .doctor-hero h1 {
+                font-size: 28px;
+            }
+            
+            .doctor-content {
+                padding: 30px 15px;
+            }
+            
+            .doctor-section {
+                padding: 20px 15px;
+            }
+            
+            .studio-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/150x150" alt="PhysioFit Logo" class="logo">
+            <div class="header-text">
+                <h1>PHYSIO EXERCISES</h1>
+                <p>Professional Physiotherapy Services</p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <a href="index.html#appointment" class="btn book-btn">BOOK APPOINTMENT</a>
+            <a href="index.html" class="btn">BACK TO HOME</a>
+        </div>
+    </header>
+
+    <!-- Doctor Hero Section -->
+    <section class="doctor-hero">
+        <div class="doctor-hero-content">
+            <h1>DR. AMOL SAKPAL</h1>
+            <p>Founder & Lead Physiotherapist at PHYSIO EXERCISES</p>
+        </div>
+    </section>
+
+    <!-- Doctor Content -->
+    <div class="doctor-content">
+        <!-- Doctor Profile Section -->
+        <div class="doctor-section">
+            <h2 class="section-title">About Dr. Amol Sakpal</h2>
+            <div class="doctor-profile">
+                <div class="doctor-image">
+                    <img src="https://via.placeholder.com/350x450" alt="Dr. Sarah Johnson">
+                </div>
+                <div class="doctor-info">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p class="doctor-credentials">Ph.D. in Physical Therapy, Certified Orthopedic Specialist</p>
+                    <div class="doctor-bio">
+                        <p>Dr. Sarah Johnson is the founder and lead physiotherapist at PHYSIO EXERCISES. With over 15 years of experience in the field, she has established herself as a leading expert in orthopedic rehabilitation and sports medicine.</p>
+                        <p>After completing her undergraduate studies at the University of California, Dr. Johnson pursued her Ph.D. in Physical Therapy at Johns Hopkins University, where she graduated with honors. Her doctoral research focused on innovative approaches to treating chronic back pain, which has since been published in several prestigious medical journals.</p>
+                        <p>Prior to founding PHYSIO EXERCISES in 2010, Dr. Johnson worked at several renowned hospitals and sports rehabilitation centers, including the Sports Medicine Clinic at Stanford University and the Rehabilitation Center at Mount Sinai Hospital. These experiences allowed her to work with diverse patient populations, from professional athletes recovering from injuries to elderly patients managing age-related mobility issues.</p>
+                        <p>Dr. Johnson's approach to physiotherapy combines evidence-based treatments with personalized care. She believes in treating not just the symptoms but addressing the root causes of physical discomfort. Her holistic methodology incorporates manual therapy, therapeutic exercises, and patient education to ensure comprehensive recovery and long-term well-being.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Studio Information Section -->
+        <div class="doctor-section studio-section">
+            <h2 class="section-title">Our Studio</h2>
+            <p>Our modern 3,000 sq. ft. studio is designed to provide a comfortable and effective environment for your physiotherapy journey. Located in the heart of Health City, our facility features:</p>
+            
+            <ul class="certification-list" style="margin-top: 20px; margin-bottom: 30px;">
+                <li>State-of-the-art rehabilitation equipment</li>
+                <li>Private treatment rooms for one-on-one sessions</li>
+                <li>Spacious exercise area for group sessions</li>
+                <li>Specialized sports rehabilitation zone</li>
+                <li>Comfortable waiting area with refreshments</li>
+                <li>Accessible facilities for all patients</li>
+            </ul>
+            
+            <p>Our studio was designed with your comfort and recovery in mind. The serene environment, natural lighting, and ergonomic furniture all contribute to creating a space that promotes healing and wellness.</p>
+            
+            <div class="studio-gallery">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="doctor-section certifications">
+            <h2 class="section-title">Certifications & Specializations</h2>
+            <p>Dr. Johnson continuously pursues professional development to stay at the forefront of physiotherapy practices. Her credentials include:</p>
+            <ul class="certification-list">
+                <li>Ph.D. in Physical Therapy - Johns Hopkins University</li>
+                <li>Board Certified Orthopedic Clinical Specialist (OCS)</li>
+                <li>Certified Strength and Conditioning Specialist (CSCS)</li>
+                <li>Manual Therapy Certification (MTC)</li>
+                <li>Certified in Dry Needling Techniques</li>
+                <li>Sports Rehabilitation Specialist</li>
+                <li>Certified Kinesio Taping Practitioner</li>
+                <li>McKenzie Method of Mechanical Diagnosis and Therapy (MDT)</li>
+            </ul>
+        </div>
+
+        <!-- Awards & Accolades Section -->
+        <div class="doctor-section accolades">
+            <h2 class="section-title">Awards & Accolades</h2>
+            <p>Dr. Johnson and PHYSIO EXERCISES have been recognized for excellence in patient care, research, and community service:</p>
+            
+            <div class="accolade-items">
+                <div class="accolade-item">
+                    <h4>Excellence in Physiotherapy Award</h4>
+                    <p class="accolade-date">2022</p>
+                    <p class="accolade-description">Awarded by the National Association of Physiotherapists for outstanding contributions to the field and exceptional patient care.</p>
+                </div>
+                
+                <div class="accolade-item">
+                    <h4>Best Rehabilitation Center</h4>
+                    <p class="accolade-date">2020</p>
+                    <p class="accolade-description">PHYSIO EXERCISES was recognized as the Best Rehabilitation Center in the region under Dr. Johnson's leadership.</p>
+                </div>
+                
+                <div class="accolade-item">
+                    <h4>Research Publication Award</h4>
+                    <p class="accolade-date">2018</p>
+                    <p class="accolade-description">Received for groundbreaking research on innovative approaches to treating chronic back pain, published in the Journal of Physical Therapy Science.</p>
+                </div>
+                
+                <div class="accolade-item">
+                    <h4>Community Service Recognition</h4>
+                    <p class="accolade-date">2016</p>
+                    <p class="accolade-description">Honored for providing pro bono physiotherapy services to underprivileged communities and organizing free workshops on injury prevention.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <a href="index.html#about" class="back-button">Back to About Us</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://via.placeholder.com/100x100" alt="PhysioFit Logo">
+                <h3>PHYSIO EXERCISES</h3>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#exercises">Exercises</a></li>
+                    <li><a href="index.html#packages">Packages</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@physioexercises.com</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Address: 123 Fitness Street, Health City</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 PHYSIO EXERCISES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
