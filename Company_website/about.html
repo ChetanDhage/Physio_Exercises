@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PHYSIO EXERCISES</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles specific to about page */
+
+         
+    p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+    i {
+      margin-right: 8px;
+      color: #0077cc;
+    }
+  
+        .about-hero {
+            background-color: #f0f0f0;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .about-section {
+            margin-bottom: 40px;
+        }
+        
+        .doctor-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .doctor-image {
+            width: 200px;
+            height: 200px;
+            background-color: #ddd;
+            margin-right: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .doctor-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .doctor-credentials {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-member-image {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+        
+        .team-member h4 {
+            margin-bottom: 5px;
+        }
+        
+        .team-member p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .facility-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .facility-image {
+            height: 200px;
+            background-color: #ddd;
+        }
+        
+        @media (max-width: 768px) {
+            .team-members {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .doctor-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .doctor-image {
+                margin-right: 0;
+            }
+            
+            .team-members {
+                grid-template-columns: 1fr;
+            }
+            
+            .facility-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/150x150" alt="PhysioFit Logo" class="logo">
+            <div class="header-text">
+                <h1>PHYSIO EXERCISES</h1>
+                <p>Professional Physiotherapy Services</p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <a href="index.html#appointment" class="btn book-btn">BOOK APPOINTMENT</a>
+            <a href="index.html#exercises" class="btn">EXPLORE EXERCISES</a>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <h1>ABOUT US</h1>
+        <p>Learn more about our professional team and our approach to physiotherapy</p>
+    </section>
+
+    <!-- About Content -->
+    <div class="about-content">
+        <!-- Our Story Section -->
+        <div class="about-section">
+            <h2>OUR STORY</h2>
+            <p>Founded in 2010, PHYSIO EXERCISES has been dedicated to providing high-quality physiotherapy services to patients of all ages. Our mission is to help our patients recover from injuries, manage chronic conditions, and improve their overall physical wellbeing through personalized exercise programs and treatments.</p>
+            <p>What started as a small practice has grown into a comprehensive physiotherapy center with state-of-the-art facilities and a team of experienced professionals. We take pride in our patient-centered approach and our commitment to staying updated with the latest advancements in physiotherapy.</p>
+        </div>
+
+        <!-- Meet the Doctor Section -->
+        <div class="about-section">
+            <h2>MEET THE DOCTOR</h2>
+            <div class="doctor-profile">
+                <div class="doctor-image"></div>
+                <div class="doctor-info">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p class="doctor-credentials">Ph.D. in Physical Therapy, Certified Orthopedic Specialist</p>
+                    <p>Dr. Sarah Johnson has over 15 years of experience in physiotherapy with a specialization in orthopedic rehabilitation. She has worked with patients ranging from professional athletes to elderly individuals with mobility issues. Her approach combines evidence-based treatments with personalized care to ensure optimal recovery and improved quality of life for all her patients.</p>
+                    <p>Dr. Johnson regularly conducts workshops and seminars on injury prevention and rehabilitation techniques. She is passionate about educating her patients and empowering them to take control of their physical health.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Team Section -->
+        <div class="about-section">
+            <h2>OUR TEAM</h2>
+            <p>Our team of certified physiotherapists and support staff are dedicated to providing exceptional care and support throughout your recovery journey.</p>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="team-member-image"></div>
+                    <h4>Michael Chen</h4>
+                    <p>Sports Rehabilitation Specialist</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-member-image"></div>
+                    <h4>Emily Rodriguez</h4>
+                    <p>Pediatric Physiotherapist</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-member-image"></div>
+                    <h4>David Wilson</h4>
+                    <p>Geriatric Care Specialist</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Facility Section -->
+        <div class="about-section">
+            <h2>OUR FACILITY</h2>
+            <p>Our modern facility is equipped with the latest physiotherapy equipment and technology to provide comprehensive care for various conditions. We have created a comfortable and welcoming environment to ensure a positive experience for all our patients.</p>
+            
+            <div class="facility-images">
+                <div class="facility-image"></div>
+                <div class="facility-image"></div>
+                <div class="facility-image"></div>
+                <div class="facility-image"></div>
+            </div>
+        </div>
+
+        <!-- Our Approach Section -->
+        <div class="about-section">
+            <h2>OUR APPROACH</h2>
+            <p>At PHYSIO EXERCISES, we believe in a holistic approach to physiotherapy that addresses not just the symptoms but the root cause of physical issues. Our treatment plans are tailored to each patient's specific needs and goals, taking into account their medical history, lifestyle, and personal preferences.</p>
+            <p>We emphasize patient education and active participation in the recovery process. Our physiotherapists work closely with patients to develop home exercise programs that complement in-clinic treatments and accelerate recovery.</p>
+            <p>Regular assessments and progress tracking ensure that treatment plans are adjusted as needed to achieve optimal results. We celebrate every milestone with our patients and provide continuous support and encouragement throughout their journey to better health.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+               <svg width="150" height="150" viewBox="0 0 150 150" class="logo">
+                <circle cx="75" cy="75" r="70" fill="#4CAF50" />
+                <path d="M45,75 C45,45 75,45 75,75 C75,105 105,105 105,75" stroke="white" stroke-width="8" fill="none" />
+                <circle cx="75" cy="40" r="6" fill="white" />
+                <circle cx="75" cy="110" r="6" fill="white" />
+                <text x="75" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">PHYSIO</text>
+            </svg>
+                <h3>PHYSIO EXERCISES</h3>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#exercises">Exercises</a></li>
+                    <li><a href="index.html#packages">Packages</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> info@physiofit.com</p>
+  <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+  <p><i class="fas fa-map-marker-alt"></i> 123 Wellness Avenue, Health City</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 PHYSIO EXERCISES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

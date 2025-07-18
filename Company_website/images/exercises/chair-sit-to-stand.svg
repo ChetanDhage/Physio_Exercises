@@ -1,0 +1,28 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @keyframes standUp {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0); }
+        }
+        .person {
+            animation: standUp 4s infinite;
+        }
+    </style>
+    
+    <!-- Chair -->
+    <rect x="100" y="150" width="80" height="10" fill="#8B4513"/>
+    <rect x="110" y="160" width="10" height="40" fill="#8B4513"/>
+    <rect x="160" y="160" width="10" height="40" fill="#8B4513"/>
+    <rect x="100" y="140" width="80" height="10" fill="#8B4513"/>
+    
+    <!-- Person doing chair sit-to-stand -->
+    <g class="person">
+        <circle cx="140" cy="70" r="20" fill="#FFD700"/>
+        <line x1="140" y1="90" x2="140" y2="130" stroke="#FFD700" stroke-width="10"/>
+        <line x1="140" y1="100" x2="110" y2="110" stroke="#FFD700" stroke-width="8"/>
+        <line x1="140" y1="100" x2="170" y2="110" stroke="#FFD700" stroke-width="8"/>
+        <line x1="140" y1="130" x2="120" y2="170" stroke="#FFD700" stroke-width="8"/>
+        <line x1="140" y1="130" x2="160" y2="170" stroke="#FFD700" stroke-width="8"/>
+    </g>
+</svg>

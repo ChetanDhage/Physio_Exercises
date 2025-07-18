@@ -1,0 +1,35 @@
+<svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Floor line -->
+    <line x1="30" y1="170" x2="170" y2="170" stroke="#D3D3D3" stroke-width="3"/>
+    
+    <!-- Person stretching -->
+    <circle cx="100" cy="60" r="20" fill="#FFD700" class="stretch-head"/>
+    <line x1="100" y1="80" x2="100" y2="130" stroke="#FFD700" stroke-width="10" class="stretch-body"/>
+    
+    <!-- Arms stretching -->
+    <line x1="100" y1="90" x2="60" y2="100" stroke="#FFD700" stroke-width="8" class="stretch-arm-left"/>
+    <line x1="100" y1="90" x2="140" y2="100" stroke="#FFD700" stroke-width="8" class="stretch-arm-right"/>
+    
+    <!-- Legs in stretch position -->
+    <line x1="100" y1="130" x2="70" y2="170" stroke="#FFD700" stroke-width="8" class="stretch-leg-left"/>
+    <line x1="100" y1="130" x2="130" y2="170" stroke="#FFD700" stroke-width="8" class="stretch-leg-right"/>
+    
+    <style>
+        @keyframes stretchLeft {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-15deg); }
+        }
+        @keyframes stretchRight {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+        .stretch-arm-left {
+            animation: stretchLeft 4s infinite;
+            transform-origin: 100px 90px;
+        }
+        .stretch-arm-right {
+            animation: stretchRight 4s infinite;
+            transform-origin: 100px 90px;
+        }
+    </style>
+</svg>

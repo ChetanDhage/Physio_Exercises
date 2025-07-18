@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Exercise Categories - Fitness Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+
+        
+    p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+    i {
+      margin-right: 8px;
+      color: #0077cc;
+    }
+
+        .category-section {
+            padding: 80px 40px;
+            background-color: #f9f9f9;
+        }
+        
+        .category-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .category-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .category-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .category-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+        
+        .category-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .category-description {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .category-description p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .btn-explore {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-explore:hover {
+            background-color: #388E3C;
+            transform: translateY(-3px);
+        }
+        
+        /* Age-specific category styles */
+        .teenager-category .category-img {
+            border-top: 5px solid #4CAF50;
+        }
+        
+        .young-adult-category .category-img {
+            border-top: 5px solid #2196F3;
+        }
+        
+        .middle-age-category .category-img {
+            border-top: 5px solid #FF9800;
+        }
+        
+        .senior-middle-age-category .category-img {
+            border-top: 5px solid #E91E63;
+        }
+        
+        .senior-citizen-category .category-img {
+            border-top: 5px solid #9C27B0;
+        }
+        
+        @media (max-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 30px;
+            }
+            
+            .category-img {
+                height: 180px;
+            }
+            
+            .category-title {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-section {
+                padding: 60px 20px;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+         <div class="logo-container">
+            <svg width="150" height="150" viewBox="0 0 150 150" class="logo">
+                <circle cx="75" cy="75" r="70" fill="#4CAF50" />
+                <path d="M45,75 C45,45 75,45 75,75 C75,105 105,105 105,75" stroke="white" stroke-width="8" fill="none" />
+                <circle cx="75" cy="40" r="6" fill="white" />
+                <circle cx="75" cy="110" r="6" fill="white" />
+                <text x="75" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Fitness hub</text>
+            </svg>
+        
+            <h1>Fitness Hub</h1>
+        
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="index.html#about">ABOUT</a>
+            <a href="index.html#exercises">EXERCISES</a>
+            <a href="index.html#packages" class="active">PACKAGES</a>
+            <a href="index.html#testimonials">TESTIMONIALS</a>
+            <a href="index.html#appointment">APPOINTMENT</a>
+            <a href="index.html#blog">BLOG</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#contact">CONTACT</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- All Exercise Categories Section -->
+    <section class="category-section">
+        <div class="category-container">
+            <h2 class="section-title">All Exercise Categories</h2>
+            <p class="section-description">Explore our specialized exercise programs designed for different age groups</p>
+            
+            <div class="category-grid">
+                <!-- Teenagers Category -->
+                <div class="category-card teenager-category">
+                    <div class="category-img" style="background-image: url('images/exercises/bodyweight-squats.svg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                        <h3 class="category-title">TEENAGERS</h3>
+                    </div>
+                    <div class="category-description">
+                        <p>Specialized exercises designed for teenagers to build strength, improve flexibility, and develop healthy habits.</p>
+                        <a href="teenagers-exercises.html" class="btn-explore">Explore Exercises</a>
+                    </div>
+                </div>
+                
+                <!-- Young Adults Category -->
+                <div class="category-card young-adult-category">
+                    <div class="category-img" style="background-image: url('images/exercises/burpees.svg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                        <h3 class="category-title">YOUNG ADULTS</h3>
+                    </div>
+                    <div class="category-description">
+                        <p>High-intensity workouts and strength training programs designed for young adults to maximize fitness potential.</p>
+                        <a href="young-adults-exercises.html" class="btn-explore">Explore Exercises</a>
+                    </div>
+                </div>
+                
+                <!-- Middle Age Category -->
+                <div class="category-card middle-age-category">
+                    <div class="category-img" style="background-image: url('images/exercises/chair-assisted-squats.svg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                        <h3 class="category-title">MIDDLE AGE</h3>
+                    </div>
+                    <div class="category-description">
+                        <p>Balanced exercise programs focusing on core strength, flexibility, and stress reduction for middle-aged adults.</p>
+                        <a href="middle-age-exercises.html" class="btn-explore">Explore Exercises</a>
+                    </div>
+                </div>
+                
+                <!-- Senior Middle Age Category -->
+                <div class="category-card senior-middle-age-category">
+                    <div class="category-img" style="background-image: url('images/exercises/gentle-stretching.svg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                        <h3 class="category-title">SENIOR MIDDLE AGE</h3>
+                    </div>
+                    <div class="category-description">
+                        <p>Joint-friendly exercises and mobility workouts designed to maintain strength and flexibility for senior middle-aged adults.</p>
+                        <a href="senior-middle-age-exercises.html" class="btn-explore">Explore Exercises</a>
+                    </div>
+                </div>
+                
+                <!-- Senior Citizens Category -->
+                <div class="category-card senior-citizen-category">
+                    <div class="category-img" style="background-image: url('images/exercises/chair-yoga.svg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                        <h3 class="category-title">SENIOR CITIZENS</h3>
+                    </div>
+                    <div class="category-description">
+                        <p>Gentle exercises focusing on balance, mobility, and overall well-being designed specifically for senior citizens.</p>
+                        <a href="senior-exercises.html" class="btn-explore">Explore Exercises</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+               <div class="footer-logo">
+                 <svg width="150" height="150" viewBox="0 0 150 150" class="logo">
+                <circle cx="75" cy="75" r="70" fill="#4CAF50" />
+                <path d="M45,75 C45,45 75,45 75,75 C75,105 105,105 105,75" stroke="white" stroke-width="8" fill="none" />
+                <circle cx="75" cy="40" r="6" fill="white" />
+                <circle cx="75" cy="110" r="6" fill="white" />
+                <text x="75" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">PHYSIO</text>
+            </svg>
+                    
+                    <h3>Fitness Hub</h3>
+                    <p>Your journey to a healthier lifestyle starts here.</p>
+                </div>
+                <div class="column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Contact Us</h4>
+                     <p><i class="fas fa-envelope"></i> info@physiofit.com</p>
+  <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+  <p><i class="fas fa-map-marker-alt"></i> 123 Wellness Avenue, Health City</p>
+                </div>
+                <div class="column">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Fitness Hub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Add hover effects or other interactions if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                // Optional: Add click event to make entire card clickable
+                card.addEventListener('click', function() {
+                    const link = this.querySelector('.btn-explore');
+                    if (link) {
+                        link.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @keyframes yogaArmsLeft {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-30deg); }
+            100% { transform: rotate(0deg); }
+        }
+        @keyframes yogaArmsRight {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(30deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .yoga-arm-left {
+            transform-origin: 160px 100px;
+            animation: yogaArmsLeft 5s infinite;
+        }
+        .yoga-arm-right {
+            transform-origin: 160px 100px;
+            animation: yogaArmsRight 5s infinite;
+        }
+    </style>
+    
+    <!-- Chair -->
+    <rect x="120" y="150" width="80" height="10" fill="#8B4513"/>
+    <rect x="130" y="160" width="10" height="20" fill="#8B4513"/>
+    <rect x="180" y="160" width="10" height="20" fill="#8B4513"/>
+    
+    <!-- Person doing chair yoga -->
+    <circle cx="160" cy="70" r="20" fill="#FFD700"/>
+    <line x1="160" y1="90" x2="160" y2="130" stroke="#FFD700" stroke-width="10"/>
+    <line x1="160" y1="100" x2="120" y2="120" stroke="#FFD700" stroke-width="8" class="yoga-arm-left"/>
+    <line x1="160" y1="100" x2="200" y2="120" stroke="#FFD700" stroke-width="8" class="yoga-arm-right"/>
+    <line x1="160" y1="130" x2="140" y2="150" stroke="#FFD700" stroke-width="8"/>
+    <line x1="160" y1="130" x2="180" y2="150" stroke="#FFD700" stroke-width="8"/>
+</svg>

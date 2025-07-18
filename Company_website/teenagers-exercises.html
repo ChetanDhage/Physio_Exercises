@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teenager Exercises - PHYSIO EXERCISES</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Main Header -->
+    <header>
+ <div class="logo-container">
+            <svg width="150" height="150" viewBox="0 0 150 150" class="logo">
+                <circle cx="75" cy="75" r="70" fill="#4CAF50" />
+                <path d="M45,75 C45,45 75,45 75,75 C75,105 105,105 105,75" stroke="white" stroke-width="8" fill="none" />
+                <circle cx="75" cy="40" r="6" fill="white" />
+                <circle cx="75" cy="110" r="6" fill="white" />
+                <text x="75" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">PHYSIO</text>
+            </svg>
+            <div class="header-text">
+                <h1>PHYSIO EXERCISES</h1>
+                <p>Teenager Exercise Program</p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <a href="index.html#appointment" class="btn book-btn">BOOK APPOINTMENT</a>
+            <a href="index.html#exercises" class="btn">BACK TO EXERCISES</a>
+        </div>
+    </header>
+
+    <!-- Teenager Exercises Section -->
+    <section id="teenager-exercises" class="exercises-detail-section">
+        <h2>TEENAGER EXERCISES</h2>
+        <p class="section-intro">These exercises are specifically designed for teenagers to improve strength, flexibility, and overall fitness. Always use proper form and start with lighter weights if you're new to exercise.</p>
+        
+        <div class="exercise-grid">
+            <!-- Exercise 1 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for bodyweight squats -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Person doing squats -->
+                        <circle cx="100" cy="60" r="20" fill="#4CAF50" class="squat-head"/>
+                        <line x1="100" y1="80" x2="100" y2="120" stroke="#4CAF50" stroke-width="10" class="squat-body"/>
+                        <line x1="100" y1="90" x2="70" y2="110" stroke="#4CAF50" stroke-width="8" class="squat-arm-left"/>
+                        <line x1="100" y1="90" x2="130" y2="110" stroke="#4CAF50" stroke-width="8" class="squat-arm-right"/>
+                        <line x1="100" y1="120" x2="70" y2="160" stroke="#4CAF50" stroke-width="8" class="squat-leg-left"/>
+                        <line x1="100" y1="120" x2="130" y2="160" stroke="#4CAF50" stroke-width="8" class="squat-leg-right"/>
+                        
+                        <style>
+                            @keyframes squat {
+                                0% { transform: translateY(0); }
+                                50% { transform: translateY(30px); }
+                                100% { transform: translateY(0); }
+                            }
+                            .squat-head, .squat-body, .squat-arm-left, .squat-arm-right {
+                                animation: squat 3s infinite;
+                            }
+                            @keyframes squatLegs {
+                                0% { transform: scaleY(1); }
+                                50% { transform: scaleY(0.6); }
+                                100% { transform: scaleY(1); }
+                            }
+                            .squat-leg-left, .squat-leg-right {
+                                transform-origin: 100px 120px;
+                                animation: squatLegs 3s infinite;
+                            }
+                        </style>
+                    </svg>
+                </div>
+                <h3>Bodyweight Squats</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Builds leg strength and improves mobility</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Stand with feet shoulder-width apart</li>
+                        <li>Keep your chest up and back straight</li>
+                        <li>Lower your body as if sitting in a chair</li>
+                        <li>Keep knees aligned with toes</li>
+                        <li>Return to standing position</li>
+                        <li>Repeat for 3 sets of 15 reps</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Hold onto a stable surface for balance if needed</p>
+                </div>
+            </div>
+
+            <!-- Exercise 2 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for push-ups -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Floor line -->
+                        <line x1="30" y1="150" x2="170" y2="150" stroke="#D3D3D3" stroke-width="2"/>
+                        <!-- Person doing push-ups -->
+                        <circle cx="100" cy="110" r="15" fill="#4CAF50" class="pushup-head"/>
+                        <line x1="100" y1="125" x2="100" y2="160" stroke="#4CAF50" stroke-width="10" class="pushup-body"/>
+                        <line x1="100" y1="130" x2="60" y2="150" stroke="#4CAF50" stroke-width="8" class="pushup-arm-left"/>
+                        <line x1="100" y1="130" x2="140" y2="150" stroke="#4CAF50" stroke-width="8" class="pushup-arm-right"/>
+                        <line x1="100" y1="160" x2="60" y2="150" stroke="#4CAF50" stroke-width="8" class="pushup-leg-left"/>
+                        <line x1="100" y1="160" x2="140" y2="150" stroke="#4CAF50" stroke-width="8" class="pushup-leg-right"/>
+                        
+                        <style>
+                            @keyframes pushUp {
+                                0% { transform: translateY(0); }
+                                50% { transform: translateY(15px); }
+                                100% { transform: translateY(0); }
+                            }
+                            .pushup-head, .pushup-body, .pushup-leg-left, .pushup-leg-right {
+                                animation: pushUp 3s infinite;
+                            }
+                            @keyframes pushArms {
+                                0% { transform: scaleY(1); }
+                                50% { transform: scaleY(0.7); }
+                                100% { transform: scaleY(1); }
+                            }
+                            .pushup-arm-left, .pushup-arm-right {
+                                transform-origin: 100px 130px;
+                                animation: pushArms 3s infinite;
+                            }
+                        </style>
+                    </svg>
+                </div>
+                <h3>Modified Push-Ups</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Strengthens chest, shoulders, and arms</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Start in a plank position with hands slightly wider than shoulders</li>
+                        <li>Keep your body in a straight line from head to heels</li>
+                        <li>Lower your chest toward the floor</li>
+                        <li>Push back up to starting position</li>
+                        <li>Repeat for 3 sets of 10-12 reps</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Perform on knees for beginners</p>
+                </div>
+            </div>
+
+            <!-- Exercise 3 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for planks -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Floor line -->
+                        <line x1="30" y1="150" x2="170" y2="150" stroke="#D3D3D3" stroke-width="2"/>
+                        <!-- Person doing plank -->
+                        <circle cx="60" cy="120" r="15" fill="#4CAF50" class="plank-head"/>
+                        <line x1="60" y1="135" x2="140" y2="135" stroke="#4CAF50" stroke-width="10" class="plank-body"/>
+                        <line x1="60" y1="135" x2="60" y2="150" stroke="#4CAF50" stroke-width="8" class="plank-arm-left"/>
+                        <line x1="80" y1="135" x2="80" y2="150" stroke="#4CAF50" stroke-width="8" class="plank-arm-right"/>
+                        <line x1="140" y1="135" x2="160" y2="150" stroke="#4CAF50" stroke-width="8" class="plank-leg-left"/>
+                        <line x1="140" y1="135" x2="170" y2="150" stroke="#4CAF50" stroke-width="8" class="plank-leg-right"/>
+                        
+                        <style>
+                            @keyframes plankShake {
+                                0% { transform: translateY(0); }
+                                25% { transform: translateY(1px); }
+                                50% { transform: translateY(0); }
+                                75% { transform: translateY(-1px); }
+                                100% { transform: translateY(0); }
+                            }
+                            .plank-head, .plank-body, .plank-arm-left, .plank-arm-right, .plank-leg-left, .plank-leg-right {
+                                animation: plankShake 1s infinite;
+                            }
+                        </style>
+                    </svg>
+                </div>
+                <h3>Forearm Plank</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Strengthens core, shoulders, and back</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Start in a forearm plank position with elbows under shoulders</li>
+                        <li>Keep your body in a straight line from head to heels</li>
+                        <li>Engage your core and glutes</li>
+                        <li>Hold the position for 30 seconds</li>
+                        <li>Rest and repeat 3 times</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Perform on knees for beginners</p>
+                </div>
+            </div>
+
+            <!-- Exercise 4 -->
+            <div class="exercise-card">
+                <div class="exercise-img">
+                    <!-- SVG animation for jumping jacks -->
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Person doing jumping jacks -->
+                        <circle cx="100" cy="50" r="15" fill="#4CAF50" class="jack-head"/>
+                        <line x1="100" y1="65" x2="100" y2="110" stroke="#4CAF50" stroke-width="8" class="jack-body"/>
+                        <line x1="100" y1="80" x2="70" y2="70" stroke="#4CAF50" stroke-width="6" class="jack-arm-left">
+                            <animate 
+                                attributeName="x2" 
+                                values="70;50;70;100;70" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                            <animate 
+                                attributeName="y2" 
+                                values="70;100;70;80;70" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="80" x2="130" y2="70" stroke="#4CAF50" stroke-width="6" class="jack-arm-right">
+                            <animate 
+                                attributeName="x2" 
+                                values="130;150;130;100;130" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                            <animate 
+                                attributeName="y2" 
+                                values="70;100;70;80;70" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="110" x2="80" y2="150" stroke="#4CAF50" stroke-width="6" class="jack-leg-left">
+                            <animate 
+                                attributeName="x2" 
+                                values="80;60;80;100;80" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                        <line x1="100" y1="110" x2="120" y2="150" stroke="#4CAF50" stroke-width="6" class="jack-leg-right">
+                            <animate 
+                                attributeName="x2" 
+                                values="120;140;120;100;120" 
+                                dur="2s" 
+                                repeatCount="indefinite"/>
+                        </line>
+                    </svg>
+                </div>
+                <h3>Jumping Jacks</h3>
+                <div class="exercise-details">
+                    <p><strong>Benefits:</strong> Improves cardiovascular fitness and coordination</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Stand with feet together and arms at your sides</li>
+                        <li>Jump while spreading legs and raising arms above head</li>
+                        <li>Jump again to return to starting position</li>
+                        <li>Perform 3 sets of 30 seconds each</li>
+                    </ol>
+                    <p><strong>Modifications:</strong> Step out instead of jumping for lower impact</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2>VIDEO DEMONSTRATIONS</h2>
+        <p class="section-intro">Watch these video demonstrations to ensure proper form and technique for each exercise.</p>
+        
+        <div class="video-container">
+            <div class="video-card">
+                <div class="video-placeholder"></div>
+                <h3>Proper Squat Form</h3>
+                <p>Learn the correct technique for bodyweight squats to maximize benefits and prevent injury.</p>
+            </div>
+            <div class="video-card">
+                <div class="video-placeholder"></div>
+                <h3>Push-Up Variations</h3>
+                <p>Different push-up modifications for beginners to advanced fitness levels.</p>
+            </div>
+            <div class="video-card">
+                <div class="video-placeholder"></div>
+                <h3>Core Strengthening</h3>
+                <p>Effective plank techniques and progressions for a stronger core.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section class="safety-section">
+        <h2>SAFETY GUIDELINES</h2>
+        
+        <div class="safety-content">
+            <div class="safety-icon">
+                <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 5L5 20V40L30 55L55 40V20L30 5Z" fill="none" stroke="#333" stroke-width="2"/>
+                    <text x="27" y="38" font-size="24" font-weight="bold">!</text>
+                </svg>
+            </div>
+            <div class="safety-tips">
+                <h3>Important Safety Tips for Teenagers</h3>
+                <ul>
+                    <li>Always warm up before exercising and cool down afterward</li>
+                    <li>Use proper form to prevent injuries</li>
+                    <li>Stay hydrated before, during, and after exercise</li>
+                    <li>Listen to your body and rest if you feel pain (not just muscle fatigue)</li>
+                    <li>Increase intensity gradually as you build strength</li>
+                    <li>Consult with a healthcare provider before starting a new exercise program, especially if you have any health concerns</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+         <div class="footer-logo">
+                 <svg width="150" height="150" viewBox="0 0 150 150" class="logo">
+                <circle cx="75" cy="75" r="70" fill="#4CAF50" />
+                <path d="M45,75 C45,45 75,45 75,75 C75,105 105,105 105,75" stroke="white" stroke-width="8" fill="none" />
+                <circle cx="75" cy="40" r="6" fill="white" />
+                <circle cx="75" cy="110" r="6" fill="white" />
+                <text x="75" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">PHYSIO</text>
+            </svg>
+                <h3>PHYSIO EXERCISES</h3>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#exercises">Exercises</a></li>
+                    <li><a href="index.html#packages">Packages</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <div class="contact-info">
+  <p><i class="email-icon fas fa-envelope"></i> info@physiofit.com</p>
+  <p><i class="phone-icon fas fa-phone"></i> (123) 456-7890</p>
+  <p><i class="address-icon fas fa-map-marker-alt"></i> 123 Wellness Avenue, Health City</p>
+</div>
+
+                <div class="social-icons">
+                    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 PHYSIO EXERCISES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

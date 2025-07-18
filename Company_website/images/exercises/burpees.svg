@@ -1,0 +1,31 @@
+<svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Floor line -->
+    <line x1="30" y1="170" x2="170" y2="170" stroke="#D3D3D3" stroke-width="3"/>
+    
+    <!-- Person doing burpees -->
+    <g class="burpee-figure">
+        <circle cx="100" cy="60" r="20" fill="#FFD700" class="burpee-head"/>
+        <line x1="100" y1="80" x2="100" y2="130" stroke="#FFD700" stroke-width="10" class="burpee-body"/>
+        
+        <!-- Arms -->
+        <line x1="100" y1="90" x2="70" y2="110" stroke="#FFD700" stroke-width="8" class="burpee-arm-left"/>
+        <line x1="100" y1="90" x2="130" y2="110" stroke="#FFD700" stroke-width="8" class="burpee-arm-right"/>
+        
+        <!-- Legs -->
+        <line x1="100" y1="130" x2="70" y2="170" stroke="#FFD700" stroke-width="8" class="burpee-leg-left"/>
+        <line x1="100" y1="130" x2="130" y2="170" stroke="#FFD700" stroke-width="8" class="burpee-leg-right"/>
+    </g>
+    
+    <style>
+        @keyframes burpee {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(0) scale(0.8); } /* Squat down */
+            50% { transform: translateY(30px) scale(0.6); } /* Plank position */
+            75% { transform: translateY(0) scale(0.8); } /* Back to squat */
+        }
+        .burpee-figure {
+            animation: burpee 4s infinite;
+            transform-origin: 100px 115px;
+        }
+    </style>
+</svg>
