@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Doctor</p>
+                </div>
+            </div>
+            <a href="doctor-dashboard.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 active">
+                <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+            </a>
+            <a href="doctor-my-patients.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-users mr-2 text-primary"></i> My Patients
+            </a>
+            <a href="doctor-subscription-management.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dollar-sign mr-2 text-primary"></i> Subscription Management
+            </a>
+            <a href="doctor-appointments.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-calendar-alt mr-2 text-primary"></i> Appointments
+            </a>
+            <a href="doctor-exercise-programs.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dumbbell mr-2 text-primary"></i> Exercise Programs
+            </a>
+            <a href="doctor-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-cog mr-2 text-primary"></i> Settings
+            </a>
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-primary"></i> Back to Home
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Doctor</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="doctor-dashboard.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg font-medium">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="doctor-my-patients.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>My Patients</span>
+                    </a>
+                    <a href="doctor-subscription-management.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dollar-sign mr-3"></i>
+                        <span>Subscription Management</span>
+                    </a>
+                    <a href="doctor-appointments.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-calendar-alt mr-3"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="doctor-exercise-programs.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>Exercise Programs</span>
+                    </a>
+                    <a href="doctor-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-home mr-3"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">Doctor Dashboard</h1>
+                    </div>
+                    
+                    <!-- Auth Buttons (shown before login) -->
+                    <div class="flex items-center space-x-4" id="header-auth-buttons">
+                        <a href="login.html" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-medium">Login</a>
+                        <a href="signup.html" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-green-600 transition font-medium">Sign Up</a>
+                    </div>
+                    
+                    <!-- User Profile (shown after login) -->
+                    <div class="flex items-center space-x-4" id="header-user-profile">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-primary transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-2">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">Dr. Sarah Johnson</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Welcome Section -->
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-6 mb-6 text-white">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2" id="welcome-message">Welcome back, Dr. Sarah!</h2>
+                            <p class="opacity-90">Here's an overview of your patients and practice</p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-white text-primary rounded-lg font-medium hover:bg-blue-50 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>
+                                Add New Patient
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">Total Patients</h3>
+                            <span class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center">
+                                <i class="fas fa-users"></i>
+                            </span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800 mb-1">48</p>
+                        <p class="text-sm text-gray-500"><span class="text-green-500">+5</span> this month</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">Appointments Today</h3>
+                            <span class="w-10 h-10 rounded-full bg-purple-100 text-purple-500 flex items-center justify-center">
+                                <i class="fas fa-calendar-check"></i>
+                            </span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800 mb-1">8</p>
+                        <p class="text-sm text-gray-500">2 remaining</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">Active Subscriptions</h3>
+                            <span class="w-10 h-10 rounded-full bg-green-100 text-green-500 flex items-center justify-center">
+                                <i class="fas fa-credit-card"></i>
+                            </span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800 mb-1">42</p>
+                        <p class="text-sm text-gray-500">87.5% of patients</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">Monthly Revenue</h3>
+                            <span class="w-10 h-10 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center">
+                                <i class="fas fa-dollar-sign"></i>
+                            </span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800 mb-1">$1,259.99</p>
+                        <p class="text-sm text-gray-500"><span class="text-green-500">+12%</span> from last month</p>
+                    </div>
+                </div>
+
+                <!-- Subscription Management -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-800">Subscription Management</h3>
+                        <button id="save-subscription-changes" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+                            <i class="fas fa-save mr-2"></i> Save Changes
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan Name</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Price</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">New Price</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Active Subscribers</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="font-medium text-gray-800">Basic Plan</p>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <p class="text-gray-600">Limited access to exercise programs</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="text-gray-600">$14.99/month</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <input type="number" min="0" step="0.01" value="14.99" data-plan="basic"
+                                            class="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="text-gray-600">15</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="font-medium text-gray-800">Premium Plan</p>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <p class="text-gray-600">Full access to all exercise programs</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="text-gray-600">$29.99/month</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <input type="number" min="0" step="0.01" value="29.99" data-plan="premium"
+                                            class="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="text-gray-600">27</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="font-medium text-gray-800">Family Plan</p>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <p class="text-gray-600">Access for up to 5 family members</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="text-gray-600">$49.99/month</p>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <input type="number" min="0" step="0.01" value="49.99" data-plan="family"
+                                            class="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <p class="text-gray-600">6</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Patient List -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-800">Recent Patients</h3>
+                        <a href="#" class="text-primary hover:text-blue-700 font-medium text-sm">View All Patients</a>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Patient</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age Group</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subscription</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Activity</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-blue-500"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">John Smith</p>
+                                                <p class="text-sm text-gray-500">john.smith@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">Middle Age (36-55)</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Premium Plan
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">Today</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <a href="doctor-my-patients.html" class="p-1 text-blue-500 hover:text-blue-700 transition-colors">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-green-500 hover:text-green-700 transition-colors">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-red-500 hover:text-red-700 transition-colors">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-purple-500"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Emily Johnson</p>
+                                                <p class="text-sm text-gray-500">emily.j@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">Young Adults (20-35)</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Basic Plan
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">Yesterday</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <a href="doctor-my-patients.html" class="p-1 text-blue-500 hover:text-blue-700 transition-colors">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-green-500 hover:text-green-700 transition-colors">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-red-500 hover:text-red-700 transition-colors">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-green-500"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Robert Williams</p>
+                                                <p class="text-sm text-gray-500">robert.w@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">Senior Middle (56-70)</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Premium Plan
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">2 days ago</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <a href="doctor-my-patients.html" class="p-1 text-blue-500 hover:text-blue-700 transition-colors">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-green-500 hover:text-green-700 transition-colors">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-red-500 hover:text-red-700 transition-colors">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-orange-500"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Lisa Brown</p>
+                                                <p class="text-sm text-gray-500">lisa.b@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">Middle Age (36-55)</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Family Plan
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-gray-600">3 days ago</td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <a href="doctor-my-patients.html" class="p-1 text-blue-500 hover:text-blue-700 transition-colors">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-green-500 hover:text-green-700 transition-colors">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="doctor-my-patients.html" class="p-1 text-red-500 hover:text-red-700 transition-colors">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.open-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('translate-x-full');
+        });
+        
+        document.querySelector('.close-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.add('translate-x-full');
+        });
+
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Initially hide user profile and show auth buttons
+            document.getElementById('header-user-profile').classList.add('hidden');
+            document.getElementById('header-auth-buttons').classList.remove('hidden');
+            
+            if (!currentUser || !currentUser.loggedIn || currentUser.role !== 'doctor') {
+                // User is not logged in as doctor, keep auth buttons visible
+                // Don't redirect, just show login/signup buttons
+                return;
+            }
+            
+            // User is logged in as doctor, show profile and hide auth buttons
+            document.getElementById('header-user-profile').classList.remove('hidden');
+            document.getElementById('header-auth-buttons').classList.add('hidden');
+            
+            // Update user info in the UI
+            const userName = currentUser.firstName ? 
+                `Dr. ${currentUser.firstName} ${currentUser.lastName}` : 
+                currentUser.name || `Dr. ${currentUser.email.split('@')[0]}`;
+            
+            // Update sidebar user info
+            document.getElementById('sidebar-user-name').textContent = userName;
+            document.getElementById('sidebar-user-role').textContent = 'Doctor';
+            
+            // Update mobile menu user info
+            document.getElementById('mobile-user-name').textContent = userName;
+            document.getElementById('mobile-user-role').textContent = 'Doctor';
+            
+            // Update header user info
+            document.getElementById('header-user-name').textContent = userName;
+            
+            // Update welcome message
+            document.getElementById('welcome-message').textContent = `Welcome back, ${userName.split(' ')[0]} ${userName.split(' ')[1] || ''}!`;
+            
+            // Load subscription prices from localStorage if available
+            loadSubscriptionPrices();
+        });
+        
+        // Function to load subscription prices from localStorage
+        function loadSubscriptionPrices() {
+            const storedPrices = localStorage.getItem('subscriptionPrices');
+            if (storedPrices) {
+                const prices = JSON.parse(storedPrices);
+                
+                // Update input fields with stored prices
+                const basicPlanInput = document.querySelector('input[data-plan="basic"]');
+                const premiumPlanInput = document.querySelector('input[data-plan="premium"]');
+                const familyPlanInput = document.querySelector('input[data-plan="family"]');
+                
+                if (basicPlanInput && prices.basic) {
+                    basicPlanInput.value = prices.basic;
+                }
+                
+                if (premiumPlanInput && prices.premium) {
+                    premiumPlanInput.value = prices.premium;
+                }
+                
+                if (familyPlanInput && prices.family) {
+                    familyPlanInput.value = prices.family;
+                }
+            }
+        }
+
+        // Logout functionality
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+
+        // Subscription price update functionality
+        document.getElementById('save-subscription-changes').addEventListener('click', function() {
+            // Get all the new price inputs
+            const basicPlanPrice = document.querySelector('input[data-plan="basic"]').value;
+            const premiumPlanPrice = document.querySelector('input[data-plan="premium"]').value;
+            const familyPlanPrice = document.querySelector('input[data-plan="family"]').value;
+            
+            // Validate inputs
+            if (!basicPlanPrice || !premiumPlanPrice || !familyPlanPrice) {
+                alert('Please enter valid prices for all plans');
+                return;
+            }
+            
+            // Calculate monthly, half-yearly, and yearly prices based on premium plan
+            const monthlyPrice = parseFloat(premiumPlanPrice);
+            const halfYearlyPrice = monthlyPrice * 6 * 0.85; // 15% discount for half-yearly
+            const yearlyPrice = monthlyPrice * 12 * 0.7; // 30% discount for yearly
+            
+            // Store the updated prices in localStorage
+            const subscriptionPrices = {
+                basic: parseFloat(basicPlanPrice),
+                premium: parseFloat(premiumPlanPrice),
+                family: parseFloat(familyPlanPrice),
+                monthly: monthlyPrice,
+                'half-yearly': parseFloat(halfYearlyPrice.toFixed(2)),
+                yearly: parseFloat(yearlyPrice.toFixed(2))
+            };
+            
+            localStorage.setItem('subscriptionPrices', JSON.stringify(subscriptionPrices));
+            
+            alert('Subscription prices updated successfully! The changes will be reflected across the website.');
+            
+            // Log the updated prices for verification
+            console.log('Updated subscription prices:', subscriptionPrices);
+        });
+    </script>
+</body>
+</html>

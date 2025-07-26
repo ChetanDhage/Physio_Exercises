@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Doctor</p>
+                </div>
+            </div>
+            <a href="doctor-dashboard.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+            </a>
+            <a href="doctor-my-patients.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-users mr-2 text-primary"></i> My Patients
+            </a>
+            <a href="doctor-subscription-management.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-credit-card mr-2 text-primary"></i> Subscription Management
+            </a>
+            <a href="doctor-appointments.html" class="block py-3 px-4 rounded-lg bg-blue-50 text-primary mb-2">
+                <i class="fas fa-calendar-alt mr-2 text-primary"></i> Appointments
+            </a>
+            <a href="doctor-exercise-programs.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dumbbell mr-2 text-primary"></i> Exercise Programs
+            </a>
+            <a href="doctor-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-cog mr-2 text-primary"></i> Settings
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-primary"></i> Back to Home
+            </a>
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Doctor</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="doctor-dashboard.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="doctor-my-patients.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>My Patients</span>
+                    </a>
+                    <a href="doctor-subscription-management.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-credit-card mr-3"></i>
+                        <span>Subscription Management</span>
+                    </a>
+                    <a href="doctor-appointments.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg font-medium">
+                        <i class="fas fa-calendar-alt mr-3"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="doctor-exercise-programs.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>Exercise Programs</span>
+                    </a>
+                    <a href="doctor-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors mb-4">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Back to Home</span>
+                </a>
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">Appointments</h1>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-primary transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-2">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">Dr. Sarah Johnson</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Appointments Content -->
+            <div class="p-6">
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center">
+                        <i class="fas fa-plus mr-2"></i> New Appointment
+                    </button>
+                    <div class="relative">
+                        <input type="text" placeholder="Search appointments..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent pl-10">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div class="ml-auto flex gap-2">
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center">
+                            <i class="fas fa-filter mr-2"></i> Filter
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center">
+                            <i class="fas fa-download mr-2"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Calendar View -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">May 2023</h2>
+                        <div class="flex space-x-2">
+                            <button class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                Today
+                            </button>
+                            <button class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                Day
+                            </button>
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                Week
+                            </button>
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                Month
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Day View Calendar -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <!-- Time Headers -->
+                        <div class="grid grid-cols-[80px_1fr] border-b border-gray-200">
+                            <div class="p-3 border-r border-gray-200 bg-gray-50"></div>
+                            <div class="p-3 font-semibold text-gray-800 text-center">Wednesday, May 17, 2023</div>
+                        </div>
+                        
+                        <!-- Time Slots -->
+                        <div class="grid grid-cols-[80px_1fr] divide-y divide-gray-200">
+                            <!-- 8:00 AM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">8:00 AM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                            </div>
+                            
+                            <!-- 9:00 AM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">9:00 AM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                                <div class="absolute top-0 left-4 right-4 h-24 bg-blue-100 border-l-4 border-primary rounded-r-lg p-2 shadow-sm">
+                                    <p class="font-semibold text-gray-800">John Doe</p>
+                                    <p class="text-sm text-gray-600">9:00 AM - 10:00 AM</p>
+                                    <p class="text-sm text-gray-600">Initial Assessment</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 10:00 AM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">10:00 AM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                            </div>
+                            
+                            <!-- 11:00 AM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">11:00 AM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                                <div class="absolute top-0 left-4 right-4 h-24 bg-green-100 border-l-4 border-green-500 rounded-r-lg p-2 shadow-sm">
+                                    <p class="font-semibold text-gray-800">Emily Wilson</p>
+                                    <p class="text-sm text-gray-600">11:00 AM - 12:00 PM</p>
+                                    <p class="text-sm text-gray-600">Follow-up Session</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 12:00 PM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">12:00 PM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                                <div class="absolute top-0 left-4 right-4 h-24 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg p-2 shadow-sm">
+                                    <p class="font-semibold text-gray-800">Lunch Break</p>
+                                    <p class="text-sm text-gray-600">12:00 PM - 1:00 PM</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 1:00 PM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">1:00 PM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                            </div>
+                            
+                            <!-- 2:00 PM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">2:00 PM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                                <div class="absolute top-0 left-4 right-4 h-24 bg-blue-100 border-l-4 border-primary rounded-r-lg p-2 shadow-sm">
+                                    <p class="font-semibold text-gray-800">Michael Brown</p>
+                                    <p class="text-sm text-gray-600">2:00 PM - 3:00 PM</p>
+                                    <p class="text-sm text-gray-600">Progress Review</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 3:00 PM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">3:00 PM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                            </div>
+                            
+                            <!-- 4:00 PM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">4:00 PM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                                <div class="absolute top-0 left-4 right-4 h-24 bg-purple-100 border-l-4 border-purple-500 rounded-r-lg p-2 shadow-sm">
+                                    <p class="font-semibold text-gray-800">Sarah Johnson</p>
+                                    <p class="text-sm text-gray-600">4:00 PM - 5:00 PM</p>
+                                    <p class="text-sm text-gray-600">Virtual Consultation</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 5:00 PM -->
+                            <div class="p-3 border-r border-gray-200 text-sm text-gray-500 text-right">5:00 PM</div>
+                            <div class="p-2 min-h-[100px] relative">
+                                <div class="absolute top-0 left-0 right-0 h-full border-b border-gray-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Appointments -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Upcoming Appointments</h2>
+                        <button class="text-primary hover:text-blue-700 transition-colors font-medium">
+                            View All
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Patient</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">John Doe</p>
+                                                <p class="text-sm text-gray-500">ID: PT-1001</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 17, 2023</p>
+                                        <p class="text-sm text-gray-500">9:00 AM - 10:00 AM</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Initial Assessment</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <button class="p-1 text-blue-600 hover:text-blue-800" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="p-1 text-green-600 hover:text-green-800" title="Start Session">
+                                                <i class="fas fa-video"></i>
+                                            </button>
+                                            <button class="p-1 text-gray-600 hover:text-gray-800" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-1 text-red-600 hover:text-red-800" title="Cancel">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Emily Wilson</p>
+                                                <p class="text-sm text-gray-500">ID: PT-1002</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 17, 2023</p>
+                                        <p class="text-sm text-gray-500">11:00 AM - 12:00 PM</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Follow-up Session</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <button class="p-1 text-blue-600 hover:text-blue-800" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="p-1 text-green-600 hover:text-green-800" title="Start Session">
+                                                <i class="fas fa-video"></i>
+                                            </button>
+                                            <button class="p-1 text-gray-600 hover:text-gray-800" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-1 text-red-600 hover:text-red-800" title="Cancel">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Michael Brown</p>
+                                                <p class="text-sm text-gray-500">ID: PT-1003</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 17, 2023</p>
+                                        <p class="text-sm text-gray-500">2:00 PM - 3:00 PM</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Progress Review</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <button class="p-1 text-blue-600 hover:text-blue-800" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="p-1 text-green-600 hover:text-green-800" title="Start Session">
+                                                <i class="fas fa-video"></i>
+                                            </button>
+                                            <button class="p-1 text-gray-600 hover:text-gray-800" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-1 text-red-600 hover:text-red-800" title="Cancel">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Sarah Johnson</p>
+                                                <p class="text-sm text-gray-500">ID: PT-1004</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 17, 2023</p>
+                                        <p class="text-sm text-gray-500">4:00 PM - 5:00 PM</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800">Virtual Consultation</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <button class="p-1 text-blue-600 hover:text-blue-800" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="p-1 text-green-600 hover:text-green-800" title="Start Session">
+                                                <i class="fas fa-video"></i>
+                                            </button>
+                                            <button class="p-1 text-gray-600 hover:text-gray-800" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-1 text-red-600 hover:text-red-800" title="Cancel">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Appointment Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <!-- Today's Appointments -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-800">Today's Appointments</h3>
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-calendar-day text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-3xl font-bold text-gray-800">4</span>
+                            <span class="ml-2 text-sm text-green-500 font-medium">+1 from yesterday</span>
+                        </div>
+                    </div>
+                    
+                    <!-- This Week -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-800">This Week</h3>
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-calendar-week text-green-600"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-3xl font-bold text-gray-800">18</span>
+                            <span class="ml-2 text-sm text-green-500 font-medium">+3 from last week</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Completion Rate -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-800">Completion Rate</h3>
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                <i class="fas fa-check-circle text-purple-600"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-3xl font-bold text-gray-800">95%</span>
+                            <span class="ml-2 text-sm text-green-500 font-medium">+2% from last month</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Appointment Notes -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Recent Appointment Notes</h2>
+                        <button class="text-primary hover:text-blue-700 transition-colors font-medium">
+                            View All Notes
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Note 1 -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-user text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">John Doe</p>
+                                        <p class="text-sm text-gray-500">Initial Assessment • May 10, 2023</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                            <p class="text-gray-700">Patient presented with lower back pain (7/10) after lifting heavy objects. Examination showed reduced lumbar mobility and muscle spasm. Prescribed initial exercises focusing on core strengthening and proper lifting techniques.</p>
+                            <div class="mt-3 flex items-center text-sm text-gray-500">
+                                <i class="fas fa-paperclip mr-1"></i> 2 attachments
+                                <span class="mx-2">•</span>
+                                <button class="text-primary hover:text-blue-700">View Exercise Plan</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Note 2 -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-user text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Emily Wilson</p>
+                                        <p class="text-sm text-gray-500">Follow-up Session • May 12, 2023</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                            <p class="text-gray-700">Patient reports significant improvement in knee mobility (ROM increased by 15°). Pain reduced from 6/10 to 3/10. Continuing with current exercise regimen and adding light resistance training. Patient is adhering well to the program.</p>
+                            <div class="mt-3 flex items-center text-sm text-gray-500">
+                                <i class="fas fa-paperclip mr-1"></i> 1 attachment
+                                <span class="mx-2">•</span>
+                                <button class="text-primary hover:text-blue-700">View Progress Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Redirect if not logged in or not a doctor
+            if (!currentUser || !currentUser.loggedIn || currentUser.role !== 'doctor') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Update user information
+            const userName = currentUser.firstName ?
+                `Dr. ${currentUser.firstName} ${currentUser.lastName}` :
+                currentUser.name || `Dr. ${currentUser.email.split('@')[0]}`;
+                
+            // Update sidebar user info
+            document.getElementById('sidebar-user-name').textContent = userName;
+            document.getElementById('sidebar-user-role').textContent = 'Doctor';
+            
+            // Update mobile menu user info
+            document.getElementById('mobile-user-name').textContent = userName;
+            document.getElementById('mobile-user-role').textContent = 'Doctor';
+        });
+        
+        // Logout functionality
+        function handleLogout() {
+            // Clear user data
+            localStorage.removeItem('currentUser');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+        
+        // Add logout event listeners
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+    </script>
+</body>
+</html>

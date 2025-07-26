@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrideWellStudio - Personalized Physiotherapy Exercises</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="style.css">
+    <style>
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        // Update header based on login status
+        function updateHeaderBasedOnLogin() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (currentUser.loggedIn) {
+                // Show profile section, hide auth section
+                document.getElementById('header-auth-buttons').classList.add('hidden');
+                document.getElementById('header-user-profile').classList.remove('hidden');
+                document.getElementById('mobile-auth-section').classList.add('hidden');
+                document.getElementById('mobile-profile-section').classList.remove('hidden');
+                
+                // Update user info
+                const userName = currentUser.firstName ? 
+                    `${currentUser.firstName} ${currentUser.lastName}` : 
+                    currentUser.name || currentUser.email.split('@')[0];
+                const userRole = currentUser.role || 'User';
+                const userInitial = userName.charAt(0).toUpperCase();
+                
+                // Update header user info
+                document.getElementById('header-user-name').textContent = userName;
+                
+                // Update mobile menu user info
+                document.getElementById('mobile-user-name').textContent = userName;
+                document.getElementById('mobile-user-role').textContent = userRole;
+                document.getElementById('mobile-user-initial').textContent = userInitial;
+                
+                // Set dashboard link based on user role
+                const dashboardLink = document.getElementById('header-dashboard-link');
+                const mobileDashboardLink = document.getElementById('mobile-dashboard-link');
+                
+                if (currentUser.role === 'patient') {
+                    dashboardLink.href = 'patient-dashboard.html';
+                    mobileDashboardLink.href = 'patient-dashboard.html';
+                } else if (currentUser.role === 'doctor') {
+                    dashboardLink.href = 'doctor-dashboard.html';
+                    mobileDashboardLink.href = 'doctor-dashboard.html';
+                } else if (currentUser.role === 'admin') {
+                    dashboardLink.href = 'admin-dashboard.html';
+                    mobileDashboardLink.href = 'admin-dashboard.html';
+                }
+                
+                // Add logout event listeners
+                document.getElementById('header-logout-btn').addEventListener('click', handleLogout);
+                document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+                
+                // Toggle dropdown menu
+                const dropdownBtn = document.querySelector('.group button');
+                const dropdownMenu = document.querySelector('.group-hover\\:block');
+                
+                if (dropdownBtn && dropdownMenu) {
+                    dropdownBtn.addEventListener('click', () => {
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+                    
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', (event) => {
+                        if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                }
+            } else {
+                // Show auth section, hide profile section
+                document.getElementById('header-auth-buttons').classList.remove('hidden');
+                document.getElementById('header-user-profile').classList.add('hidden');
+                document.getElementById('mobile-auth-section').classList.remove('hidden');
+                document.getElementById('mobile-profile-section').classList.add('hidden');
+            }
+        }
+        
+        // Handle logout
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        
+        // Call updateHeaderBasedOnLogin when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHeaderBasedOnLogin();
+        });
+    </script>
+   
+  
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <a href="#" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Home</a>
+            <a href="#exercises" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Exercises</a>
+            <a href="#subscription" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Subscription</a>
+            <a href="#appointment" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Appointment</a>
+            <a href="#testimonials" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Testimonials</a>
+            <a href="#about" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">About Us</a>
+            <a href="#faq" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">FAQ</a>
+            <a href="#contact" class="block py-3 px-4 rounded-lg hover:bg-blue-50">Contact</a>
+        </div>
+        <div class="mt-auto pt-6 border-t border-gray-800" id="mobile-auth-section">
+            <a href="login.html" class="block w-full bg-primary text-white text-center py-3 rounded-lg mb-4">Login</a>
+            <a href="signup.html" class="block w-full border border-primary text-white text-center py-3 rounded-lg mb-4">Sign Up</a>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+      
+ 
+    <!-- User Profile Section (Hidden by default) -->
+        <div class="mt-auto pt-6 border-t border-gray-800 hidden" id="mobile-profile-section">
+            <div class="text-center mb-4">
+                <div class="inline-block rounded-full bg-primary text-white w-16 h-16 flex items-center justify-center text-2xl font-bold mb-2">
+                    <span id="mobile-user-initial">U</span>
+                </div>
+                <h3 class="text-white text-xl font-bold" id="mobile-user-name">User Name</h3>
+                <p class="text-gray-400" id="mobile-user-role">Role</p>
+            </div>
+            <a href="#" id="mobile-dashboard-link" class="block w-full bg-primary text-white text-center py-3 rounded-lg mb-4">Dashboard</a>
+            <button id="mobile-logout-btn" class="block w-full border border-primary text-white text-center py-3 rounded-lg mb-4">Logout</button>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-primary font-medium">Home</a>
+                    <a href="#exercises" class="text-gray-600 hover:text-primary">Exercises</a>
+                    <a href="#subscription" class="text-gray-600 hover:text-primary">Subscription</a>
+                    <a href="#appointment" class="text-gray-600 hover:text-primary">Appointment</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-primary">Testimonials</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary">About Us</a>
+                </nav>
+                
+                <div class="md:flex items-center space-x-4" id="header-auth-buttons">
+                    <a href="login.html" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-medium">Login</a>
+                    <a href="signup.html" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-green-600 transition font-medium">Sign Up</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4" id="header-user-profile">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-2">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800" id="header-user-name"></p>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="text-gray-600 hover:text-primary">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block">
+                            <a href="#" id="header-dashboard-link" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Dashboard</a>
+                            <button id="header-logout-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="md:hidden text-2xl text-gray-600 open-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-20 relative overflow-hidden bg-gradient-to-r from-blue-50 to-cyan-50">
+        <div class="absolute inset-0">
+            <video autoplay muted loop class="hero-video">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-doing-stretching-exercises-4393-large.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-cyan-900/40"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                    Personalized Physiotherapy for Every Stage of Life
+                </h1>
+                <p class="text-xl text-blue-100 mb-10">
+                    Expert-designed exercise programs tailored to your age group and health needs
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#appointment" class="bg-accent text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:bg-green-500 transition inline-block">
+                        Book Appointment
+                    </a>
+                    <a href="all-exercises.html" class="bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:bg-gray-100 transition inline-block">
+                        Explore Exercises
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Age Groups Section -->
+    <section class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Exercises For Every Age Group</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our specialized programs address the unique physical therapy needs at different life stages</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <a href="teenagers.html" class="age-group bg-white rounded-xl shadow-md p-6 text-center cursor-pointer transition-all hover:shadow-lg active">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-child text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Teenagers</h3>
+                    <p class="text-gray-600 text-sm">Sports injury prevention and posture correction</p>
+                </a>
+                
+                <a href="young-adults.html" class="age-group bg-white rounded-xl shadow-md p-6 text-center cursor-pointer transition-all hover:shadow-lg">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-running text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Young Adults</h3>
+                    <p class="text-gray-600 text-sm">Fitness enhancement and injury recovery</p>
+                </a>
+                
+                <a href="middle-age.html" class="age-group bg-white rounded-xl shadow-md p-6 text-center cursor-pointer transition-all hover:shadow-lg">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-tie text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Middle Age</h3>
+                    <p class="text-gray-600 text-sm">Work-related strain relief and mobility</p>
+                </a>
+                
+                <a href="senior-middle.html" class="age-group bg-white rounded-xl shadow-md p-6 text-center cursor-pointer transition-all hover:shadow-lg">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-friends text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Senior Middle</h3>
+                    <p class="text-gray-600 text-sm">Joint health and strength maintenance</p>
+                </a>
+                
+                <a href="senior-citizen.html" class="age-group bg-white rounded-xl shadow-md p-6 text-center cursor-pointer transition-all hover:shadow-lg">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-wheelchair text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Senior Citizens</h3>
+                    <p class="text-gray-600 text-sm">Balance improvement and pain management</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exercise Videos Section -->
+    <section id="exercises" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Animated Exercise Videos</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Follow along with our professionally animated exercise tutorials</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative overflow-hidden">
+                        <video class="exercise-video w-full h-64 object-cover transition-transform" poster="https://images.unsplash.com/photo-1534367507877-0edd93bd013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" controls>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-doing-yoga-exercises-4394-large.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute top-4 right-4 bg-primary text-white text-xs px-2 py-1 rounded">15 min</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Lower Back Pain Relief</h3>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <span class="mr-4"><i class="fas fa-user mr-1"></i> Middle Age</span>
+                                    <span><i class="fas fa-dumbbell mr-1"></i> Beginner</span>
+                                </div>
+                            </div>
+                            <button class="text-primary text-2xl">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-4">Gentle exercises to alleviate lower back discomfort and improve flexibility</p>
+                        <a href="subscription.html" class="block w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition text-center">
+                            Start Exercise
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative overflow-hidden">
+                        <video class="exercise-video w-full h-64 object-cover transition-transform" poster="https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" controls>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-stretching-legs-4391-large.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute top-4 right-4 bg-primary text-white text-xs px-2 py-1 rounded">20 min</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Knee Strengthening</h3>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <span class="mr-4"><i class="fas fa-user mr-1"></i> Senior</span>
+                                    <span><i class="fas fa-dumbbell mr-1"></i> Intermediate</span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 text-2xl">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-4">Build strength around your knees to improve stability and reduce pain</p>
+                        <a href="subscription.html" class="block w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition text-center">
+                            Start Exercise
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative overflow-hidden">
+                        <video class="exercise-video w-full h-64 object-cover transition-transform" poster="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" controls>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-young-woman-stretching-her-body-in-a-gym-4388-large.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute top-4 right-4 bg-primary text-white text-xs px-2 py-1 rounded">12 min</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Posture Correction</h3>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <span class="mr-4"><i class="fas fa-user mr-1"></i> Young Adults</span>
+                                    <span><i class="fas fa-dumbbell mr-1"></i> Beginner</span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 text-2xl">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-4">Exercises to correct forward head posture and rounded shoulders</p>
+                        <a href="subscription.html" class="block w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition text-center">
+                            Start Exercise
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="all-exercises.html" class="inline-block border-2 border-primary text-primary font-bold px-8 py-3 rounded-lg hover:bg-primary hover:text-white transition">
+                    View All Exercises
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Packages -->
+    <section id="subscription" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Flexible Subscription Plans</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose the plan that fits your therapy needs and budget</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Monthly</h3>
+                        <div class="text-4xl font-bold text-dark mb-2" id="monthly-price">$29<span class="text-xl text-gray-500">/month</span></div>
+                        <p class="text-gray-600">Ideal for short-term recovery</p>
+                    </div>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access to all exercises</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Basic progress tracking</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Email support</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times-circle mr-3"></i>
+                            <span>Live Q&A sessions</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times-circle mr-3"></i>
+                            <span>Personalized coaching</span>
+                        </li>
+                    </ul>
+                    <a href="#" onclick="checkLoginBeforePayment(event, 'monthly')" class="block w-full bg-gray-100 text-gray-800 font-medium py-3 rounded-lg hover:bg-gray-200 transition text-center">
+                        Get Started
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-xl p-8 border-2 border-primary relative">
+                    <div class="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg">Popular</div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Half Yearly</h3>
+                        <div class="text-4xl font-bold text-dark mb-2" id="half-yearly-price">$149<span class="text-xl text-gray-500">/6 months</span></div>
+                        <p class="text-gray-600">Save 15% with our best value plan</p>
+                    </div>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access to all exercises</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Advanced progress tracking</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Priority email support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Bi-weekly Q&A sessions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Monthly coaching session</span>
+                        </li>
+                    </ul>
+                    <a href="#" onclick="checkLoginBeforePayment(event, 'half-yearly')" class="block w-full bg-primary text-white font-medium py-3 rounded-lg hover:bg-blue-600 transition text-center">
+                        Get Started
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Yearly</h3>
+                        <div class="text-4xl font-bold text-dark mb-2" id="yearly-price">$249<span class="text-xl text-gray-500">/year</span></div>
+                        <p class="text-gray-600">Best value for long-term wellness</p>
+                    </div>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access to all exercises</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Comprehensive progress tracking</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>24/7 priority support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Weekly Q&A sessions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Bi-weekly coaching sessions</span>
+                        </li>
+                    </ul>
+                    <a href="#" onclick="checkLoginBeforePayment(event, 'yearly')" class="block w-full bg-gray-100 text-gray-800 font-medium py-3 rounded-lg hover:bg-gray-200 transition text-center">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Booking -->
+    <section id="appointment" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-gradient-to-r from-primary to-secondary rounded-2xl shadow-2xl overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-2/5 bg-blue-900 p-8 text-white">
+                        <h2 class="text-3xl font-bold mb-6">Book Your Appointment</h2>
+                        <p class="mb-6">Schedule a consultation with our certified physiotherapists</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Hours</h4>
+                                    <p>Monday - Friday: 9:00 AM - 12:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Location</h4>
+                                    <p>123 Wellness Street, Health City</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Contact</h4>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-3/5 bg-white p-8">
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Phone Number</label>
+                                    <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Age Group</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                        <option>Select Age Group</option>
+                                        <option>Teenager (13-19)</option>
+                                        <option>Young Adult (20-35)</option>
+                                        <option>Middle Age (36-55)</option>
+                                        <option>Senior Middle (56-70)</option>
+                                        <option>Senior Citizen (71+)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2">Health Background</label>
+                                <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" rows="3" placeholder="Please mention any historical diseases, injuries, or conditions"></textarea>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2">Preferred Date & Time</label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="date" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                    <select class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                        <option>9:00 AM</option>
+                                        <option>9:30 AM</option>
+                                        <option>10:00 AM</option>
+                                        <option>10:30 AM</option>
+                                        <option>11:00 AM</option>
+                                        <option>11:30 AM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button class="w-full bg-primary text-white font-medium py-4 rounded-lg hover:bg-blue-600 transition">
+                                Book Appointment Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Patient Success Stories</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">See how our personalized physiotherapy programs have transformed lives</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Patient" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Sarah Johnson</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"After my knee surgery, I thought I'd never run again. The senior citizen program at StrideWellStudio gave me back my mobility and confidence. I'm now walking 5 miles every morning!"</p>
+                    <div class="text-sm text-gray-500">
+                        <span class="bg-blue-100 text-primary px-3 py-1 rounded-full">Knee Replacement Recovery</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Patient" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Michael Torres</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"As a software developer, my chronic back pain was affecting both my work and family life. The middle age program fixed my posture and eliminated my pain in just 3 months. Life-changing!"</p>
+                    <div class="text-sm text-gray-500">
+                        <span class="bg-blue-100 text-primary px-3 py-1 rounded-full">Chronic Back Pain</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Patient" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Emma Reynolds</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"The young adult program helped me recover from a sports injury faster than I thought possible. The animated videos made it so easy to follow along at home. Highly recommend!"</p>
+                    <div class="text-sm text-gray-500">
+                        <span class="bg-blue-100 text-primary px-3 py-1 rounded-full">Sports Injury Recovery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Doctors -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Expert Team</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Meet our certified physiotherapists with specialized expertise</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Dr. James Wilson</h3>
+                        <p class="text-primary mb-4">Sports Physiotherapy Specialist</p>
+                        <p class="text-gray-600 mb-4">15+ years experience in athletic rehabilitation and performance enhancement</p>
+                        <div class="flex space-x-3">
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">Ph.D. Physiotherapy</span>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">CSCS Certified</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Dr. Sarah Chen</h3>
+                        <p class="text-primary mb-4">Geriatric Physiotherapist</p>
+                        <p class="text-gray-600 mb-4">Specialized in mobility improvement and pain management for seniors</p>
+                        <div class="flex space-x-3">
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">DPT Certified</span>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">Balance Expert</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Dr. Robert Garcia</h3>
+                        <p class="text-primary mb-4">Orthopedic Specialist</p>
+                        <p class="text-gray-600 mb-4">Expert in post-surgical rehabilitation and chronic pain management</p>
+                        <div class="flex space-x-3">
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">OCS Certified</span>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">Fellowship Trained</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Dr. Priya Sharma</h3>
+                        <p class="text-primary mb-4">Pediatric & Adolescent Care</p>
+                        <p class="text-gray-600 mb-4">Specializing in growth-related issues and sports injuries in young athletes</p>
+                        <div class="flex space-x-3">
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">PPC Certified</span>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">Youth Specialist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Frequently Asked Questions</h2>
+                    <p class="text-gray-600">Find answers to common questions about our services</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
+                            How do I know which age group program is right for me?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Our age groups are based on common physical therapy needs at different life stages. If you're between categories, we recommend starting with the program for your chronological age. During your initial assessment, we'll fine-tune the program to match your specific physical condition and goals.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
+                            Can I access the exercises without a subscription?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            We offer a selection of free basic exercises for each age group. However, our personalized programs, advanced routines, and progress tracking features require a subscription. You can try our premium features with a 7-day free trial before committing to a subscription.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
+                            What if I have a pre-existing medical condition?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Our intake form includes detailed questions about your medical history. Based on your information, our system will automatically modify exercises to accommodate your condition. For complex cases, we recommend starting with an in-person consultation where our physiotherapists can create a fully customized program.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
+                            How often should I do the exercises?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Most programs recommend 3-5 sessions per week, each lasting 20-45 minutes depending on your specific program. Consistency is more important than duration - we'd rather see you do 15 minutes daily than one long session weekly. Our app will create a personalized schedule based on your goals and availability.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
+                            Can I switch between subscription plans?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Yes, you can upgrade or downgrade your subscription at any time. When upgrading, you'll pay the prorated difference for the remainder of your billing cycle. Downgrades take effect at your next billing date. All changes can be made easily through your account dashboard.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Contact Us</h2>
+                    <p class="text-gray-600">Have questions? Get in touch with our support team</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center p-6 bg-blue-50 rounded-xl">
+                        <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-phone-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Call Us</h3>
+                        <p class="text-gray-600">+1 (555) 123-4567</p>
+                        <p class="text-gray-600">Mon-Fri, 9:00 AM - 5:00 PM</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-blue-50 rounded-xl">
+                        <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-envelope text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Email Us</h3>
+                        <p class="text-gray-600">support@stridewellstudio.com</p>
+                        <p class="text-gray-600">info@stridewellstudio.com</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-blue-50 rounded-xl">
+                        <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-map-marker-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Visit Us</h3>
+                        <p class="text-gray-600">123 Wellness Street</p>
+                        <p class="text-gray-600">Health City, HC 12345</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <form>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Your Email</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Subject</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                                    <option>General Inquiry</option>
+                                    <option>Appointment Booking</option>
+                                    <option>Subscription Question</option>
+                                    <option>Technical Support</option>
+                                    <option>Feedback</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Message</label>
+                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" rows="4"></textarea>
+                        </div>
+                        
+                        <button class="w-full bg-primary text-white font-medium py-4 rounded-lg hover:bg-blue-600 transition">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <span class="ml-3 font-bold text-xl">StrideWell<span class="text-primary">Studio</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Personalized physiotherapy exercise programs tailored to your age group and health needs.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="all-exercises.html" class="text-gray-400 hover:text-white transition">All Exercises</a></li>
+                        <li><a href="subscription.html" class="text-gray-400 hover:text-white transition">Subscription</a></li>
+                        <li><a href="#appointment" class="text-gray-400 hover:text-white transition">Appointment</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Age Groups</h3>
+                    <ul class="space-y-3">
+                        <li><a href="teenagers.html" class="text-gray-400 hover:text-white transition">Teenagers (13-19)</a></li>
+                        <li><a href="young-adults.html" class="text-gray-400 hover:text-white transition">Young Adults (20-35)</a></li>
+                        <li><a href="middle-age.html" class="text-gray-400 hover:text-white transition">Middle Age (36-55)</a></li>
+                        <li><a href="senior-middle.html" class="text-gray-400 hover:text-white transition">Senior Middle (56-70)</a></li>
+                        <li><a href="senior-citizen.html" class="text-gray-400 hover:text-white transition">Senior Citizens (71+)</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to get health tips and special offers</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-primary px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2025 StrideWellStudio. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+         // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+        
+        // This event listener is not needed as updateHeaderBasedOnLogin is already called in the head section
+        /* document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (currentUser.loggedIn) {
+                // Update mobile menu
+                document.getElementById('mobile-auth-section').classList.add('hidden');
+                document.getElementById('mobile-user-profile').classList.remove('hidden');
+                document.getElementById('mobile-user-name').textContent = currentUser.firstName ? 
+                    `${currentUser.firstName} ${currentUser.lastName}` : 
+                    currentUser.name || currentUser.email.split('@')[0];
+                document.getElementById('mobile-user-role').textContent = currentUser.role || 'User';
+                
+                // Update header
+                document.getElementById('header-auth-buttons').classList.add('hidden');
+                document.getElementById('header-user-profile').classList.remove('hidden');
+                document.getElementById('header-user-name').textContent = currentUser.firstName ? 
+                    `${currentUser.firstName} ${currentUser.lastName}` : 
+                    currentUser.name || currentUser.email.split('@')[0];
+                
+                // Set dashboard link based on user role
+                const dashboardLink = document.getElementById('header-dashboard-link');
+                if (currentUser.role === 'patient') {
+                    dashboardLink.href = 'patient-dashboard.html';
+                } else if (currentUser.role === 'doctor') {
+                    dashboardLink.href = 'doctor-dashboard.html';
+                } else if (currentUser.role === 'admin') {
+                    dashboardLink.href = 'admin-dashboard.html';
+                }
+            }
+        });
+        */
+        
+        // Logout functionality
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        
+        // Add event listeners for logout buttons and update header based on login status
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update header based on login status
+            updateHeaderBasedOnLogin();
+            
+            const headerLogoutBtn = document.getElementById('header-logout-btn');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+            
+            if (headerLogoutBtn) {
+                headerLogoutBtn.addEventListener('click', handleLogout);
+            }
+            
+            if (mobileLogoutBtn) {
+                mobileLogoutBtn.addEventListener('click', handleLogout);
+            }
+        });
+        
+        // Function to check if user is logged in before proceeding to payment
+        function checkLoginBeforePayment(event, planType) {
+            event.preventDefault();
+            
+            // Check if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (currentUser.loggedIn) {
+                // If logged in, redirect to payment page
+                window.location.href = `payment-options.html?plan=${planType}`;
+            } else {
+                // If not logged in, redirect to login page with redirect parameter
+                window.location.href = 'login.html?redirect=payment';
+            }
+        }
+        
+        // Function to load subscription prices from localStorage
+        function loadSubscriptionPrices() {
+            const storedPrices = localStorage.getItem('subscriptionPrices');
+            if (storedPrices) {
+                const prices = JSON.parse(storedPrices);
+                
+                // Update monthly plan price
+                const monthlyPriceElement = document.getElementById('monthly-price');
+                if (monthlyPriceElement && prices.monthly) {
+                    monthlyPriceElement.innerHTML = `$${prices.monthly}<span class="text-xl text-gray-500">/month</span>`;
+                }
+                
+                // Update half-yearly plan price
+                const halfYearlyPriceElement = document.getElementById('half-yearly-price');
+                if (halfYearlyPriceElement && prices['half-yearly']) {
+                    halfYearlyPriceElement.innerHTML = `$${prices['half-yearly']}<span class="text-xl text-gray-500">/6 months</span>`;
+                }
+                
+                // Update yearly plan price
+                const yearlyPriceElement = document.getElementById('yearly-price');
+                if (yearlyPriceElement && prices.yearly) {
+                    yearlyPriceElement.innerHTML = `$${prices.yearly}<span class="text-xl text-gray-500">/year</span>`;
+                }
+            }
+        }
+        
+        // Load subscription prices when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSubscriptionPrices();
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    answer.classList.add('hidden');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Age Group Selection
+        const ageGroups = document.querySelectorAll('.age-group');
+        
+        ageGroups.forEach(group => {
+            group.addEventListener('click', () => {
+                ageGroups.forEach(g => g.classList.remove('active'));
+                group.classList.add('active');
+            });
+        });
+        
+        // Video Play on Hover
+        const exerciseVideos = document.querySelectorAll('.exercise-video');
+        
+        exerciseVideos.forEach(video => {
+            video.addEventListener('mouseover', () => {
+                video.play();
+            });
+            
+            video.addEventListener('mouseout', () => {
+                video.pause();
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

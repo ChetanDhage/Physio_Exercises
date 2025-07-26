@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription - StrideWellStudio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .plan-card.selected {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+        .plan-card.selected .check-icon {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="font-sans bg-light">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 bg-dark z-50 flex flex-col p-6 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-end mb-8">
+            <button class="close-menu text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="flex-1">
+            <ul class="space-y-6 text-xl">
+                <li><a href="index.html" class="text-white hover:text-primary transition">Home</a></li>
+                <li><a href="index.html#exercises" class="text-white hover:text-primary transition">Exercises</a></li>
+                <li><a href="index.html#subscription" class="text-white hover:text-primary transition">Subscription</a></li>
+                <li><a href="index.html#appointment" class="text-white hover:text-primary transition">Appointment</a></li>
+                <li><a href="index.html#about" class="text-white hover:text-primary transition">About Us</a></li>
+                <li><a href="index.html#contact" class="text-white hover:text-primary transition">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mt-auto pt-6 border-t border-gray-800" id="mobile-auth-section">
+            <a href="login.html" class="block w-full bg-primary text-white text-center py-3 rounded-lg mb-4">Login</a>
+            <a href="signup.html" class="block w-full border border-primary text-white text-center py-3 rounded-lg mb-4">Sign Up</a>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <!-- User Profile Section (Hidden by default) -->
+        <div class="mt-auto pt-6 border-t border-gray-800 hidden" id="mobile-profile-section">
+            <div class="text-center mb-4">
+                <div class="inline-block rounded-full bg-primary text-white w-16 h-16 flex items-center justify-center text-2xl font-bold mb-2">
+                    <span id="mobile-user-initial">U</span>
+                </div>
+                <h3 class="text-white text-xl font-bold" id="mobile-user-name">User Name</h3>
+                <p class="text-gray-400" id="mobile-user-role">Role</p>
+            </div>
+            <a href="#" id="mobile-dashboard-link" class="block w-full bg-primary text-white text-center py-3 rounded-lg mb-4">Dashboard</a>
+            <button id="mobile-logout-btn" class="block w-full border border-primary text-white text-center py-3 rounded-lg mb-4">Logout</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center">
+                    <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="ml-3 font-bold text-xl">StrideWell<span class="text-primary">Studio</span></span>
+                </div>
+                
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a></li>
+                        <li><a href="index.html#exercises" class="text-gray-600 hover:text-primary transition">Exercises</a></li>
+                        <li><a href="index.html#subscription" class="text-gray-600 hover:text-primary transition">Subscription</a></li>
+                        <li><a href="index.html#appointment" class="text-gray-600 hover:text-primary transition">Appointment</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Auth buttons (shown by default) -->
+                    <div id="header-auth-section">
+                        <a href="login.html" class="hidden md:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">Login</a>
+                        <a href="signup.html" class="hidden md:block border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition">Sign Up</a>
+                    </div>
+                    
+                    <!-- User Profile Dropdown (Hidden by default) -->
+                    <div id="header-profile-section" class="hidden relative">
+                        <button id="profile-dropdown-btn" class="flex items-center space-x-2 focus:outline-none">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                <span id="header-user-initial">U</span>
+                            </div>
+                            <span id="header-user-name" class="hidden md:block font-medium">User Name</span>
+                            <i class="fas fa-chevron-down hidden md:block"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="profile-dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden z-50">
+                            <a id="header-dashboard-link" href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                            </a>
+                            <button id="header-logout-btn" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="open-menu md:hidden text-gray-600 text-xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subscription Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4">Choose Your Subscription Plan</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Select the perfect plan that fits your needs and start your journey to better health today</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Monthly Plan -->
+                <div class="plan-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-transparent relative">
+                    <div class="absolute top-3 right-3 check-icon hidden w-6 h-6 bg-primary rounded-full text-white items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-2 text-dark">Monthly</h3>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold text-primary">$29</span>
+                            <span class="text-gray-500 ml-1">/month</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Access to all exercise videos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Personalized exercise plans</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Weekly progress tracking</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times text-red-400 mt-1 mr-3"></i>
+                                <span>1-on-1 virtual consultation</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times text-red-400 mt-1 mr-3"></i>
+                                <span>Priority customer support</span>
+                            </li>
+                        </ul>
+                        <button class="select-plan w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-600 transition" data-plan="monthly" data-price="29">
+                            Select Plan
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Half Yearly Plan -->
+                <div class="plan-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-transparent relative">
+                    <div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-4 py-1 rounded-br-lg">
+                        POPULAR
+                    </div>
+                    <div class="absolute top-3 right-3 check-icon hidden w-6 h-6 bg-primary rounded-full text-white items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-2 text-dark">Half Yearly</h3>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold text-primary">$149</span>
+                            <span class="text-gray-500 ml-1">/6 months</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Access to all exercise videos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Personalized exercise plans</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Weekly progress tracking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>1-on-1 virtual consultation</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times text-red-400 mt-1 mr-3"></i>
+                                <span>Priority customer support</span>
+                            </li>
+                        </ul>
+                        <button class="select-plan w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-600 transition" data-plan="half-yearly" data-price="149">
+                            Select Plan
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Yearly Plan -->
+                <div class="plan-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-transparent relative">
+                    <div class="absolute top-0 left-0 bg-green-500 text-white text-xs font-bold px-4 py-1 rounded-br-lg">
+                        BEST VALUE
+                    </div>
+                    <div class="absolute top-3 right-3 check-icon hidden w-6 h-6 bg-primary rounded-full text-white items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-2 text-dark">Yearly</h3>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold text-primary">$249</span>
+                            <span class="text-gray-500 ml-1">/year</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Access to all exercise videos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Personalized exercise plans</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Weekly progress tracking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>1-on-1 virtual consultation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span>Priority customer support</span>
+                            </li>
+                        </ul>
+                        <button class="select-plan w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-600 transition" data-plan="yearly" data-price="249">
+                            Select Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Proceed Button -->
+            <div class="text-center mt-12">
+                <button id="proceed-btn" class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition opacity-50 cursor-not-allowed" disabled>
+                    Proceed to Payment
+                </button>
+                <p class="text-gray-500 mt-3">Please select a plan to continue</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Why Choose Our Subscription?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Enjoy these exclusive benefits with your subscription</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-video text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Unlimited Access</h3>
+                    <p class="text-gray-600">Access all exercise videos anytime, anywhere on any device</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-md text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Expert Guidance</h3>
+                    <p class="text-gray-600">All exercises designed by certified physiotherapists</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Progress Tracking</h3>
+                    <p class="text-gray-600">Monitor your improvement with detailed progress reports</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Mobile Friendly</h3>
+                    <p class="text-gray-600">Exercise anywhere with our mobile-optimized platform</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">What Our Subscribers Say</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Join thousands of satisfied members who have improved their health with our programs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                            <img src="https://source.unsplash.com/random/100x100?portrait,1" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The personalized exercise plans have been a game-changer for my back pain. I've seen significant improvement in just 2 months!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                            <img src="https://source.unsplash.com/random/100x100?portrait,2" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Michael Chen</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"As a senior, I was worried about finding appropriate exercises. The senior citizen program is perfect - gentle yet effective!"</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                            <img src="https://source.unsplash.com/random/100x100?portrait,3" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Emily Rodriguez</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The yearly subscription is such great value! I love having access to all the videos and the virtual consultations are incredibly helpful."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Find answers to common questions about our subscription plans</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left font-bold text-lg text-dark">
+                        <span>Can I cancel my subscription anytime?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-3 text-gray-600">
+                        <p>Yes, you can cancel your subscription at any time. For monthly plans, you'll maintain access until the end of your billing cycle. For half-yearly and yearly plans, you can request a prorated refund for the unused portion.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left font-bold text-lg text-dark">
+                        <span>How do I access the exercise videos?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-3 text-gray-600">
+                        <p>After subscribing, you'll have immediate access to all exercise videos through our website and mobile app. You can stream the videos on any device with an internet connection.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left font-bold text-lg text-dark">
+                        <span>Are the exercises suitable for beginners?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-3 text-gray-600">
+                        <p>Absolutely! Our exercise library includes programs for all fitness levels, from complete beginners to advanced practitioners. Each exercise includes detailed instructions and modifications for different ability levels.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left font-bold text-lg text-dark">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-3 text-gray-600">
+                        <p>We accept all major credit and debit cards, PayPal, Google Pay, Apple Pay, and local payment options like PhonePe and GPay for Indian customers.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left font-bold text-lg text-dark">
+                        <span>Can I switch between subscription plans?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-3 text-gray-600">
+                        <p>Yes, you can upgrade or downgrade your subscription plan at any time. When upgrading, you'll be charged the prorated difference. When downgrading, the new rate will apply at your next billing cycle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <span class="ml-3 font-bold text-xl">StrideWell<span class="text-primary">Studio</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Personalized physiotherapy exercise programs tailored to your age group and health needs.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="index.html#exercises" class="text-gray-400 hover:text-white transition">Exercises</a></li>
+                        <li><a href="index.html#subscription" class="text-gray-400 hover:text-white transition">Subscription</a></li>
+                        <li><a href="index.html#appointment" class="text-gray-400 hover:text-white transition">Appointment</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="index.html#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Age Groups</h3>
+                    <ul class="space-y-3">
+                        <li><a href="teenagers.html" class="text-gray-400 hover:text-white transition">Teenagers (13-19)</a></li>
+                        <li><a href="young-adults.html" class="text-gray-400 hover:text-white transition">Young Adults (20-35)</a></li>
+                        <li><a href="middle-age.html" class="text-gray-400 hover:text-white transition">Middle Age (36-55)</a></li>
+                        <li><a href="senior-middle.html" class="text-gray-400 hover:text-white transition">Senior Middle (56-70)</a></li>
+                        <li><a href="senior-citizen.html" class="text-gray-400 hover:text-white transition">Senior Citizens (71+)</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to get health tips and special offers</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-primary px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2025 StrideWellStudio. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+        
+        // Plan Selection
+        const planCards = document.querySelectorAll('.plan-card');
+        const selectPlanBtns = document.querySelectorAll('.select-plan');
+        const proceedBtn = document.getElementById('proceed-btn');
+        let selectedPlan = null;
+        let selectedPrice = null;
+        
+        // Load subscription prices from localStorage if available
+        function loadSubscriptionPrices() {
+            try {
+                const storedPrices = localStorage.getItem('subscriptionPrices');
+                if (storedPrices) {
+                    const prices = JSON.parse(storedPrices);
+                    
+                    // Update monthly plan price
+                    const monthlyPriceElement = document.querySelector('.plan-card:nth-child(1) .text-4xl.font-bold');
+                    const monthlyPlanButton = document.querySelector('.plan-card:nth-child(1) .select-plan');
+                    if (monthlyPriceElement && prices.monthly) {
+                        monthlyPriceElement.textContent = `$${prices.monthly}`;
+                        monthlyPlanButton.dataset.price = prices.monthly;
+                    }
+                    
+                    // Update half-yearly plan price if available
+                    const halfYearlyPriceElement = document.querySelector('.plan-card:nth-child(2) .text-4xl.font-bold');
+                    const halfYearlyPlanButton = document.querySelector('.plan-card:nth-child(2) .select-plan');
+                    if (halfYearlyPriceElement && prices['half-yearly']) {
+                        halfYearlyPriceElement.textContent = `$${prices['half-yearly']}`;
+                        halfYearlyPlanButton.dataset.price = prices['half-yearly'];
+                    }
+                    
+                    // Update yearly plan price
+                    const yearlyPriceElement = document.querySelector('.plan-card:nth-child(3) .text-4xl.font-bold');
+                    const yearlyPlanButton = document.querySelector('.plan-card:nth-child(3) .select-plan');
+                    if (yearlyPriceElement && prices.yearly) {
+                        yearlyPriceElement.textContent = `$${prices.yearly}`;
+                        yearlyPlanButton.dataset.price = prices.yearly;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading subscription prices:', error);
+            }
+        }
+        
+        // Update header based on login status
+        function updateHeaderBasedOnLogin() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (currentUser.loggedIn) {
+                // Show profile section, hide auth section
+                document.getElementById('header-auth-section').classList.add('hidden');
+                document.getElementById('header-profile-section').classList.remove('hidden');
+                document.getElementById('mobile-auth-section').classList.add('hidden');
+                document.getElementById('mobile-profile-section').classList.remove('hidden');
+                
+                // Update user info
+                const userName = currentUser.firstName ? 
+                    `${currentUser.firstName} ${currentUser.lastName}` : 
+                    currentUser.name || currentUser.email.split('@')[0];
+                const userRole = currentUser.role || 'User';
+                const userInitial = userName.charAt(0).toUpperCase();
+                
+                // Update header user info
+                document.getElementById('header-user-name').textContent = userName;
+                document.getElementById('header-user-initial').textContent = userInitial;
+                
+                // Update mobile menu user info
+                document.getElementById('mobile-user-name').textContent = userName;
+                document.getElementById('mobile-user-role').textContent = userRole;
+                document.getElementById('mobile-user-initial').textContent = userInitial;
+                
+                // Set dashboard link based on user role
+                const dashboardLink = document.getElementById('header-dashboard-link');
+                const mobileDashboardLink = document.getElementById('mobile-dashboard-link');
+                
+                if (currentUser.role === 'patient') {
+                    dashboardLink.href = 'patient-dashboard.html';
+                    mobileDashboardLink.href = 'patient-dashboard.html';
+                } else if (currentUser.role === 'doctor') {
+                    dashboardLink.href = 'doctor-dashboard.html';
+                    mobileDashboardLink.href = 'doctor-dashboard.html';
+                } else if (currentUser.role === 'admin') {
+                    dashboardLink.href = 'admin-dashboard.html';
+                    mobileDashboardLink.href = 'admin-dashboard.html';
+                }
+                
+                // Add logout event listeners
+                document.getElementById('header-logout-btn').addEventListener('click', handleLogout);
+                document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+                
+                // Toggle dropdown menu
+                const dropdownBtn = document.getElementById('profile-dropdown-btn');
+                const dropdownMenu = document.getElementById('profile-dropdown-menu');
+                
+                if (dropdownBtn && dropdownMenu) {
+                    dropdownBtn.addEventListener('click', () => {
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+                    
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', (event) => {
+                        if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Handle logout
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        
+        // Load prices and update header when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSubscriptionPrices();
+            updateHeaderBasedOnLogin();
+        });
+        
+        selectPlanBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove selected class from all cards
+                planCards.forEach(card => {
+                    card.classList.remove('selected');
+                });
+                
+                // Add selected class to parent card
+                const card = btn.closest('.plan-card');
+                card.classList.add('selected');
+                
+                // Update selected plan and price
+                selectedPlan = btn.dataset.plan;
+                selectedPrice = btn.dataset.price;
+                
+                // Enable proceed button
+                proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                proceedBtn.removeAttribute('disabled');
+                
+                // Update proceed button text
+                proceedBtn.textContent = `Proceed to Payment ($${selectedPrice})`;
+                
+                // Hide the instruction text
+                document.querySelector('#proceed-btn + p').classList.add('hidden');
+            });
+        });
+        
+        // Proceed to Payment
+        proceedBtn.addEventListener('click', () => {
+            if (selectedPlan) {
+                window.location.href = `payment-options.html?plan=${selectedPlan}&price=${selectedPrice}`;
+            }
+        });
+        
+        // FAQ Accordion
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                // Toggle content visibility
+                content.classList.toggle('hidden');
+                
+                // Rotate icon
+                if (content.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

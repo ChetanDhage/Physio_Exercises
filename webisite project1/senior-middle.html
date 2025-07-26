@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Middle Exercise Program - StrideWellStudio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+    <script>
+        // Handle logout
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        
+        // Call updateHeaderBasedOnLogin when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHeaderBasedOnLogin();
+        });
+    </script>
+</head>
+<body class="font-sans bg-light">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 bg-dark z-50 flex flex-col p-6 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-end mb-8">
+            <button class="close-menu text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="flex-1">
+            <ul class="space-y-6 text-xl">
+                <li><a href="index.html" class="text-white hover:text-primary transition">Home</a></li>
+                <li><a href="#about" class="text-white hover:text-primary transition">About Program</a></li>
+                <li><a href="#schedule" class="text-white hover:text-primary transition">Weekly Schedule</a></li>
+                <li><a href="#videos" class="text-white hover:text-primary transition">Exercise Videos</a></li>
+                <li><a href="index.html#subscription" class="text-white hover:text-primary transition">Subscription</a></li>
+                <li><a href="index.html#contact" class="text-white hover:text-primary transition">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mt-auto pt-6 border-t border-gray-800">
+            <div id="mobile-auth-section">
+                <a href="login.html" class="block w-full bg-primary text-white text-center py-3 rounded-lg mb-4">Login</a>
+                <a href="signup.html" class="block w-full border border-primary text-white text-center py-3 rounded-lg mb-4">Sign Up</a>
+            </div>
+            <div id="mobile-profile-section" class="hidden">
+                <div class="bg-primary/10 rounded-lg p-4 mb-4">
+                    <div class="flex items-center mb-3">
+                        <div id="mobile-user-initial" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p id="mobile-user-name" class="font-medium text-white">User Name</p>
+                            <p id="mobile-user-role" class="text-xs text-gray-300">Role</p>
+                        </div>
+                    </div>
+                    <a href="#" id="mobile-dashboard-link" class="block w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded transition mb-2 text-center">
+                        <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                    </a>
+                    <button id="mobile-logout-btn" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded transition">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </button>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <div class="bg-primary w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white">
+                            <span class="text-white font-bold text-2xl sm:text-3xl">S</span>
+                        </div>
+                        <span class="ml-3 font-bold text-xl sm:text-2xl md:text-3xl">StrideWell<span class="text-primary font-extrabold">Studio</span></span>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-600 hover:text-primary transition">About Program</a></li>
+                        <li><a href="#schedule" class="text-gray-600 hover:text-primary transition">Weekly Schedule</a></li>
+                        <li><a href="#videos" class="text-gray-600 hover:text-primary transition">Exercise Videos</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <div id="header-auth-section" class="md:flex space-x-3">
+                        <a href="login.html" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">Login</a>
+                        <a href="signup.html" class="border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition">Sign Up</a>
+                    </div>
+                    <div id="header-profile-section" class="hidden md:flex items-center space-x-3">
+                        <div class="relative group">
+                            <div class="flex items-center space-x-2 cursor-pointer">
+                                <div id="header-user-initial" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span id="header-user-name" class="font-medium">User Name</span>
+                                <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+                            </div>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 hidden group-hover:block">
+                                <a id="header-dashboard-link" href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user-cog mr-2 text-primary"></i> Profile Settings
+                                </a>
+                                <div class="border-t border-gray-200 my-1"></div>
+                                <button id="header-logout-btn" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-2 text-primary"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="open-menu md:hidden text-gray-600 text-xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-12 sm:py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-dark mb-4 sm:mb-6">Senior Middle Exercise Program</h1>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8">Specialized physiotherapy exercises designed for adults aged 56-70 to maintain mobility, improve balance, and support joint health.</p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="#schedule" id="view-schedule-btn" class="bg-primary text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition text-center shadow-md hover:shadow-lg">View Schedule</a>
+                        <a href="index.html#subscription" class="border-2 border-primary text-primary px-5 py-3 rounded-lg hover:bg-primary hover:text-white transition text-center">Get Started</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-6 md:mt-0">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Senior Middle Exercise" class="rounded-xl shadow-lg w-full hover:shadow-xl transition-all duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Program Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">About Senior Middle Program</h2>
+                    <p class="text-gray-600">Tailored exercises for maintaining mobility and preventing age-related issues</p>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-light rounded-xl p-8">
+                        <h3 class="text-xl font-bold text-dark mb-4">Program Benefits</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>Improves balance and reduces fall risk</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>Maintains joint flexibility and range of motion</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>Preserves muscle strength to support daily activities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>Manages arthritis and joint pain through gentle movement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>Supports cardiovascular health with appropriate intensity</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-light rounded-xl p-8">
+                        <h3 class="text-xl font-bold text-dark mb-4">Who This Program Is For</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-walking text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Active Seniors</h4>
+                                    <p class="text-gray-600">Those looking to maintain their active lifestyle</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-heartbeat text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Health-Conscious</h4>
+                                    <p class="text-gray-600">Those focused on preventing age-related health issues</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-balance-scale text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Balance Improvers</h4>
+                                    <p class="text-gray-600">Those concerned about stability and fall prevention</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-bone text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Joint Health Seekers</h4>
+                                    <p class="text-gray-600">Those managing arthritis or joint discomfort</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Schedule Section -->
+    <section id="schedule" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Weekly Exercise Schedule</h2>
+                    <p class="text-gray-600">Follow this recommended routine for optimal results</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-blue-700 to-blue-500 text-white">
+                                    <th class="py-4 px-6 text-left font-extrabold text-sm sm:text-base md:text-lg border-b-2 border-blue-300 uppercase">Day</th>
+                                    <th class="py-4 px-6 text-left font-extrabold text-sm sm:text-base md:text-lg border-b-2 border-blue-300 uppercase">Focus Area</th>
+                                    <th class="py-4 px-6 text-left font-extrabold text-sm sm:text-base md:text-lg border-b-2 border-blue-300 uppercase">Duration</th>
+                                    <th class="py-4 px-6 text-left font-extrabold text-sm sm:text-base md:text-lg border-b-2 border-blue-300 uppercase">Intensity</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-4 px-6 font-medium">Monday</td>
+                                    <td class="py-4 px-6">Balance & Stability</td>
+                                    <td class="py-4 px-6">25 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Moderate</span></td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-4 px-6 font-medium">Tuesday</td>
+                                    <td class="py-4 px-6">Gentle Strength Training</td>
+                                    <td class="py-4 px-6">30 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Moderate</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-6 font-medium">Wednesday</td>
+                                    <td class="py-4 px-6">Cardiovascular Health</td>
+                                    <td class="py-4 px-6">20 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Light</span></td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-4 px-6 font-medium">Thursday</td>
+                                    <td class="py-4 px-6">Joint Mobility</td>
+                                    <td class="py-4 px-6">25 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Light</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-6 font-medium">Friday</td>
+                                    <td class="py-4 px-6">Functional Movement</td>
+                                    <td class="py-4 px-6">30 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Moderate</span></td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-4 px-6 font-medium">Saturday</td>
+                                    <td class="py-4 px-6">Posture & Core</td>
+                                    <td class="py-4 px-6">25 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Light</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-6 font-medium">Sunday</td>
+                                    <td class="py-4 px-6">Flexibility & Relaxation</td>
+                                    <td class="py-4 px-6">20 minutes</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Light</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-gray-600 mb-4">This schedule is customizable based on your specific needs and health conditions.</p>
+                    <a href="index.html#subscription" class="inline-block bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition">Get Personalized Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exercise Videos Section -->
+    <section id="videos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Senior Middle Exercise Videos</h2>
+                <p class="text-gray-600">Follow along with our expert-guided exercise videos</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Exercise Video Card 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-48 bg-gray-200">
+                        <video class="exercise-video w-full h-full object-cover" poster="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" muted loop>
+                            <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-dark bg-opacity-40 hover:bg-opacity-30 transition">
+                            <span class="w-16 h-16 rounded-full bg-primary bg-opacity-90 flex items-center justify-center">
+                                <i class="fas fa-play text-white text-xl"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Balance & Fall Prevention</h3>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">20 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Simple exercises to improve stability and reduce fall risk.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Beginner</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Balance</span>
+                            </div>
+                            <a href="index.html#subscription" class="text-primary hover:text-blue-700 font-medium">Start Exercise</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercise Video Card 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-48 bg-gray-200">
+                        <video class="exercise-video w-full h-full object-cover" poster="https://images.unsplash.com/photo-1571019613664-11303e0ad7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" muted loop>
+                            <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-dark bg-opacity-40 hover:bg-opacity-30 transition">
+                            <span class="w-16 h-16 rounded-full bg-primary bg-opacity-90 flex items-center justify-center">
+                                <i class="fas fa-play text-white text-xl"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Joint-Friendly Mobility</h3>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">25 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Gentle exercises to maintain joint health and reduce stiffness.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Beginner</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Mobility</span>
+                            </div>
+                            <a href="index.html#subscription" class="text-primary hover:text-blue-700 font-medium">Start Exercise</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercise Video Card 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-48 bg-gray-200">
+                        <video class="exercise-video w-full h-full object-cover" poster="https://images.unsplash.com/photo-1571019613592-90cb45610f44?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" muted loop>
+                            <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-dark bg-opacity-40 hover:bg-opacity-30 transition">
+                            <span class="w-16 h-16 rounded-full bg-primary bg-opacity-90 flex items-center justify-center">
+                                <i class="fas fa-play text-white text-xl"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Gentle Strength Building</h3>
+                            <span class="bg-blue-100 text-primary text-xs px-2 py-1 rounded">30 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Maintain muscle strength with these low-impact resistance exercises.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Intermediate</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Strength</span>
+                            </div>
+                            <a href="index.html#subscription" class="text-primary hover:text-blue-700 font-medium">Start Exercise</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="all-exercises.html" class="inline-block bg-white border-2 border-primary text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition">View All Exercises</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <span class="ml-3 font-bold text-xl">StrideWell<span class="text-primary">Studio</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Personalized physiotherapy exercise programs tailored to your age group and health needs.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="index.html#exercises" class="text-gray-400 hover:text-white transition">Exercises</a></li>
+                        <li><a href="index.html#subscription" class="text-gray-400 hover:text-white transition">Subscription</a></li>
+                        <li><a href="index.html#appointment" class="text-gray-400 hover:text-white transition">Appointment</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="index.html#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Age Groups</h3>
+                    <ul class="space-y-3">
+                        <li><a href="teenagers.html" class="text-gray-400 hover:text-white transition">Teenagers (13-19)</a></li>
+                        <li><a href="young-adults.html" class="text-gray-400 hover:text-white transition">Young Adults (20-35)</a></li>
+                        <li><a href="middle-age.html" class="text-gray-400 hover:text-white transition">Middle Age (36-55)</a></li>
+                        <li><a href="senior-middle.html" class="text-gray-400 hover:text-white transition">Senior Middle (56-70)</a></li>
+                        <li><a href="senior-citizen.html" class="text-gray-400 hover:text-white transition">Senior Citizens (71+)</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to get health tips and special offers</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-primary px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2025 StrideWellStudio. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+        
+        // Handle logout function
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        
+        // Function to update header and mobile menu based on login status
+        function updateHeaderBasedOnLogin() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Get all the necessary elements
+            const mobileAuthSection = document.getElementById('mobile-auth-section');
+            const mobileProfileSection = document.getElementById('mobile-profile-section');
+            const mobileUserName = document.getElementById('mobile-user-name');
+            const mobileUserRole = document.getElementById('mobile-user-role');
+            const mobileUserInitial = document.getElementById('mobile-user-initial');
+            const mobileDashboardLink = document.getElementById('mobile-dashboard-link');
+            
+            const headerAuthSection = document.getElementById('header-auth-section');
+            const headerProfileSection = document.getElementById('header-profile-section');
+            const headerUserName = document.getElementById('header-user-name');
+            const headerUserRole = document.getElementById('header-user-role');
+            const headerUserInitial = document.getElementById('header-user-initial');
+            const headerDashboardLink = document.getElementById('header-dashboard-link');
+            
+            if (currentUser.loggedIn) {
+                // Get user display name
+                const userName = currentUser.firstName ? 
+                    `${currentUser.firstName} ${currentUser.lastName}` : 
+                    currentUser.name || currentUser.email.split('@')[0];
+                
+                // Get user role
+                const userRole = currentUser.role || 'User';
+                
+                // Get user initial
+                const userInitial = (currentUser.firstName ? currentUser.firstName[0] : 
+                                    currentUser.name ? currentUser.name[0] : 
+                                    currentUser.email ? currentUser.email[0] : 'U').toUpperCase();
+                
+                // Update mobile menu
+                if (mobileAuthSection) mobileAuthSection.classList.add('hidden');
+                if (mobileProfileSection) mobileProfileSection.classList.remove('hidden');
+                if (mobileUserName) mobileUserName.textContent = userName;
+                if (mobileUserRole) mobileUserRole.textContent = userRole;
+                if (mobileUserInitial) {
+                    const initialElement = mobileUserInitial.querySelector('i');
+                    if (initialElement) {
+                        initialElement.className = '';
+                        initialElement.textContent = userInitial;
+                    }
+                }
+                
+                // Update header
+                if (headerAuthSection) headerAuthSection.classList.add('hidden');
+                if (headerProfileSection) headerProfileSection.classList.remove('hidden');
+                if (headerUserName) headerUserName.textContent = userName;
+                if (headerUserRole) headerUserRole.textContent = userRole;
+                if (headerUserInitial) {
+                    const initialElement = headerUserInitial.querySelector('i');
+                    if (initialElement) {
+                        initialElement.className = '';
+                        initialElement.textContent = userInitial;
+                    }
+                }
+                
+                // Set dashboard link based on user role
+                const dashboardUrl = 
+                    userRole === 'patient' ? 'patient-dashboard.html' :
+                    userRole === 'doctor' ? 'doctor-dashboard.html' :
+                    userRole === 'admin' ? 'admin-dashboard.html' : '#';
+                
+                if (mobileDashboardLink) mobileDashboardLink.href = dashboardUrl;
+                if (headerDashboardLink) headerDashboardLink.href = dashboardUrl;
+            } else {
+                // User is not logged in
+                if (mobileAuthSection) mobileAuthSection.classList.remove('hidden');
+                if (mobileProfileSection) mobileProfileSection.classList.add('hidden');
+                
+                if (headerAuthSection) headerAuthSection.classList.remove('hidden');
+                if (headerProfileSection) headerProfileSection.classList.add('hidden');
+            }
+        }
+        
+        // Initialize profile dropdown functionality
+        function initProfileDropdown() {
+            const profileToggle = document.getElementById('profile-dropdown-toggle');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            if (profileToggle && profileDropdown) {
+                profileToggle.addEventListener('click', function() {
+                    profileDropdown.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!profileToggle.contains(event.target) && !profileDropdown.contains(event.target)) {
+                        profileDropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+        
+        // Check login status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHeaderBasedOnLogin();
+            initProfileDropdown();
+            
+            // Add event listeners for logout buttons
+            const headerLogoutBtn = document.getElementById('header-logout-btn');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+            
+            if (headerLogoutBtn) {
+                headerLogoutBtn.addEventListener('click', handleLogout);
+            }
+            
+            if (mobileLogoutBtn) {
+                mobileLogoutBtn.addEventListener('click', handleLogout);
+            }
+        });
+        
+        // Video Play on Hover
+        const exerciseVideos = document.querySelectorAll('.exercise-video');
+        
+        exerciseVideos.forEach(video => {
+            video.addEventListener('mouseover', () => {
+                video.play();
+            });
+            
+            video.addEventListener('mouseout', () => {
+                video.pause();
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+        
+        // Ensure View Schedule button works properly
+        const viewScheduleBtn = document.getElementById('view-schedule-btn');
+        if (viewScheduleBtn) {
+            viewScheduleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const scheduleSection = document.getElementById('schedule');
+                if (scheduleSection) {
+                    scheduleSection.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+                    // Add a visual indicator that the button was clicked
+                    this.classList.add('clicked');
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 500);
+                }
+            });
+        }
+    </script>
+    
+    <style>
+        /* Additional styles for button click effect */
+        #view-schedule-btn.clicked {
+            transform: scale(0.95);
+            background-color: #2563eb !important;
+        }
+    </style>
+</body>
+</html>

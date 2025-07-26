@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Programs - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Doctor</p>
+                </div>
+            </div>
+            <a href="doctor-dashboard.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+            </a>
+            <a href="doctor-my-patients.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-users mr-2 text-primary"></i> My Patients
+            </a>
+            <a href="doctor-subscription-management.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-credit-card mr-2 text-primary"></i> Subscription Management
+            </a>
+            <a href="doctor-appointments.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-calendar-alt mr-2 text-primary"></i> Appointments
+            </a>
+            <a href="doctor-exercise-programs.html" class="block py-3 px-4 rounded-lg bg-blue-50 text-primary mb-2">
+                <i class="fas fa-dumbbell mr-2 text-primary"></i> Exercise Programs
+            </a>
+            <a href="doctor-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-cog mr-2 text-primary"></i> Settings
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-primary"></i> Back to Home
+            </a>
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Doctor</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="doctor-dashboard.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="doctor-my-patients.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>My Patients</span>
+                    </a>
+                    <a href="doctor-subscription-management.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-credit-card mr-3"></i>
+                        <span>Subscription Management</span>
+                    </a>
+                    <a href="doctor-appointments.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-calendar-alt mr-3"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="doctor-exercise-programs.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg font-medium">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>Exercise Programs</span>
+                    </a>
+                    <a href="doctor-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors mb-4">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Back to Home</span>
+                </a>
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">Exercise Programs</h1>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-primary transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-2">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">Dr. Sarah Johnson</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Exercise Programs Content -->
+            <div class="p-6">
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center" id="create-program-btn">
+                        <i class="fas fa-plus mr-2"></i> Create New Program
+                    </button>
+                    <div class="relative">
+                        <input type="text" placeholder="Search programs..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent pl-10">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div class="ml-auto flex gap-2">
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center">
+                            <i class="fas fa-filter mr-2"></i> Filter
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center">
+                            <i class="fas fa-sort mr-2"></i> Sort
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Program Categories -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Program Categories</h2>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors">
+                            All Programs
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Back Pain
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Knee Rehabilitation
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Shoulder Recovery
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Post-Surgery
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Sports Injury
+                        </button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            General Fitness
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Exercise Programs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Program 1 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/400x200" alt="Lower Back Pain Relief" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Active</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Lower Back Pain Relief</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="fas fa-users mr-2"></i> 24 patients assigned
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-dumbbell mr-2"></i> 12 exercises
+                            </div>
+                            <p class="text-gray-600 mb-4">A comprehensive program designed to alleviate lower back pain through targeted stretching and strengthening exercises.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Back Pain</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">4 Weeks</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">Beginner</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <i class="fas fa-eye mr-1"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 2 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/400x200" alt="Knee Rehabilitation" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Active</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Knee Rehabilitation</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="fas fa-users mr-2"></i> 18 patients assigned
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-dumbbell mr-2"></i> 15 exercises
+                            </div>
+                            <p class="text-gray-600 mb-4">A progressive program for knee injury recovery, focusing on mobility, stability, and strength building exercises.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Knee Rehabilitation</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">6 Weeks</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-semibold rounded-full">Intermediate</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <i class="fas fa-eye mr-1"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 3 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/400x200" alt="Shoulder Recovery" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Active</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Shoulder Recovery</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="fas fa-users mr-2"></i> 15 patients assigned
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-dumbbell mr-2"></i> 14 exercises
+                            </div>
+                            <p class="text-gray-600 mb-4">Targeted exercises for shoulder pain and injury recovery, improving range of motion and strengthening rotator cuff muscles.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Shoulder Recovery</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">5 Weeks</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-semibold rounded-full">Intermediate</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <i class="fas fa-eye mr-1"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 4 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/400x200" alt="Post-Surgery Rehabilitation" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Active</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Post-Surgery Rehabilitation</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="fas fa-users mr-2"></i> 12 patients assigned
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-dumbbell mr-2"></i> 18 exercises
+                            </div>
+                            <p class="text-gray-600 mb-4">A gentle, progressive program designed for patients recovering from orthopedic surgery, with phases for early, middle, and late recovery.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Post-Surgery</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">8 Weeks</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">Beginner</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <i class="fas fa-eye mr-1"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 5 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/400x200" alt="Sports Injury Recovery" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Active</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Sports Injury Recovery</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="fas fa-users mr-2"></i> 20 patients assigned
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-dumbbell mr-2"></i> 16 exercises
+                            </div>
+                            <p class="text-gray-600 mb-4">Specialized program for athletes recovering from sports-related injuries, with focus on functional movement patterns and return to sport.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Sports Injury</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">6 Weeks</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs font-semibold rounded-full">Advanced</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <i class="fas fa-eye mr-1"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 6 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/400x200" alt="General Fitness" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-gray-500 text-white text-xs font-bold px-2 py-1 rounded-full">Draft</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">General Fitness & Conditioning</h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="fas fa-users mr-2"></i> 0 patients assigned
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-dumbbell mr-2"></i> 20 exercises
+                            </div>
+                            <p class="text-gray-600 mb-4">A general fitness program focusing on overall strength, flexibility, and cardiovascular health for patients transitioning to maintenance.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">General Fitness</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">Ongoing</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-semibold rounded-full">Intermediate</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <i class="fas fa-eye mr-1"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Program Analytics -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Program Analytics</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <!-- Total Programs -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-gray-700">Total Programs</h3>
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-clipboard-list text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-gray-800">6</p>
+                            <p class="text-sm text-green-500 mt-1">+1 from last month</p>
+                        </div>
+                        
+                        <!-- Active Patients -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-gray-700">Active Patients</h3>
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class="fas fa-users text-green-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-gray-800">89</p>
+                            <p class="text-sm text-green-500 mt-1">+12 from last month</p>
+                        </div>
+                        
+                        <!-- Completion Rate -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-gray-700">Completion Rate</h3>
+                                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-purple-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-gray-800">78%</p>
+                            <p class="text-sm text-green-500 mt-1">+5% from last month</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Program Distribution Chart -->
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-700 mb-4">Program Distribution</h3>
+                        <div class="h-64 flex items-end justify-between px-4">
+                            <!-- Back Pain -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 bg-blue-500 rounded-t-lg" style="height: 120px;"></div>
+                                <p class="text-xs font-medium text-gray-600 mt-2">Back Pain</p>
+                                <p class="text-sm font-bold text-gray-800">24</p>
+                            </div>
+                            
+                            <!-- Knee Rehab -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 bg-green-500 rounded-t-lg" style="height: 90px;"></div>
+                                <p class="text-xs font-medium text-gray-600 mt-2">Knee Rehab</p>
+                                <p class="text-sm font-bold text-gray-800">18</p>
+                            </div>
+                            
+                            <!-- Shoulder -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 bg-yellow-500 rounded-t-lg" style="height: 75px;"></div>
+                                <p class="text-xs font-medium text-gray-600 mt-2">Shoulder</p>
+                                <p class="text-sm font-bold text-gray-800">15</p>
+                            </div>
+                            
+                            <!-- Post-Surgery -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 bg-red-500 rounded-t-lg" style="height: 60px;"></div>
+                                <p class="text-xs font-medium text-gray-600 mt-2">Post-Surgery</p>
+                                <p class="text-sm font-bold text-gray-800">12</p>
+                            </div>
+                            
+                            <!-- Sports Injury -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 bg-purple-500 rounded-t-lg" style="height: 100px;"></div>
+                                <p class="text-xs font-medium text-gray-600 mt-2">Sports Injury</p>
+                                <p class="text-sm font-bold text-gray-800">20</p>
+                            </div>
+                            
+                            <!-- General Fitness -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 bg-gray-500 rounded-t-lg" style="height: 0px;"></div>
+                                <p class="text-xs font-medium text-gray-600 mt-2">General</p>
+                                <p class="text-sm font-bold text-gray-800">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recently Updated Programs -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Recently Updated Programs</h2>
+                        <button class="text-primary hover:text-blue-700 transition-colors font-medium">
+                            View All Updates
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Changes</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Updated By</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-dumbbell text-primary"></i>
+                                            </div>
+                                            <p class="font-medium text-gray-800">Lower Back Pain Relief</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 15, 2023</p>
+                                        <p class="text-sm text-gray-500">2:45 PM</p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p class="text-gray-700">Added 2 new exercises, modified progression timeline</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                                <i class="fas fa-user-md text-primary"></i>
+                                            </div>
+                                            <p class="text-gray-700">Dr. Sarah Johnson</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-dumbbell text-primary"></i>
+                                            </div>
+                                            <p class="font-medium text-gray-800">Knee Rehabilitation</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 14, 2023</p>
+                                        <p class="text-sm text-gray-500">11:20 AM</p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p class="text-gray-700">Updated exercise instructions, added video demonstrations</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                                <i class="fas fa-user-md text-primary"></i>
+                                            </div>
+                                            <p class="text-gray-700">Dr. Sarah Johnson</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-dumbbell text-primary"></i>
+                                            </div>
+                                            <p class="font-medium text-gray-800">General Fitness & Conditioning</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <p class="text-gray-700">May 12, 2023</p>
+                                        <p class="text-sm text-gray-500">3:15 PM</p>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <p class="text-gray-700">Created program draft with initial 20 exercises</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                                <i class="fas fa-user-md text-primary"></i>
+                                            </div>
+                                            <p class="text-gray-700">Dr. Sarah Johnson</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Program Modal -->
+    <div id="create-program-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-bold text-gray-800">Create New Exercise Program</h2>
+                    <button id="close-modal-btn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <form>
+                    <!-- Program Details -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Program Details</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="program-name" class="block text-sm font-medium text-gray-700 mb-1">Program Name</label>
+                                <input type="text" id="program-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter program name">
+                            </div>
+                            
+                            <div>
+                                <label for="program-category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                <select id="program-category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Select a category</option>
+                                    <option value="back-pain">Back Pain</option>
+                                    <option value="knee-rehab">Knee Rehabilitation</option>
+                                    <option value="shoulder">Shoulder Recovery</option>
+                                    <option value="post-surgery">Post-Surgery</option>
+                                    <option value="sports-injury">Sports Injury</option>
+                                    <option value="general-fitness">General Fitness</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label for="program-duration" class="block text-sm font-medium text-gray-700 mb-1">Duration</label>
+                                <div class="flex">
+                                    <input type="number" id="program-duration" class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Duration">
+                                    <select class="px-4 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent border-l-0">
+                                        <option value="weeks">Weeks</option>
+                                        <option value="months">Months</option>
+                                        <option value="ongoing">Ongoing</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="program-difficulty" class="block text-sm font-medium text-gray-700 mb-1">Difficulty Level</label>
+                                <select id="program-difficulty" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Select difficulty</option>
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                    <option value="adaptive">Adaptive</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="program-status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select id="program-status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="draft">Draft</option>
+                                    <option value="active">Active</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="program-description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea id="program-description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter program description"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="program-image" class="block text-sm font-medium text-gray-700 mb-1">Program Image</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500 mb-2">Drag and drop an image here, or click to browse</p>
+                                <input type="file" id="program-image" class="hidden">
+                                <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm" onclick="document.getElementById('program-image').click()">
+                                    Browse Files
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Exercises Section -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Exercises</h3>
+                            <button type="button" class="px-3 py-1 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                <i class="fas fa-plus mr-1"></i> Add Exercise
+                            </button>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg divide-y divide-gray-200">
+                            <!-- Exercise 1 -->
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-dumbbell text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800">Gentle Back Stretches</p>
+                                            <p class="text-sm text-gray-500">Week 1 • 3 sets of 10 reps</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button type="button" class="p-1 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="p-1 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-arrows-alt"></i>
+                                        </button>
+                                        <button type="button" class="p-1 text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercise 2 -->
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-dumbbell text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800">Core Stabilization</p>
+                                            <p class="text-sm text-gray-500">Week 1 • 2 sets of 15 reps</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button type="button" class="p-1 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="p-1 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-arrows-alt"></i>
+                                        </button>
+                                        <button type="button" class="p-1 text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercise 3 -->
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-dumbbell text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800">Pelvic Tilts</p>
+                                            <p class="text-sm text-gray-500">Week 1 • 3 sets of 12 reps</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button type="button" class="p-1 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="p-1 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-arrows-alt"></i>
+                                        </button>
+                                        <button type="button" class="p-1 text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Settings -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Additional Settings</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="allow-modifications" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                <label for="allow-modifications" class="ml-2 text-sm text-gray-700">Allow patients to modify exercise intensity</label>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input type="checkbox" id="progress-tracking" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                <label for="progress-tracking" class="ml-2 text-sm text-gray-700">Enable progress tracking and reporting</label>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input type="checkbox" id="send-reminders" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                <label for="send-reminders" class="ml-2 text-sm text-gray-700">Send exercise reminders to patients</label>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input type="checkbox" id="require-feedback" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                <label for="require-feedback" class="ml-2 text-sm text-gray-700">Require patient feedback after each session</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancel-btn" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="button" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-blue-50 transition-colors">
+                            Save as Draft
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors">
+                            Create Program
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Redirect if not logged in or not a doctor
+            if (!currentUser || !currentUser.loggedIn || currentUser.role !== 'doctor') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Update user information
+            const userName = currentUser.firstName ?
+                `${currentUser.firstName} ${currentUser.lastName}` :
+                currentUser.name || currentUser.email.split('@')[0];
+                
+            // Update sidebar user info
+            document.getElementById('sidebar-user-name').textContent = userName;
+            document.getElementById('sidebar-user-role').textContent = currentUser.role || 'User';
+            
+            // Update mobile menu user info
+            document.getElementById('mobile-user-name').textContent = userName;
+            document.getElementById('mobile-user-role').textContent = currentUser.role || 'User';
+        });
+        
+        // Modal Toggle
+        const createProgramBtn = document.getElementById('create-program-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const createProgramModal = document.getElementById('create-program-modal');
+        
+        createProgramBtn.addEventListener('click', () => {
+            createProgramModal.classList.remove('hidden');
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            createProgramModal.classList.add('hidden');
+        });
+        
+        cancelBtn.addEventListener('click', () => {
+            createProgramModal.classList.add('hidden');
+        });
+        
+        // Logout functionality
+        function handleLogout() {
+            // Clear user data
+            localStorage.removeItem('currentUser');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+        
+        // Add logout event listeners
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+    </script>
+</body>
+</html>

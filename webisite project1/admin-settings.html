@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Admin Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">Admin User</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Administrator</p>
+                </div>
+            </div>
+            <a href="admin-dashboard-pages.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-tachometer-alt mr-2 text-purple-600"></i> Dashboard
+            </a>
+            <a href="admin-doctors.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-user-md mr-2 text-purple-600"></i> Doctors
+            </a>
+            <a href="admin-patients.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-users mr-2 text-purple-600"></i> Patients
+            </a>
+            <a href="admin-subscription-plans.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dollar-sign mr-2 text-purple-600"></i> Subscription Plans
+            </a>
+            <a href="admin-exercise-programs.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dumbbell mr-2 text-purple-600"></i> Exercise Programs
+            </a>
+            <a href="admin-analytics.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-chart-line mr-2 text-purple-600"></i> Analytics
+            </a>
+            <a href="admin-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 active">
+                <i class="fas fa-cog mr-2 text-purple-600"></i> Settings
+            </a>
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-purple-600"></i> Back to Home
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">Admin User</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Administrator</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="admin-dashboard-pages.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="admin-doctors.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-user-md mr-3"></i>
+                        <span>Doctors</span>
+                    </a>
+                    <a href="admin-patients.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>Patients</span>
+                    </a>
+                    <a href="admin-subscription-plans.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dollar-sign mr-3"></i>
+                        <span>Subscription Plans</span>
+                    </a>
+                    <a href="admin-exercise-programs.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>Exercise Programs</span>
+                    </a>
+                    <a href="admin-analytics.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="admin-settings.html" class="flex items-center px-4 py-3 text-purple-600 bg-purple-50 rounded-lg font-medium">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-home mr-3"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">Settings</h1>
+                    </div>
+                    
+                    <!-- Auth Buttons (shown before login) -->
+                    <div class="flex items-center space-x-4" id="header-auth-buttons">
+                        <a href="login.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition font-medium">Login</a>
+                        <a href="signup.html" class="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition font-medium">Sign Up</a>
+                    </div>
+                    
+                    <!-- User Profile (shown after login) -->
+                    <div class="flex items-center space-x-4" id="header-user-profile">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-purple-600 transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-2">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">Admin User</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">System Settings</h2>
+                        <p class="text-gray-600">Configure your platform settings and preferences</p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <button id="save-settings-btn" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                            <i class="fas fa-save mr-2"></i>
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings Tabs -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8 px-6" aria-label="Tabs">
+                            <button class="settings-tab whitespace-nowrap py-4 px-1 border-b-2 border-purple-500 font-medium text-sm text-purple-600" data-tab="general">
+                                <i class="fas fa-sliders-h mr-2"></i>
+                                General
+                            </button>
+                            <button class="settings-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="security">
+                                <i class="fas fa-shield-alt mr-2"></i>
+                                Security
+                            </button>
+                            <button class="settings-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="notifications">
+                                <i class="fas fa-bell mr-2"></i>
+                                Notifications
+                            </button>
+                            <button class="settings-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="billing">
+                                <i class="fas fa-credit-card mr-2"></i>
+                                Billing
+                            </button>
+                            <button class="settings-tab whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="integrations">
+                                <i class="fas fa-plug mr-2"></i>
+                                Integrations
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- General Settings Tab -->
+                    <div id="general-tab" class="settings-content p-6">
+                        <div class="max-w-4xl mx-auto">
+                            <!-- Platform Settings -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Platform Settings</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Platform Name -->
+                                    <div>
+                                        <label for="platform-name" class="block text-sm font-medium text-gray-700 mb-1">Platform Name</label>
+                                        <input type="text" id="platform-name" value="StrideWell Studio" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                    </div>
+                                    
+                                    <!-- Platform URL -->
+                                    <div>
+                                        <label for="platform-url" class="block text-sm font-medium text-gray-700 mb-1">Platform URL</label>
+                                        <input type="text" id="platform-url" value="https://stridewellstudio.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                    </div>
+                                    
+                                    <!-- Contact Email -->
+                                    <div>
+                                        <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
+                                        <input type="email" id="contact-email" value="support@stridewellstudio.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                    </div>
+                                    
+                                    <!-- Support Phone -->
+                                    <div>
+                                        <label for="support-phone" class="block text-sm font-medium text-gray-700 mb-1">Support Phone</label>
+                                        <input type="tel" id="support-phone" value="+1 (555) 123-4567" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Localization Settings -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Localization</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Language -->
+                                    <div>
+                                        <label for="language" class="block text-sm font-medium text-gray-700 mb-1">Default Language</label>
+                                        <select id="language" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="en" selected>English</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                            <option value="zh">Chinese</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Timezone -->
+                                    <div>
+                                        <label for="timezone" class="block text-sm font-medium text-gray-700 mb-1">Default Timezone</label>
+                                        <select id="timezone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="UTC-8" selected>Pacific Time (UTC-8)</option>
+                                            <option value="UTC-7">Mountain Time (UTC-7)</option>
+                                            <option value="UTC-6">Central Time (UTC-6)</option>
+                                            <option value="UTC-5">Eastern Time (UTC-5)</option>
+                                            <option value="UTC+0">Greenwich Mean Time (UTC+0)</option>
+                                            <option value="UTC+1">Central European Time (UTC+1)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Date Format -->
+                                    <div>
+                                        <label for="date-format" class="block text-sm font-medium text-gray-700 mb-1">Date Format</label>
+                                        <select id="date-format" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="MM/DD/YYYY" selected>MM/DD/YYYY</option>
+                                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Currency -->
+                                    <div>
+                                        <label for="currency" class="block text-sm font-medium text-gray-700 mb-1">Default Currency</label>
+                                        <select id="currency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="USD" selected>US Dollar ($)</option>
+                                            <option value="EUR">Euro (€)</option>
+                                            <option value="GBP">British Pound (£)</option>
+                                            <option value="CAD">Canadian Dollar (C$)</option>
+                                            <option value="AUD">Australian Dollar (A$)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Appearance Settings -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Appearance</h3>
+                                <div class="grid grid-cols-1 gap-6">
+                                    <!-- Theme -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-3">Theme</label>
+                                        <div class="flex space-x-4">
+                                            <div class="theme-option relative">
+                                                <input type="radio" id="theme-light" name="theme" value="light" class="sr-only" checked>
+                                                <label for="theme-light" class="flex flex-col items-center cursor-pointer">
+                                                    <div class="w-16 h-16 rounded-lg bg-white border-2 border-purple-500 flex items-center justify-center mb-2">
+                                                        <i class="fas fa-sun text-yellow-500 text-xl"></i>
+                                                    </div>
+                                                    <span class="text-sm font-medium text-gray-700">Light</span>
+                                                </label>
+                                            </div>
+                                            <div class="theme-option relative">
+                                                <input type="radio" id="theme-dark" name="theme" value="dark" class="sr-only">
+                                                <label for="theme-dark" class="flex flex-col items-center cursor-pointer">
+                                                    <div class="w-16 h-16 rounded-lg bg-gray-800 border-2 border-gray-300 flex items-center justify-center mb-2">
+                                                        <i class="fas fa-moon text-blue-300 text-xl"></i>
+                                                    </div>
+                                                    <span class="text-sm font-medium text-gray-700">Dark</span>
+                                                </label>
+                                            </div>
+                                            <div class="theme-option relative">
+                                                <input type="radio" id="theme-system" name="theme" value="system" class="sr-only">
+                                                <label for="theme-system" class="flex flex-col items-center cursor-pointer">
+                                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-r from-white to-gray-800 border-2 border-gray-300 flex items-center justify-center mb-2">
+                                                        <i class="fas fa-desktop text-gray-600 text-xl"></i>
+                                                    </div>
+                                                    <span class="text-sm font-medium text-gray-700">System</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Primary Color -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-3">Primary Color</label>
+                                        <div class="flex space-x-4">
+                                            <div class="color-option relative">
+                                                <input type="radio" id="color-purple" name="color" value="purple" class="sr-only" checked>
+                                                <label for="color-purple" class="w-8 h-8 rounded-full bg-purple-600 border-2 border-white shadow-sm cursor-pointer flex items-center justify-center">
+                                                    <i class="fas fa-check text-white opacity-0 check-icon"></i>
+                                                </label>
+                                            </div>
+                                            <div class="color-option relative">
+                                                <input type="radio" id="color-blue" name="color" value="blue" class="sr-only">
+                                                <label for="color-blue" class="w-8 h-8 rounded-full bg-blue-600 border-2 border-white shadow-sm cursor-pointer flex items-center justify-center">
+                                                    <i class="fas fa-check text-white opacity-0 check-icon"></i>
+                                                </label>
+                                            </div>
+                                            <div class="color-option relative">
+                                                <input type="radio" id="color-green" name="color" value="green" class="sr-only">
+                                                <label for="color-green" class="w-8 h-8 rounded-full bg-green-600 border-2 border-white shadow-sm cursor-pointer flex items-center justify-center">
+                                                    <i class="fas fa-check text-white opacity-0 check-icon"></i>
+                                                </label>
+                                            </div>
+                                            <div class="color-option relative">
+                                                <input type="radio" id="color-red" name="color" value="red" class="sr-only">
+                                                <label for="color-red" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow-sm cursor-pointer flex items-center justify-center">
+                                                    <i class="fas fa-check text-white opacity-0 check-icon"></i>
+                                                </label>
+                                            </div>
+                                            <div class="color-option relative">
+                                                <input type="radio" id="color-orange" name="color" value="orange" class="sr-only">
+                                                <label for="color-orange" class="w-8 h-8 rounded-full bg-orange-500 border-2 border-white shadow-sm cursor-pointer flex items-center justify-center">
+                                                    <i class="fas fa-check text-white opacity-0 check-icon"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Logo Upload -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-3">Logo</label>
+                                        <div class="flex items-center space-x-6">
+                                            <div class="w-24 h-24 rounded-lg bg-gray-100 flex items-center justify-center border border-gray-300">
+                                                <img src="https://via.placeholder.com/96x96.png?text=Logo" alt="Current Logo" class="max-w-full max-h-full">
+                                            </div>
+                                            <div>
+                                                <button class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                                    <i class="fas fa-upload mr-2"></i>
+                                                    Upload New Logo
+                                                </button>
+                                                <p class="mt-2 text-xs text-gray-500">Recommended size: 512x512px. Max file size: 2MB.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- System Maintenance -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">System Maintenance</h3>
+                                <div class="space-y-4">
+                                    <!-- Maintenance Mode -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Maintenance Mode</h4>
+                                            <p class="text-sm text-gray-500">Put the system in maintenance mode during updates</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="maintenance-mode" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600">
+                                            <label for="maintenance-mode" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Database Backup -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Automatic Database Backup</h4>
+                                            <p class="text-sm text-gray-500">Schedule regular database backups</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="db-backup" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="db-backup" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Error Logging -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Enhanced Error Logging</h4>
+                                            <p class="text-sm text-gray-500">Enable detailed error logging for debugging</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="error-logging" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600">
+                                            <label for="error-logging" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Cache Management -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Clear System Cache</h4>
+                                            <p class="text-sm text-gray-500">Clear all cached data to resolve potential issues</p>
+                                        </div>
+                                        <button class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                            Clear Cache
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings Tab (Hidden by default) -->
+                    <div id="security-tab" class="settings-content p-6 hidden">
+                        <div class="max-w-4xl mx-auto">
+                            <!-- Password Policy -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Password Policy</h3>
+                                <div class="space-y-4">
+                                    <!-- Minimum Length -->
+                                    <div>
+                                        <label for="min-password-length" class="block text-sm font-medium text-gray-700 mb-1">Minimum Password Length</label>
+                                        <select id="min-password-length" class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="6">6 characters</option>
+                                            <option value="8" selected>8 characters</option>
+                                            <option value="10">10 characters</option>
+                                            <option value="12">12 characters</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Password Requirements -->
+                                    <div class="space-y-2">
+                                        <label class="block text-sm font-medium text-gray-700">Password Requirements</label>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="req-uppercase" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" checked>
+                                            <label for="req-uppercase" class="ml-2 block text-sm text-gray-700">Require uppercase letters</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="req-lowercase" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" checked>
+                                            <label for="req-lowercase" class="ml-2 block text-sm text-gray-700">Require lowercase letters</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="req-numbers" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" checked>
+                                            <label for="req-numbers" class="ml-2 block text-sm text-gray-700">Require numbers</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="req-special" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" checked>
+                                            <label for="req-special" class="ml-2 block text-sm text-gray-700">Require special characters</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Password Expiry -->
+                                    <div>
+                                        <label for="password-expiry" class="block text-sm font-medium text-gray-700 mb-1">Password Expiry</label>
+                                        <select id="password-expiry" class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="never">Never</option>
+                                            <option value="30">30 days</option>
+                                            <option value="60">60 days</option>
+                                            <option value="90" selected>90 days</option>
+                                            <option value="180">180 days</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Two-Factor Authentication -->
+                            <div class="mb-8">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-bold text-gray-800">Two-Factor Authentication</h3>
+                                    <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                        <input type="checkbox" id="enable-2fa" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                        <label for="enable-2fa" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Two-factor authentication is enabled</h4>
+                                            <p class="text-sm text-gray-500">Additional security for all administrator accounts</p>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <input type="radio" id="2fa-app" name="2fa-method" value="app" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300" checked>
+                                            <label for="2fa-app" class="ml-2 block text-sm text-gray-700">Authenticator app (Google Authenticator, Authy)</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="2fa-sms" name="2fa-method" value="sms" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300">
+                                            <label for="2fa-sms" class="ml-2 block text-sm text-gray-700">SMS verification</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="2fa-email" name="2fa-method" value="email" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300">
+                                            <label for="2fa-email" class="ml-2 block text-sm text-gray-700">Email verification</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Session Management -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Session Management</h3>
+                                <div class="space-y-4">
+                                    <!-- Session Timeout -->
+                                    <div>
+                                        <label for="session-timeout" class="block text-sm font-medium text-gray-700 mb-1">Session Timeout</label>
+                                        <select id="session-timeout" class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="15">15 minutes</option>
+                                            <option value="30" selected>30 minutes</option>
+                                            <option value="60">1 hour</option>
+                                            <option value="120">2 hours</option>
+                                            <option value="240">4 hours</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Concurrent Sessions -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Limit Concurrent Sessions</h4>
+                                            <p class="text-sm text-gray-500">Prevent users from being logged in on multiple devices</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="limit-sessions" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600">
+                                            <label for="limit-sessions" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Force Logout -->
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-medium text-gray-900 mb-2">Active Sessions</h4>
+                                        <p class="text-sm text-gray-500 mb-4">Force logout users from all devices</p>
+                                        <button class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                            Logout All Users
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- IP Restrictions -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">IP Restrictions</h3>
+                                <div class="space-y-4">
+                                    <!-- Enable IP Restrictions -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Enable IP Restrictions</h4>
+                                            <p class="text-sm text-gray-500">Restrict admin access to specific IP addresses</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="enable-ip-restrictions" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600">
+                                            <label for="enable-ip-restrictions" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Allowed IPs -->
+                                    <div>
+                                        <label for="allowed-ips" class="block text-sm font-medium text-gray-700 mb-1">Allowed IP Addresses</label>
+                                        <textarea id="allowed-ips" rows="3" placeholder="Enter IP addresses, one per line" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600"></textarea>
+                                        <p class="mt-1 text-xs text-gray-500">Enter IP addresses or CIDR ranges (e.g., 192.168.1.1 or 192.168.1.0/24)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Settings Tab (Hidden by default) -->
+                    <div id="notifications-tab" class="settings-content p-6 hidden">
+                        <div class="max-w-4xl mx-auto">
+                            <!-- Email Notifications -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Email Notifications</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">New Patient Registration</h4>
+                                            <p class="text-sm text-gray-500">Receive an email when a new patient registers</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="notify-patient-reg" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="notify-patient-reg" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">New Doctor Registration</h4>
+                                            <p class="text-sm text-gray-500">Receive an email when a new doctor registers</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="notify-doctor-reg" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="notify-doctor-reg" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">New Subscription</h4>
+                                            <p class="text-sm text-gray-500">Receive an email when a new subscription is purchased</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="notify-subscription" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="notify-subscription" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Subscription Cancellation</h4>
+                                            <p class="text-sm text-gray-500">Receive an email when a subscription is cancelled</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="notify-cancellation" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="notify-cancellation" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Payment Failure</h4>
+                                            <p class="text-sm text-gray-500">Receive an email when a payment fails</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="notify-payment-failure" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="notify-payment-failure" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">System Alerts</h4>
+                                            <p class="text-sm text-gray-500">Receive an email for important system alerts</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="notify-system-alerts" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="notify-system-alerts" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- In-App Notifications -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">In-App Notifications</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">New Patient Registration</h4>
+                                            <p class="text-sm text-gray-500">Show notification when a new patient registers</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="inapp-patient-reg" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="inapp-patient-reg" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">New Doctor Registration</h4>
+                                            <p class="text-sm text-gray-500">Show notification when a new doctor registers</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="inapp-doctor-reg" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="inapp-doctor-reg" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">New Subscription</h4>
+                                            <p class="text-sm text-gray-500">Show notification when a new subscription is purchased</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="inapp-subscription" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="inapp-subscription" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">System Alerts</h4>
+                                            <p class="text-sm text-gray-500">Show notification for important system alerts</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="inapp-system-alerts" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="inapp-system-alerts" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Email Templates -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Email Templates</h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-medium text-gray-900 mb-2">Customize Email Templates</h4>
+                                        <p class="text-sm text-gray-500 mb-4">Edit the templates used for system emails</p>
+                                        <div class="space-y-2">
+                                            <button class="flex items-center justify-between w-full px-4 py-2 text-left text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                                <span>Welcome Email</span>
+                                                <i class="fas fa-chevron-right text-gray-400"></i>
+                                            </button>
+                                            <button class="flex items-center justify-between w-full px-4 py-2 text-left text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                                <span>Password Reset</span>
+                                                <i class="fas fa-chevron-right text-gray-400"></i>
+                                            </button>
+                                            <button class="flex items-center justify-between w-full px-4 py-2 text-left text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                                <span>Subscription Confirmation</span>
+                                                <i class="fas fa-chevron-right text-gray-400"></i>
+                                            </button>
+                                            <button class="flex items-center justify-between w-full px-4 py-2 text-left text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                                <span>Payment Receipt</span>
+                                                <i class="fas fa-chevron-right text-gray-400"></i>
+                                            </button>
+                                            <button class="flex items-center justify-between w-full px-4 py-2 text-left text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                                <span>Account Notification</span>
+                                                <i class="fas fa-chevron-right text-gray-400"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Settings Tab (Hidden by default) -->
+                    <div id="billing-tab" class="settings-content p-6 hidden">
+                        <div class="max-w-4xl mx-auto">
+                            <!-- Payment Gateway -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Payment Gateway</h3>
+                                <div class="space-y-4">
+                                    <!-- Gateway Selection -->
+                                    <div>
+                                        <label for="payment-gateway" class="block text-sm font-medium text-gray-700 mb-1">Default Payment Gateway</label>
+                                        <select id="payment-gateway" class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <option value="stripe" selected>Stripe</option>
+                                            <option value="paypal">PayPal</option>
+                                            <option value="square">Square</option>
+                                            <option value="authorize">Authorize.net</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Gateway Configuration -->
+                                    <div class="p-4 bg-gray-50 rounded-lg">
+                                        <h4 class="font-medium text-gray-900 mb-4">Stripe Configuration</h4>
+                                        <div class="space-y-3">
+                                            <div>
+                                                <label for="stripe-public-key" class="block text-sm font-medium text-gray-700 mb-1">Public Key</label>
+                                                <input type="text" id="stripe-public-key" value="pk_test_51HdgH2CuJMw" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            </div>
+                                            <div>
+                                                <label for="stripe-secret-key" class="block text-sm font-medium text-gray-700 mb-1">Secret Key</label>
+                                                <div class="relative">
+                                                    <input type="password" id="stripe-secret-key" value="sk_test_51HdgH2CuJMw" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                                    <button class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="stripe-webhook-secret" class="block text-sm font-medium text-gray-700 mb-1">Webhook Secret</label>
+                                                <div class="relative">
+                                                    <input type="password" id="stripe-webhook-secret" value="whsec_12345" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                                    <button class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tax Settings -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Tax Settings</h3>
+                                <div class="space-y-4">
+                                    <!-- Enable Tax -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Enable Tax Calculation</h4>
+                                            <p class="text-sm text-gray-500">Automatically calculate and apply taxes to subscriptions</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                            <input type="checkbox" id="enable-tax" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                            <label for="enable-tax" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Default Tax Rate -->
+                                    <div>
+                                        <label for="default-tax-rate" class="block text-sm font-medium text-gray-700 mb-1">Default Tax Rate (%)</label>
+                                        <input type="number" id="default-tax-rate" value="7.5" min="0" max="100" step="0.1" class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                    </div>
+                                    
+                                    <!-- Tax By Region -->
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <label class="block text-sm font-medium text-gray-700">Tax Rates by Region</label>
+                                            <button class="text-sm text-purple-600 hover:text-purple-700 font-medium">
+                                                <i class="fas fa-plus mr-1"></i> Add Region
+                                            </button>
+                                        </div>
+                                        <div class="border border-gray-300 rounded-lg overflow-hidden">
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tax Rate (%)</th>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                    <tr>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">California, USA</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">8.25%</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="text-red-600 hover:text-red-800">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">New York, USA</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">8.875%</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="text-red-600 hover:text-red-800">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Ontario, Canada</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">13%</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="text-red-600 hover:text-red-800">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Invoice Settings -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Invoice Settings</h3>
+                                <div class="space-y-4">
+                                    <!-- Company Information -->
+                                    <div>
+                                        <h4 class="font-medium text-gray-900 mb-3">Company Information</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="company-name" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                                                <input type="text" id="company-name" value="StrideWell Studio, Inc." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            </div>
+                                            <div>
+                                                <label for="company-address" class="block text-sm font-medium text-gray-700 mb-1">Company Address</label>
+                                                <input type="text" id="company-address" value="123 Fitness Ave, San Francisco, CA 94107" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            </div>
+                                            <div>
+                                                <label for="company-tax-id" class="block text-sm font-medium text-gray-700 mb-1">Tax ID / VAT Number</label>
+                                                <input type="text" id="company-tax-id" value="US123456789" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            </div>
+                                            <div>
+                                                <label for="company-email" class="block text-sm font-medium text-gray-700 mb-1">Billing Email</label>
+                                                <input type="email" id="company-email" value="billing@stridewellstudio.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Invoice Numbering -->
+                                    <div>
+                                        <label for="invoice-prefix" class="block text-sm font-medium text-gray-700 mb-1">Invoice Number Prefix</label>
+                                        <div class="flex">
+                                            <input type="text" id="invoice-prefix" value="SWS-" class="w-32 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            <span class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-500 border border-l-0 border-gray-300 rounded-r-lg">00001</span>
+                                        </div>
+                                        <p class="mt-1 text-xs text-gray-500">Example: SWS-00001</p>
+                                    </div>
+                                    
+                                    <!-- Invoice Footer -->
+                                    <div>
+                                        <label for="invoice-footer" class="block text-sm font-medium text-gray-700 mb-1">Invoice Footer Text</label>
+                                        <textarea id="invoice-footer" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">Thank you for your business! If you have any questions about your invoice, please contact billing@stridewellstudio.com.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Integrations Settings Tab (Hidden by default) -->
+                    <div id="integrations-tab" class="settings-content p-6 hidden">
+                        <div class="max-w-4xl mx-auto">
+                            <!-- Available Integrations -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Available Integrations</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Google Analytics -->
+                                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+                                                    <i class="fas fa-chart-line text-blue-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium text-gray-900">Google Analytics</h4>
+                                                    <p class="text-sm text-gray-500">Track website traffic and user behavior</p>
+                                                </div>
+                                            </div>
+                                            <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                                <input type="checkbox" id="google-analytics" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                                <label for="google-analytics" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="ga-tracking-id" class="block text-sm font-medium text-gray-700 mb-1">Tracking ID</label>
+                                            <input type="text" id="ga-tracking-id" value="UA-123456789-1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Mailchimp -->
+                                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center mr-3">
+                                                    <i class="fas fa-envelope text-yellow-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium text-gray-900">Mailchimp</h4>
+                                                    <p class="text-sm text-gray-500">Email marketing automation</p>
+                                                </div>
+                                            </div>
+                                            <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                                <input type="checkbox" id="mailchimp" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600" checked>
+                                                <label for="mailchimp" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div>
+                                                <label for="mailchimp-api-key" class="block text-sm font-medium text-gray-700 mb-1">API Key</label>
+                                                <div class="relative">
+                                                    <input type="password" id="mailchimp-api-key" value="a1b2c3d4e5f6g7h8i9j0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                                    <button class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="mailchimp-list-id" class="block text-sm font-medium text-gray-700 mb-1">Default List ID</label>
+                                                <input type="text" id="mailchimp-list-id" value="abc123def456" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Zoom -->
+                                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+                                                    <i class="fas fa-video text-blue-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium text-gray-900">Zoom</h4>
+                                                    <p class="text-sm text-gray-500">Video conferencing integration</p>
+                                                </div>
+                                            </div>
+                                            <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                                <input type="checkbox" id="zoom" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600">
+                                                <label for="zoom" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                            </div>
+                                        </div>
+                                        <button class="w-full px-4 py-2 text-sm font-medium text-purple-600 bg-purple-50 rounded-lg hover:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                            <i class="fas fa-plug mr-2"></i>
+                                            Connect Zoom Account
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Slack -->
+                                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-3">
+                                                    <i class="fab fa-slack text-green-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium text-gray-900">Slack</h4>
+                                                    <p class="text-sm text-gray-500">Team communication and notifications</p>
+                                                </div>
+                                            </div>
+                                            <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full">
+                                                <input type="checkbox" id="slack" class="absolute w-6 h-6 transition duration-200 ease-in-out transform bg-white border rounded-full appearance-none cursor-pointer peer border-gray-300 checked:right-0 checked:border-purple-600 checked:bg-purple-600 peer-checked:border-purple-600 peer-checked:bg-purple-600">
+                                                <label for="slack" class="block w-full h-full overflow-hidden rounded-full cursor-pointer bg-gray-300 peer-checked:bg-purple-300"></label>
+                                            </div>
+                                        </div>
+                                        <button class="w-full px-4 py-2 text-sm font-medium text-purple-600 bg-purple-50 rounded-lg hover:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                            <i class="fas fa-plug mr-2"></i>
+                                            Connect Slack Workspace
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- API Access -->
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-bold text-gray-800">API Access</h3>
+                                    <button class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        Generate New Key
+                                    </button>
+                                </div>
+                                <div class="border border-gray-300 rounded-lg overflow-hidden">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Key Name</th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Used</th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Admin Dashboard</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jan 15, 2023</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Today</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Mobile App Integration</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Mar 22, 2023</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Yesterday</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="mt-2 text-xs text-gray-500">API keys provide full access to your account. Keep them secure!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.open-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('translate-x-full');
+        });
+        
+        document.querySelector('.close-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.add('translate-x-full');
+        });
+        
+        // Settings Tab Functionality
+        const settingsTabs = document.querySelectorAll('.settings-tab');
+        const settingsContents = document.querySelectorAll('.settings-content');
+        
+        settingsTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                settingsTabs.forEach(t => {
+                    t.classList.remove('border-purple-500', 'text-purple-600');
+                    t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                });
+                
+                // Add active class to clicked tab
+                tab.classList.add('border-purple-500', 'text-purple-600');
+                tab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                
+                // Hide all content sections
+                settingsContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Show the corresponding content section
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+            });
+        });
+        
+        // Theme Selection
+        const themeOptions = document.querySelectorAll('.theme-option input');
+        themeOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                const selectedTheme = this.value;
+                console.log(`Theme changed to: ${selectedTheme}`);
+                // Implement theme change logic here
+            });
+        });
+        
+        // Color Selection
+        const colorOptions = document.querySelectorAll('.color-option input');
+        const checkIcons = document.querySelectorAll('.check-icon');
+        
+        colorOptions.forEach((option, index) => {
+            if (option.checked) {
+                checkIcons[index].classList.remove('opacity-0');
+            }
+            
+            option.addEventListener('change', function() {
+                // Hide all check icons
+                checkIcons.forEach(icon => {
+                    icon.classList.add('opacity-0');
+                });
+                
+                // Show check icon for selected color
+                const selectedIndex = Array.from(colorOptions).indexOf(this);
+                checkIcons[selectedIndex].classList.remove('opacity-0');
+                
+                const selectedColor = this.value;
+                console.log(`Primary color changed to: ${selectedColor}`);
+                // Implement color change logic here
+            });
+        });
+        
+        // Save Settings Button
+        document.getElementById('save-settings-btn').addEventListener('click', function() {
+            // Show a success message
+            alert('Settings saved successfully!');
+            // Implement settings save logic here
+        });
+        
+        // Check if user is logged in as admin
+        window.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Redirect if not logged in or not an admin
+            if (!currentUser || !currentUser.loggedIn || currentUser.role !== 'admin') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Show user profile and hide auth buttons if logged in
+            document.getElementById('header-auth-buttons').style.display = 'none';
+            document.getElementById('header-user-profile').style.display = 'flex';
+            
+            // Update user information
+            const userName = currentUser.firstName ?
+                `${currentUser.firstName} ${currentUser.lastName}` :
+                currentUser.name || currentUser.email.split('@')[0];
+                
+            document.getElementById('header-user-name').textContent = userName;
+            document.getElementById('sidebar-user-name').textContent = userName;
+            document.getElementById('mobile-user-name').textContent = userName;
+            
+            // Set role display
+            document.getElementById('sidebar-user-role').textContent = 'Administrator';
+            document.getElementById('mobile-user-role').textContent = 'Administrator';
+        });
+        
+        // Logout functionality
+        function handleLogout() {
+            // Clear user data
+            localStorage.removeItem('currentUser');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+        
+        // Add logout event listeners
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+    </script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 signup-page">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Home</a>
+            <a href="all-exercises.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">All Exercises</a>
+            <a href="subscription.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Subscription</a>
+            <a href="index.html#appointment" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Appointment</a>
+            <a href="index.html#testimonials" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">Testimonials</a>
+            <a href="index.html#about" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">About Us</a>
+            <a href="index.html#faq" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">FAQ</a>
+            <a href="index.html#contact" class="block py-3 px-4 rounded-lg hover:bg-blue-50">Contact</a>
+        </div>
+        <!-- Mobile Auth Section -->
+        <div class="mt-8 mobile-auth-section">
+            <a href="login.html" class="block w-full bg-primary text-white py-3 rounded-lg font-semibold mb-3 text-center">Login</a>
+            <a href="signup.html" class="block w-full border border-primary text-primary py-3 rounded-lg font-semibold text-center">Sign Up</a>
+        </div>
+        
+        <!-- Mobile Profile Section (Hidden by default) -->
+        <div class="mt-8 mobile-profile-section hidden">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">John Doe</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Patient</p>
+                </div>
+            </div>
+            <a href="#" id="mobile-dashboard-link" class="block w-full bg-primary text-white py-3 rounded-lg font-semibold mb-3 text-center">Dashboard</a>
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary">Home</a>
+                    <a href="all-exercises.html" class="text-gray-600 hover:text-primary">Exercises</a>
+                    <a href="subscription.html" class="text-gray-600 hover:text-primary">Subscription</a>
+                    <a href="index.html#appointment" class="text-gray-600 hover:text-primary">Appointment</a>
+                    <a href="index.html#testimonials" class="text-gray-600 hover:text-primary">Testimonials</a>
+                    <a href="index.html#about" class="text-gray-600 hover:text-primary">About Us</a>
+                </nav>
+                
+                <!-- Header Auth Section -->
+                <div class="hidden md:flex items-center space-x-4 header-auth-section">
+                    <a href="login.html" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-medium">Login</a>
+                    <a href="signup.html" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-medium">Sign Up</a>
+                </div>
+                
+                <!-- Header Profile Section (Hidden by default) -->
+                <div class="hidden md:flex items-center space-x-4 header-profile-section" id="header-user-profile">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 focus:outline-none" id="profile-menu-button">
+                            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="font-medium text-gray-700" id="header-user-name">John Doe</span>
+                            <i class="fas fa-chevron-down text-gray-500 text-sm"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden" id="profile-dropdown">
+                            <a href="#" id="header-dashboard-link" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-cog mr-2 text-primary"></i> Settings
+                            </a>
+                            <button id="header-logout-btn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-red-50">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="md:hidden text-2xl text-gray-600 open-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sign Up Section -->
+    <section class="min-h-screen py-16 px-4 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div class="container mx-auto max-w-md">
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden p-8 backdrop-blur-lg bg-opacity-95">
+                <div class="text-center mb-8">
+                    <div class="inline-block p-3 rounded-full bg-blue-50 mb-4">
+                        <i class="fas fa-user-plus text-4xl text-primary"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark mb-2">Create Account</h2>
+                    <p class="text-gray-600">Join StrideWellStudio for personalized fitness</p>
+                </div>
+
+                <form class="space-y-6" id="signupForm">
+                    <div class="grid grid-cols-2 gap-4">
+                          <div id="signUpMessage" class ="messageDiv" style="display:none;"></div>
+                        <div>
+                            <label for="first-name" class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+                            <input type="text" id="text" name="first-name" 
+                                class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white" 
+                                placeholder="First name" required>
+                        </div>
+                        <div>
+                            <label for="last-name" class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+                            <input type="text" id="text" name="last-name" 
+                                class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white" 
+                                placeholder="Last name" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="userRole" class="block text-sm font-semibold text-gray-700 mb-2">Register As</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-primary">
+                                <i class="fas fa-user-tag text-gray-400 group-focus-within:text-primary"></i>
+                            </div>
+                            <select id="userRole" name="userRole" 
+                                class="block w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white appearance-none" required>
+                                <option value="" disabled selected>Select your role</option>
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-primary">
+                                <i class="fas fa-envelope text-gray-400 group-focus-within:text-primary"></i>
+                            </div>
+                            <input type="email" id="email" name="email" 
+                                class="block w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white" 
+                                placeholder="Enter your email" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-primary">
+                                <i class="fas fa-lock text-gray-400 group-focus-within:text-primary"></i>
+                            </div>
+                            <input type="password" id="password" name="password" 
+                                class="block w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white" 
+                                placeholder="Create a password" required>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">Must be 8+ characters with number and symbol</p>
+                    </div>
+
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-primary">
+                                <i class="fas fa-lock text-gray-400 group-focus-within:text-primary"></i>
+                            </div>
+                            <input type="password" id="confirm-password" name="confirm-password" 
+                                class="block w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white" 
+                                placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="age-group" class="block text-sm font-semibold text-gray-700 mb-2">Age Group</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-primary">
+                                <i class="fas fa-users text-gray-400 group-focus-within:text-primary"></i>
+                            </div>
+                            <select id="age-group" name="age-group" 
+                                class="block w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl 
+                                focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-primary 
+                                transition-all duration-200 bg-gray-50 focus:bg-white appearance-none" required>
+                                <option value="" disabled selected>Select your age group</option>
+                                <option value="teenagers">Teenagers (13-19)</option>
+                                <option value="young-adults">Young Adults (20-35)</option>
+                                <option value="middle-age">Middle Age (36-55)</option>
+                                <option value="senior-middle">Senior Middle (56-70)</option>
+                                <option value="senior-citizen">Senior Citizens (71+)</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input id="terms" name="terms" type="checkbox" 
+                            class="h-4 w-4 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 
+                            border-2 border-gray-300 rounded transition-colors" required>
+                        <label for="terms" class="ml-2 text-sm text-gray-700">
+                            I agree to the <a href="#" class="font-semibold text-primary hover:text-blue-700 transition-colors">Terms of Service</a> and 
+                            <a href="#" class="font-semibold text-primary hover:text-blue-700 transition-colors">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" id="submitSignup">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Or sign up with</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-3 gap-3">
+                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="mt-8 text-center text-sm text-gray-600">
+                    Already have an account?
+                    <a href="login.html" class="font-medium text-primary hover:text-blue-700">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <span class="ml-3 font-bold text-xl">StrideWell<span class="text-primary">Studio</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Personalized physiotherapy exercise programs tailored to your age group and health needs.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="all-exercises.html" class="text-gray-400 hover:text-white transition">All Exercises</a></li>
+                        <li><a href="subscription.html" class="text-gray-400 hover:text-white transition">Subscription</a></li>
+                        <li><a href="index.html#appointment" class="text-gray-400 hover:text-white transition">Appointment</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="index.html#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Age Groups</h3>
+                    <ul class="space-y-3">
+                        <li><a href="teenagers.html" class="text-gray-400 hover:text-white transition">Teenagers (13-19)</a></li>
+                        <li><a href="young-adults.html" class="text-gray-400 hover:text-white transition">Young Adults (20-35)</a></li>
+                        <li><a href="middle-age.html" class="text-gray-400 hover:text-white transition">Middle Age (36-55)</a></li>
+                        <li><a href="senior-middle.html" class="text-gray-400 hover:text-white transition">Senior Middle (56-70)</a></li>
+                        <li><a href="senior-citizen.html" class="text-gray-400 hover:text-white transition">Senior Citizens (71+)</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-3 rounded-l-lg focus:outline-none">
+                        <button class="bg-primary text-white px-4 py-3 rounded-r-lg hover:bg-blue-600 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <p class="text-gray-400 text-center">© 2023 StrideWellStudio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.open-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.add('active');
+        });
+        
+        document.querySelector('.close-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('active');
+        });
+        
+        // Update header based on login status
+        function updateHeaderBasedOnLogin() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Initially hide user profile and show auth buttons
+            document.querySelector('.header-profile-section').classList.add('hidden');
+            document.querySelector('.header-auth-section').classList.remove('hidden');
+            document.querySelector('.mobile-profile-section').classList.add('hidden');
+            document.querySelector('.mobile-auth-section').classList.remove('hidden');
+            
+            if (currentUser && currentUser.loggedIn) {
+                // User is logged in, show profile and hide auth buttons
+                document.querySelector('.header-profile-section').classList.remove('hidden');
+                document.querySelector('.header-auth-section').classList.add('hidden');
+                document.querySelector('.mobile-profile-section').classList.remove('hidden');
+                document.querySelector('.mobile-auth-section').classList.add('hidden');
+                
+                // Update user info in the UI
+                const userName = currentUser.firstName ? 
+                    `${currentUser.firstName} ${currentUser.lastName}` : 
+                    currentUser.name || currentUser.email.split('@')[0];
+                
+                // Update mobile menu user info
+                document.getElementById('mobile-user-name').textContent = userName;
+                document.getElementById('mobile-user-role').textContent = currentUser.role || 'User';
+                
+                // Update header user info
+                document.getElementById('header-user-name').textContent = userName;
+                
+                // Set dashboard link based on user role
+                const dashboardLink = document.getElementById('header-dashboard-link');
+                const mobileDashboardLink = document.getElementById('mobile-dashboard-link');
+                
+                if (currentUser.role === 'patient') {
+                    dashboardLink.href = 'patient-dashboard.html';
+                    mobileDashboardLink.href = 'patient-dashboard.html';
+                } else if (currentUser.role === 'doctor') {
+                    dashboardLink.href = 'doctor-dashboard.html';
+                    mobileDashboardLink.href = 'doctor-dashboard.html';
+                } else if (currentUser.role === 'admin') {
+                    dashboardLink.href = 'admin-dashboard.html';
+                    mobileDashboardLink.href = 'admin-dashboard.html';
+                }
+            }
+        }
+        
+        // Toggle profile dropdown
+        const profileMenuButton = document.getElementById('profile-menu-button');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        if (profileMenuButton && profileDropdown) {
+            profileMenuButton.addEventListener('click', function() {
+                profileDropdown.classList.toggle('hidden');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!profileMenuButton.contains(event.target) && !profileDropdown.contains(event.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Logout functionality
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        
+        // Add logout event listeners
+        const headerLogoutBtn = document.getElementById('header-logout-btn');
+        const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+        
+        if (headerLogoutBtn) headerLogoutBtn.addEventListener('click', handleLogout);
+        if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', handleLogout);
+        
+        // Call updateHeaderBasedOnLogin when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHeaderBasedOnLogin();
+        });
+
+        // Password validation
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const hasMinLength = password.length >= 8;
+            const hasNumber = /\d/.test(password);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            
+            let message = '';
+            if (!hasMinLength) message += 'Password must be at least 8 characters. ';
+            if (!hasNumber) message += 'Include at least one number. ';
+            if (!hasSpecial) message += 'Include at least one special character. ';
+            
+            const hint = document.querySelector('p.text-sm.text-gray-500');
+            if (password && (message !== '')) {
+                hint.textContent = message;
+                hint.classList.remove('text-gray-500');
+                hint.classList.add('text-red-500');
+            } else if (password) {
+                hint.textContent = 'Password meets all requirements';
+                hint.classList.remove('text-red-500');
+                hint.classList.add('text-green-500');
+            } else {
+                hint.textContent = 'Must be 8+ characters with number and symbol';
+                hint.classList.remove('text-red-500', 'text-green-500');
+                hint.classList.add('text-gray-500');
+            }
+        });
+
+        // Confirm password validation
+        document.getElementById('confirm-password').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.setCustomValidity('Passwords do not match');
+                this.reportValidity();
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        // Signup Form Handling
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const userRole = document.getElementById('userRole').value;
+            const ageGroup = document.getElementById('age-group').value;
+            const termsAccepted = document.getElementById('terms').checked;
+            
+            // Validate form
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (!termsAccepted) {
+                alert('Please accept the terms and conditions');
+                return;
+            }
+            
+            // In a real application, you would send this data to a backend
+            // For demo purposes, we'll just store in localStorage and redirect
+            if (firstName && lastName && email && password && userRole && ageGroup) {
+                // Store user info in localStorage for session management
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    role: userRole,
+                    ageGroup: ageGroup,
+                    loggedIn: true
+                };
+                
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                
+                // Redirect based on role
+                switch(userRole) {
+                    case 'patient':
+                        window.location.href = 'patient-dashboard.html';
+                        break;
+                    case 'doctor':
+                        window.location.href = 'doctor-dashboard.html';
+                        break;
+                    case 'admin':
+                        window.location.href = 'admin-dashboard.html';
+                        break;
+                    default:
+                        alert('Invalid role selected');
+                }
+            } else {
+                alert('Please fill in all required fields');
+            }
+        });
+    </script>
+</body>
+</html>
