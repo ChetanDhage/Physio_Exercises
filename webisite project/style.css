@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        /* Logo styling to ensure consistency across all pages */
+        .bg-primary.rounded-full, 
+        .bg-primary.w-10.h-10.rounded-full, 
+        .bg-primary.w-14.h-14.rounded-full,
+        .bg-primary.w-16.h-16.rounded-full,
+        div[class*="bg-primary"][class*="rounded-full"],
+        header div[class*="bg-primary"],
+        aside div[class*="bg-primary"],
+        .mobile-menu div[class*="bg-primary"] {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+            overflow: visible !important;
+        }
+        
+        .bg-primary.rounded-full span, 
+        .bg-primary.w-10.h-10.rounded-full span, 
+        .bg-primary.w-14.h-14.rounded-full span,
+        .bg-primary.w-16.h-16.rounded-full span,
+        div[class*="bg-primary"][class*="rounded-full"] span,
+        header div[class*="bg-primary"] span,
+        aside div[class*="bg-primary"] span,
+        .mobile-menu div[class*="bg-primary"] span {
+            display: inline-block !important;
+            text-align: center !important;
+            color: white !important;
+            font-weight: bold !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            line-height: 1 !important;
+            width: auto !important;
+            height: auto !important;
+        }
+        
+        /* Additional fix for specific logo cases */
+        .flex.items-center div.bg-primary span,
+        .flex.items-center div[class*="rounded-full"] span {
+            position: relative !important;
+            transform: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* Ensure logo text is visible in all pages */
+        .bg-primary span.text-white,
+        .bg-primary span.text-xl,
+        .bg-primary span.text-2xl,
+        .bg-primary span.text-3xl {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: inline-block !important;
+        }
+        
+        /* Override container padding for main content pages only */
+        body:not(.login-page):not(.signup-page) .container:not(.max-w-md) {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            max-width: 100% !important;
+        }
+        
+        /* Improved button styles */
+        .bg-primary, a.bg-primary, button.bg-primary {
+            background-color: #3b82f6 !important;
+            transition: all 0.3s ease !important;
+            display: inline-block;
+        }
+        
+        .bg-primary:hover, a.bg-primary:hover, button.bg-primary:hover {
+            background-color: #2563eb !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .bg-primary:active, a.bg-primary:active, button.bg-primary:active,
+        #view-schedule-btn.clicked {
+            transform: translateY(0);
+            background-color: #2563eb !important;
+        }
+        
+        /* Ensure buttons are visible and properly styled */
+        a[href="#schedule"], a[href="index.html#subscription"] {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .exercise-card:hover .exercise-video {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .age-group.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        /* Enhanced age group styles */
+        .age-group {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .age-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #3b82f6;
+        }
+        
+        .age-group:active {
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.875rem !important;
+                line-height: 2.25rem !important;
+            }
+            
+            p {
+                font-size: 1rem !important;
+            }
+            
+            .py-16 {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .animated-video {
+            transition: all 0.3s ease;
+        }
+        
+        .animated-video:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Footer Styles */
+        footer.bg-dark {
+            background-color: #0f172a;
+        }
+        
+        footer .text-primary {
+            color: #3b82f6;
+        }
+        
+        /* Responsive table improvements */
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            th, td {
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        /* Schedule section improvements */
+        #schedule {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Ensure buttons are properly spaced on mobile */
+        @media (max-width: 640px) {
+            .flex-col {
+                gap: 0.75rem;
+            }
+            
+            .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+                margin-top: 0.75rem;
+            }
+        }
+        
+        footer .hover\:bg-primary:hover {
+            background-color: #3b82f6;
+        }
+        
+        footer .text-gray-400 {
+            color: #9ca3af;
+        }
+        
+        footer .hover\:text-white:hover {
+            color: #ffffff;
+        }
+        
+        footer .bg-gray-800 {
+            background-color: #1f2937;
+        }
+        
+        footer .border-gray-800 {
+            border-color: #1f2937;
+        }
+        
+        footer .text-gray-500 {
+            color: #6b7280;
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            h1 {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .py-16 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+            
+            .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+                margin-top: 0.75rem !important;
+            }
+            
+            /* Fix for schedule button */
+            a[href="#schedule"], a[href="#schedule"]:visited {
+                display: inline-block !important;
+                width: 100% !important;
+                text-align: center !important;
+                padding: 0.75rem 1rem !important;
+                background-color: #3b82f6 !important;
+                color: white !important;
+                border-radius: 0.5rem !important;
+                font-weight: 500 !important;
+                transition: all 0.3s ease !important;
+                text-decoration: none !important;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            }
+            
+            a[href="#schedule"]:hover {
+                background-color: #2563eb !important;
+                transform: translateY(-2px) !important;
+            }
+            
+            a[href="#schedule"]:active {
+                transform: translateY(0) !important;
+            }
+            
+            /* Table responsiveness */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            /* Grid adjustments */
+            .grid {
+                gap: 1rem !important;
+            }
+            
+            section {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+            
+            section h2 {
+                margin-bottom: 1.5rem !important;
+            }
+            
+            section h3 {
+                font-size: 1.25rem !important;
+            }
+        }

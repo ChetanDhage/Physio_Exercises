@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Exercises - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">John Doe</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Patient</p>
+                </div>
+            </div>
+            <a href="patient-dashboard.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+            </a>
+            <a href="patient-my-exercises.html" class="block py-3 px-4 rounded-lg bg-blue-50 text-primary mb-2">
+                <i class="fas fa-dumbbell mr-2 text-primary"></i> My Exercises
+            </a>
+            <a href="patient-subscription.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-credit-card mr-2 text-primary"></i> Subscription
+            </a>
+            <a href="patient-my-doctor.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-user-md mr-2 text-primary"></i> My Doctor
+            </a>
+            <a href="patient-appointments.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-calendar-alt mr-2 text-primary"></i> Appointments
+            </a>
+            <a href="patient-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-cog mr-2 text-primary"></i> Settings
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-primary"></i> Back to Home
+            </a>
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-3">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">John Doe</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Patient</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="patient-dashboard.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="patient-my-exercises.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg font-medium">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>My Exercises</span>
+                    </a>
+                    <a href="patient-subscription.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-credit-card mr-3"></i>
+                        <span>Subscription</span>
+                    </a>
+                    <a href="patient-my-doctor.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-user-md mr-3"></i>
+                        <span>My Doctor</span>
+                    </a>
+                    <a href="patient-appointments.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-calendar-alt mr-3"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="patient-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors mb-4">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Back to Home</span>
+                </a>
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">My Exercises</h1>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-primary transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-2">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">John Doe</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- My Exercises Content -->
+            <div class="p-6">
+                <!-- Search and Filter -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div class="relative flex-1">
+                            <input type="text" placeholder="Search exercises..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-4 py-2 bg-blue-100 text-primary rounded-lg hover:bg-blue-200 transition-colors font-medium">
+                                <i class="fas fa-filter mr-2"></i> Filter
+                            </button>
+                            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="all">All Categories</option>
+                                <option value="strength">Strength</option>
+                                <option value="flexibility">Flexibility</option>
+                                <option value="balance">Balance</option>
+                                <option value="cardio">Cardio</option>
+                            </select>
+                            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="all">All Difficulties</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Exercise Plan -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Your Exercise Plan</h2>
+                    <div class="bg-blue-50 rounded-lg p-4 mb-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800">Week 3: Strength & Flexibility</h3>
+                                <p class="text-gray-600">Recommended by Dr. Sarah Johnson</p>
+                            </div>
+                            <div>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">In Progress</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">65% completed</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x200" alt="Exercise Thumbnail" class="w-full h-40 object-cover">
+                                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">10:30</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-1">Lower Back Strengthening</h3>
+                                <p class="text-gray-600 text-sm mb-3">Focus on core and lower back muscles</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Strength</span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Intermediate</span>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-blue-700 text-sm font-medium">Start</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x200" alt="Exercise Thumbnail" class="w-full h-40 object-cover">
+                                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">8:45</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-1">Hip Mobility Routine</h3>
+                                <p class="text-gray-600 text-sm mb-3">Improve hip flexibility and range of motion</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Flexibility</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Beginner</span>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-blue-700 text-sm font-medium">Start</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x200" alt="Exercise Thumbnail" class="w-full h-40 object-cover">
+                                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">15:20</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-1">Core Stability Workout</h3>
+                                <p class="text-gray-600 text-sm mb-3">Build a strong and stable core</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Strength</span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Intermediate</span>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-blue-700 text-sm font-medium">Start</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                            <i class="fas fa-calendar-alt mr-2"></i> View Full Schedule
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recommended Exercises -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Recommended For You</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x200" alt="Exercise Thumbnail" class="w-full h-40 object-cover">
+                                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">12:15</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-1">Shoulder Mobility Routine</h3>
+                                <p class="text-gray-600 text-sm mb-3">Improve shoulder range of motion</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Flexibility</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Beginner</span>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-blue-700 text-sm font-medium">Start</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x200" alt="Exercise Thumbnail" class="w-full h-40 object-cover">
+                                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">9:30</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-1">Balance Training</h3>
+                                <p class="text-gray-600 text-sm mb-3">Improve stability and coordination</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">Balance</span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Intermediate</span>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-blue-700 text-sm font-medium">Start</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x200" alt="Exercise Thumbnail" class="w-full h-40 object-cover">
+                                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">7:45</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-1">Gentle Stretching Routine</h3>
+                                <p class="text-gray-600 text-sm mb-3">Full body flexibility improvement</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Flexibility</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Beginner</span>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-blue-700 text-sm font-medium">Start</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a href="all-exercises.html" class="inline-flex items-center px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors font-medium">
+                            <i class="fas fa-th-large mr-2"></i> Browse All Exercises
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Progress Tracking -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Your Progress</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Exercises Completed</h3>
+                            <p class="text-3xl font-bold text-primary">24</p>
+                            <p class="text-sm text-gray-600">This month</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Total Minutes</h3>
+                            <p class="text-3xl font-bold text-green-600">320</p>
+                            <p class="text-sm text-gray-600">This month</p>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Consistency</h3>
+                            <p class="text-3xl font-bold text-purple-600">85%</p>
+                            <p class="text-sm text-gray-600">Weekly goal achievement</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-800 mb-4">Weekly Activity</h3>
+                        <div class="flex items-center justify-between h-40 px-4">
+                            <!-- Placeholder for chart -->
+                            <div class="w-full h-full flex items-end justify-between">
+                                <div class="w-8 bg-blue-200 rounded-t-lg" style="height: 30%"></div>
+                                <div class="w-8 bg-blue-300 rounded-t-lg" style="height: 50%"></div>
+                                <div class="w-8 bg-blue-400 rounded-t-lg" style="height: 80%"></div>
+                                <div class="w-8 bg-blue-500 rounded-t-lg" style="height: 65%"></div>
+                                <div class="w-8 bg-blue-600 rounded-t-lg" style="height: 45%"></div>
+                                <div class="w-8 bg-blue-700 rounded-t-lg" style="height: 70%"></div>
+                                <div class="w-8 bg-blue-800 rounded-t-lg" style="height: 55%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between px-4 mt-2">
+                            <span class="text-xs text-gray-500">Mon</span>
+                            <span class="text-xs text-gray-500">Tue</span>
+                            <span class="text-xs text-gray-500">Wed</span>
+                            <span class="text-xs text-gray-500">Thu</span>
+                            <span class="text-xs text-gray-500">Fri</span>
+                            <span class="text-xs text-gray-500">Sat</span>
+                            <span class="text-xs text-gray-500">Sun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+        
+        // Logout functionality
+        function handleLogout() {
+            // Clear user data
+            localStorage.removeItem('userData');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+        
+        // Add logout event listeners
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+    </script>
+</body>
+</html>
