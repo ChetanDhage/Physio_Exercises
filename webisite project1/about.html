@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient-start: #4361ee;
+            --gradient-end: #3a0ca3;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-poppins bg-light">
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center">
+                    <div class="bg-gradient-to-r from-primary to-secondary w-10 h-10 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="ml-3 font-bold text-xl text-dark font-montserrat">StrideWell<span class="text-gradient">Studio</span></span>
+                </a>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a>
+                    <a href="index.html#exercises" class="text-gray-600 hover:text-primary transition">Exercises</a>
+                    <a href="index.html#subscription" class="text-gray-600 hover:text-primary transition">Subscription</a>
+                    <a href="index.html#appointment" class="text-gray-600 hover:text-primary transition">Appointment</a>
+                    <a href="index.html#testimonials" class="text-gray-600 hover:text-primary transition">Testimonials</a>
+                    <a href="#" class="text-primary font-medium">About Us</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section class="pt-32 pb-16 bg-white">
+      <!-- After the existing intro paragraph and before the grid of mission/approach/community cards -->
+<div class="mb-16">
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+        <p class="text-gray-700 leading-relaxed mb-4">Welcome to StrideWell Studio, where we bridge the gap between injury recovery and lifelong wellness. Founded and led by experienced physiotherapists and consultants, our mission is to empower you with the knowledge and tools to take control of your health.</p>
+        <p class="text-gray-700 leading-relaxed mb-4">We don't believe in one-size-fits-all solutions; instead, we excel at creating customized exercise plans that precisely fit your unique needs, helping you regain strength, improve mobility, and build lasting resilience.</p>
+        <p class="text-gray-700 leading-relaxed">Join us on your journey to a more active, pain-free life through expert guidance and personalized care.</p>
+    </div>
+</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-heart text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Our Mission</h3>
+                    <p class="text-gray-600">To make quality physiotherapy accessible to everyone through innovative digital solutions and personalized care programs.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-star text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Our Approach</h3>
+                    <p class="text-gray-600">We combine expert knowledge with cutting-edge technology to deliver tailored physiotherapy solutions that fit your lifestyle.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Our Community</h3>
+                    <p class="text-gray-600">Join thousands of satisfied clients who have transformed their lives through our comprehensive physiotherapy programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Team Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">OUR TEAM</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4 font-montserrat">Meet Our <span class="text-gradient">Expert Team</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Certified physiotherapists with specialized expertise</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="font-bold text-xl text-white font-montserrat">Dr. James Wilson</h3>
+                            <p class="text-accent">Sports Physiotherapy</p>
+                        </div>
+                    </div>
+                   <!-- For each doctor card, replace the existing p-6 div with this enhanced version -->
+<div class="p-6">
+    <p class="text-gray-600 mb-4">15+ years experience in athletic rehabilitation and performance enhancement. Specializes in sports injury recovery and prevention strategies for athletes of all levels.</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">Ph.D. Physiotherapy</span>
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">CSCS Certified</span>
+    </div>
+    <div class="text-sm text-gray-600">
+        <p class="flex items-center mb-1"><i class="fas fa-envelope text-primary mr-2"></i> james.wilson@stridewell.com</p>
+        <p class="flex items-center mb-1"><i class="fas fa-map-marker-alt text-primary mr-2"></i> Main Clinic, 1st Floor</p>
+        <p class="flex items-center mb-1"><i class="fas fa-phone text-primary mr-2"></i> (555) 123-4567</p>
+        <p class="flex items-center"><i class="fas fa-clock text-primary mr-2"></i> Mon, Wed, Fri: 9AM-5PM</p>
+    </div>
+</div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="font-bold text-xl text-white font-montserrat">Dr. Sarah Chen</h3>
+                            <p class="text-accent">Geriatric Physiotherapist</p>
+                        </div>
+                    </div>
+                   <!-- For each doctor card, replace the existing p-6 div with this enhanced version -->
+<div class="p-6">
+    <p class="text-gray-600 mb-4">15+ years experience in athletic rehabilitation and performance enhancement. Specializes in sports injury recovery and prevention strategies for athletes of all levels.</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">Ph.D. Physiotherapy</span>
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">CSCS Certified</span>
+    </div>
+    <div class="text-sm text-gray-600">
+        <p class="flex items-center mb-1"><i class="fas fa-envelope text-primary mr-2"></i> james.wilson@stridewell.com</p>
+        <p class="flex items-center mb-1"><i class="fas fa-map-marker-alt text-primary mr-2"></i> Main Clinic, 1st Floor</p>
+        <p class="flex items-center mb-1"><i class="fas fa-phone text-primary mr-2"></i> (555) 123-4567</p>
+        <p class="flex items-center"><i class="fas fa-clock text-primary mr-2"></i> Mon, Wed, Fri: 9AM-5PM</p>
+    </div>
+</div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="font-bold text-xl text-white font-montserrat">Dr. Robert Garcia</h3>
+                            <p class="text-accent">Orthopedic Specialist</p>
+                        </div>
+                    </div>
+                   <!-- For each doctor card, replace the existing p-6 div with this enhanced version -->
+<div class="p-6">
+    <p class="text-gray-600 mb-4">15+ years experience in athletic rehabilitation and performance enhancement. Specializes in sports injury recovery and prevention strategies for athletes of all levels.</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">Ph.D. Physiotherapy</span>
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">CSCS Certified</span>
+    </div>
+    <div class="text-sm text-gray-600">
+        <p class="flex items-center mb-1"><i class="fas fa-envelope text-primary mr-2"></i> james.wilson@stridewell.com</p>
+        <p class="flex items-center mb-1"><i class="fas fa-map-marker-alt text-primary mr-2"></i> Main Clinic, 1st Floor</p>
+        <p class="flex items-center mb-1"><i class="fas fa-phone text-primary mr-2"></i> (555) 123-4567</p>
+        <p class="flex items-center"><i class="fas fa-clock text-primary mr-2"></i> Mon, Wed, Fri: 9AM-5PM</p>
+    </div>
+</div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Doctor" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="font-bold text-xl text-white font-montserrat">Dr. Priya Sharma</h3>
+                            <p class="text-accent">Pediatric Specialist</p>
+                        </div>
+                    </div>
+                   <!-- For each doctor card, replace the existing p-6 div with this enhanced version -->
+<div class="p-6">
+    <p class="text-gray-600 mb-4">15+ years experience in athletic rehabilitation and performance enhancement. Specializes in sports injury recovery and prevention strategies for athletes of all levels.</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">Ph.D. Physiotherapy</span>
+        <span class="bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">CSCS Certified</span>
+    </div>
+    <div class="text-sm text-gray-600">
+        <p class="flex items-center mb-1"><i class="fas fa-envelope text-primary mr-2"></i> james.wilson@stridewell.com</p>
+        <p class="flex items-center mb-1"><i class="fas fa-map-marker-alt text-primary mr-2"></i> Main Clinic, 1st Floor</p>
+        <p class="flex items-center mb-1"><i class="fas fa-phone text-primary mr-2"></i> (555) 123-4567</p>
+        <p class="flex items-center"><i class="fas fa-clock text-primary mr-2"></i> Mon, Wed, Fri: 9AM-5PM</p>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2023 StrideWellStudio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

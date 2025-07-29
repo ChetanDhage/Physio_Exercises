@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Ashwini - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient-start: #4361ee;
+            --gradient-end: #3a0ca3;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(58, 12, 163, 0.05) 100%);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 20px;
+            bottom: -40px;
+            width: 4px;
+            background-color: var(--primary);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-poppins bg-light">
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center">
+                    <div class="bg-gradient-to-r from-primary to-secondary w-10 h-10 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="ml-3 font-bold text-xl text-dark font-montserrat">StrideWell<span class="text-gradient">Studio</span></span>
+                </a>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a>
+                    <a href="index.html#exercises" class="text-gray-600 hover:text-primary transition">Exercises</a>
+                    <a href="index.html#subscription" class="text-gray-600 hover:text-primary transition">Subscription</a>
+                    <a href="index.html#appointment" class="text-gray-600 hover:text-primary transition">Appointment</a>
+                    <a href="index.html#testimonials" class="text-gray-600 hover:text-primary transition">Testimonials</a>
+                    <a href="about.html" class="text-gray-600 hover:text-primary transition">About Us</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden text-gray-500 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 hero-section">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="Dr Ashwini.jpg" alt="Dr. Ashwini" class="rounded-2xl shadow-xl w-full max-w-md mx-auto">
+                </div>
+                <div class="md:w-1/2">
+                    <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">MUSCULOSKELETAL SPECIALIST</span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-dark mb-6 font-montserrat">Dr. <span class="text-gradient">Ashwini</span></h1>
+                    <p class="text-gray-600 text-lg mb-6">A dedicated physiotherapist specialising in musculoskeletal conditions with over 10 years of clinical experience.</p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="bg-blue-50 text-primary px-4 py-2 rounded-full">Master's degree Physiotherapy</span>
+                        <span class="bg-blue-50 text-primary px-4 py-2 rounded-full">Manual practitioner Certified</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm text-gray-500">Email</h3>
+                                <p class="font-medium">drashwininathani48@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm text-gray-500">Phone</h3>
+                                <p class="font-medium">9769057159</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm text-gray-500">Location</h3>
+                                <p class="font-medium">Shop no 06, building number 12, Dignity chs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-clock text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm text-gray-500">Hours</h3>
+                                <p class="font-medium">9 am to 12 pm</p>
+                            </div>
+                        </div>
+                         <div class="flex items-center">
+    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+        <i class="fas fa-id-card text-primary text-xl"></i>
+    </div>
+    <div>
+        <h3 class="text-sm text-gray-500"> Registration number </h3>
+        <p class="font-medium">2023/04/PT/011691</p>
+    </div>
+</div>
+
+                    </div>
+                    <a href="index.html#appointment" class="inline-block bg-primary text-white px-6 py-3 rounded-xl font-bold text-lg shadow-lg hover:bg-secondary transition">Book an Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center">About Dr. Ashwini</h2>
+                <div class="prose prose-lg max-w-none">
+                    <p class="mb-6">Hi, I am Dr.Ashwini. I am a dedicated physiotherapist specialising in musculoskeletal conditions. With a Bachelor's and Master's degree in Physiotherapy, I focus on providing personalised, evidence-based care to address chronic pain, joint discomfort, and work-related strain.</p>
+                    
+                    <p class="mb-6">My approach aims to identify the root cause of pain, improve mobility, and prevent future injuries, empowering patients to regain their quality of life and live actively. I believe in treating not just the symptoms but the whole person, creating comprehensive treatment plans that address both immediate concerns and long-term health goals.</p>
+                    
+                    <p class="mb-6">Throughout my career, I've worked with patients of all ages and backgrounds, from athletes recovering from sports injuries to office workers dealing with repetitive strain issues. This diverse experience has given me a unique perspective on how to tailor treatments to individual needs and lifestyles.</p>
+                    
+                    <p>I'm committed to continuing education and staying current with the latest research and techniques in physiotherapy. This allows me to offer my patients the most effective, evidence-based treatments available.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specializations Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">EXPERTISE</span>
+                <h2 class="text-3xl font-bold text-dark mb-4 font-montserrat">Areas of <span class="text-gradient">Specialization</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Focused expertise to address your specific needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bone text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Joint Mobilization</h3>
+                    <p class="text-gray-600">Specialized techniques to improve joint mobility, reduce pain, and enhance function in restricted joints.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-running text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sports Rehabilitation</h3>
+                    <p class="text-gray-600">Comprehensive recovery programs for athletes and active individuals recovering from sports-related injuries.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-hand-holding-medical text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Manual Therapy</h3>
+                    <p class="text-gray-600">Hands-on techniques to treat muscle and joint pain, improving tissue mobility and reducing discomfort.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Workplace Ergonomics</h3>
+                    <p class="text-gray-600">Assessment and recommendations for optimal workplace setups to prevent strain and repetitive stress injuries.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-heartbeat text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Chronic Pain Management</h3>
+                    <p class="text-gray-600">Comprehensive approaches to managing and reducing persistent pain conditions through targeted interventions.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-dumbbell text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Therapeutic Exercise</h3>
+                    <p class="text-gray-600">Customized exercise programs designed to strengthen muscles, improve flexibility, and enhance overall function.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">JOURNEY</span>
+                <h2 class="text-3xl font-bold text-dark mb-4 font-montserrat">Professional <span class="text-gradient">Experience</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A decade of dedicated practice and continuous learning</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto relative pl-12">
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200"></div>
+                
+                <div class="relative mb-12 timeline-item pl-8">
+                    <h3 class="text-xl font-bold mb-2">Senior Physiotherapist</h3>
+                    <p class="text-primary font-medium mb-2">StrideWell Studio • 2018 - Present</p>
+                    <p class="text-gray-600">Leading the musculoskeletal department, developing specialized treatment protocols, and mentoring junior physiotherapists.</p>
+                </div>
+                
+                <div class="relative mb-12 timeline-item pl-8">
+                    <h3 class="text-xl font-bold mb-2">Physiotherapist</h3>
+                    <p class="text-primary font-medium mb-2">City General Hospital • 2015 - 2018</p>
+                    <p class="text-gray-600">Provided comprehensive physiotherapy services in the outpatient department, specializing in post-surgical rehabilitation and sports injuries.</p>
+                </div>
+                
+                <div class="relative mb-12 timeline-item pl-8">
+                    <h3 class="text-xl font-bold mb-2">Junior Physiotherapist</h3>
+                    <p class="text-primary font-medium mb-2">Wellness Rehabilitation Center • 2013 - 2015</p>
+                    <p class="text-gray-600">Assisted senior therapists in patient assessments and treatment plans, focusing on musculoskeletal conditions and pain management.</p>
+                </div>
+                
+                <div class="relative timeline-item pl-8">
+                    <h3 class="text-xl font-bold mb-2">Master's in Physiotherapy</h3>
+                    <p class="text-primary font-medium mb-2">National Institute of Physiotherapy • 2011 - 2013</p>
+                    <p class="text-gray-600">Specialized in musculoskeletal physiotherapy with research focus on workplace ergonomics and repetitive strain injuries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-14">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">TESTIMONIALS</span>
+                <h2 class="text-3xl font-bold text-dark mb-4 font-montserrat">Patient <span class="text-gradient">Success Stories</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Real experiences from people I've helped</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mr-4 text-xl font-bold text-primary">RK</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Rahul Kumar</h3>
+                            <p class="text-gray-500">Office Worker</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"After months of chronic back pain from sitting at my desk, Dr. Ashwini's treatment plan completely transformed my daily life. Her ergonomic recommendations and targeted exercises eliminated my pain within weeks."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mr-4 text-xl font-bold text-primary">SP</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Sanya Patel</h3>
+                            <p class="text-gray-500">Marathon Runner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Dr. Ashwini's sports rehabilitation program helped me recover from a serious knee injury and return to running. Her expertise and personalized approach made all the difference in my recovery journey."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mr-4 text-xl font-bold text-primary">MJ</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Michael Johnson</h3>
+                            <p class="text-gray-500">Retired Teacher</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"After years of shoulder pain, I had given up hope of improvement. Dr. Ashwini's manual therapy techniques and patient-centered approach have given me back mobility I thought was lost forever."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 font-montserrat" style="color:rgb(42, 40, 40)">Ready to Start Your Recovery Journey?</h2>
+            <p class="ap" style="color:rgb(61, 61, 217)">Book an appointment with Dr. Ashwini today</p>
+            <a href="index.html#appointment" class="bg-white text-primary px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-gray-100 transition transform hover:-translate-y-1">
+    Schedule Consultation
+</a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2023 StrideWellStudio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden" id="mobile-menu-overlay">
+        <div class="bg-white h-full w-64 p-6 shadow-lg transform transition-transform duration-300" id="mobile-menu">
+            <div class="flex justify-between items-center mb-8">
+                <a href="index.html" class="flex items-center">
+                    <div class="bg-gradient-to-r from-primary to-secondary w-8 h-8 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">S</span>
+                    </div>
+                    <span class="ml-2 font-bold text-lg text-dark font-montserrat">StrideWell</span>
+                </a>
+                <button class="text-gray-500 focus:outline-none" id="close-mobile-menu">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-4">
+                <a href="index.html" class="text-gray-600 hover:text-primary transition py-2">Home</a>
+                <a href="index.html#exercises" class="text-gray-600 hover:text-primary transition py-2">Exercises</a>
+                <a href="index.html#subscription" class="text-gray-600 hover:text-primary transition py-2">Subscription</a>
+                <a href="index.html#appointment" class="text-gray-600 hover:text-primary transition py-2">Appointment</a>
+                <a href="index.html#testimonials" class="text-gray-600 hover:text-primary transition py-2">Testimonials</a>
+                <a href="about.html" class="text-gray-600 hover:text-primary transition py-2">About Us</a>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('button.md\\:hidden');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            
+            if (mobileMenuButton && mobileMenuOverlay && closeMobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('hidden');
+                    document.getElementById('mobile-menu').classList.add('translate-x-0');
+                    document.getElementById('mobile-menu').classList.remove('-translate-x-full');
+                });
+                
+                closeMobileMenuButton.addEventListener('click', function() {
+                    document.getElementById('mobile-menu').classList.remove('translate-x-0');
+                    document.getElementById('mobile-menu').classList.add('-translate-x-full');
+                    setTimeout(function() {
+                        mobileMenuOverlay.classList.add('hidden');
+                    }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

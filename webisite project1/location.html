@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Location - StrideWell Studio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom CSS */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background-image: url('https://assets.website-files.com/5e6c01bb5212506d6c119069/5e6c01bb5212501b4c119091_wave.svg');
+            background-size: cover;
+            background-position: center bottom;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #4361ee, #3a0ca3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        accent: '#4cc9f0',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        gradient: {
+                            start: '#4361ee',
+                            end: '#3a0ca3'
+                        }
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins bg-light">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl p-6">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Home</a>
+            <a href="index.html#exercises" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Exercises</a>
+            <a href="index.html#subscription" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Subscription</a>
+            <a href="index.html#appointment" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Appointment</a>
+            <a href="index.html#testimonials" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Testimonials</a>
+            <a href="index.html#about" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Expert</a>
+            <a href="about.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">About Us</a>
+            <a href="location.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium text-primary">Location</a>
+            <a href="dr-ashwini.html#coordinate" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">Coordinate with Dr.</a>
+            <a href="index.html#faq" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 font-medium">FAQ</a>
+            <a href="index.html#contact" class="block py-3 px-4 rounded-lg hover:bg-blue-50 font-medium">Contact</a>
+        </div>
+        <div class="mt-auto pt-6 border-t border-gray-200" id="mobile-auth-section">
+            <a href="login.html" class="block w-full bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg mb-4 font-medium hover:shadow-lg transition">Login</a>
+            <a href="signup.html" class="block w-full border border-primary text-primary text-center py-3 rounded-lg mb-4 font-medium hover:bg-blue-50 transition">Sign Up</a>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-primary transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-600 hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-600 hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="bg-gradient-to-r from-primary to-secondary w-10 h-10 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="ml-3 font-bold text-xl text-dark font-montserrat">StrideWell<span class="text-gradient">Studio</span></span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a>
+                    <a href="index.html#exercises" class="text-gray-600 hover:text-primary transition">Exercises</a>
+                    <a href="index.html#subscription" class="text-gray-600 hover:text-primary transition">Subscription</a>
+                    <a href="index.html#appointment" class="text-gray-600 hover:text-primary transition">Appointment</a>
+                    <a href="index.html#testimonials" class="text-gray-600 hover:text-primary transition">Testimonials</a>
+                    <a href="dr-ashwini.html#coordinate" class="text-gray-600 hover:text-primary transition">Coordinate with Dr.</a>
+                    <a href="index.html#about" class="text-gray-600 hover:text-primary transition">Expert</a>
+                    <a href="about.html" class="text-gray-600 hover:text-primary transition">About Us</a>
+                    <a href="location.html" class="text-primary font-medium hover:text-secondary transition">Location</a>
+                </nav>
+                
+                <div class="md:flex items-center space-x-4" id="header-auth-buttons">
+                    <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-lg hover:shadow-lg transition font-medium">Login</a>
+                    <a href="signup.html" class="bg-white text-primary border border-primary px-6 py-2 rounded-lg hover:bg-blue-50 transition font-medium">Sign Up</a>
+                </div>
+                
+                <button class="md:hidden text-2xl text-gray-600 open-menu focus:outline-none" >
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 hero-section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">OUR LOCATION</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 font-montserrat">Visit Our <span class="text-accent">Wellness Center</span></h1>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto">Find us at our state-of-the-art facility where we provide personalized care in a healing environment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Details Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Map -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215573036935!2d-73.98784492346177!3d40.748440471397615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b30eac9f%3A0xaca8d3c35b1c6631!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1701234567890!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    
+                    <!-- Address & Hours -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-dark mb-6 font-montserrat">Our <span class="text-gradient">Address</span></h2>
+                        
+                        <div class="mb-8">
+                            <div class="flex items-start mb-4">
+                                <div class="bg-gradient-to-r from-primary to-secondary w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">StrideWell Studio</h3>
+                                    <p class="text-gray-600">123 Wellness Street</p>
+                                    <p class="text-gray-600">Health City, HC 10001</p>
+                                    <p class="text-gray-600">United States</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start mb-4">
+                                <div class="bg-gradient-to-r from-primary to-secondary w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+                                    <i class="fas fa-phone-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">Phone</h3>
+                                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                                    <p class="text-gray-600">+1 (555) 987-6543</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-gradient-to-r from-primary to-secondary w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+                                    <i class="fas fa-clock text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">Hours of Operation</h3>
+                                    <p class="text-gray-600">Monday - Friday: 8:00 AM - 8:00 PM</p>
+                                    <p class="text-gray-600">Saturday: 9:00 AM - 5:00 PM</p>
+                                    <p class="text-gray-600">Sunday: 10:00 AM - 3:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#appointment" class="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1" style="color:rgb(59, 59, 59)">
+                            Book an Appointment <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transportation Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">GETTING HERE</span>
+                    <h2 class="text-3xl font-bold text-dark mb-6 font-montserrat">Transportation <span class="text-gradient">Options</span></h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Multiple convenient ways to reach our wellness center</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Public Transit -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-subway text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-4">Public Transit</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-train text-primary mr-3 mt-1"></i>
+                                <span>Blue Line - Health City Station (2 blocks)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-bus text-primary mr-3 mt-1"></i>
+                                <span>Bus Routes 42, 56, 78 (stop in front)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Parking -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-parking text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-4">Parking</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-car text-primary mr-3 mt-1"></i>
+                                <span>On-site parking available (limited)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-building text-primary mr-3 mt-1"></i>
+                                <span>Public parking garage (1 block away)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-info-circle text-primary mr-3 mt-1"></i>
+                                <span>Validation available for patients</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Accessibility -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-wheelchair text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-4">Accessibility</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-universal-access text-primary mr-3 mt-1"></i>
+                                <span>Wheelchair accessible entrance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-elevator text-primary mr-3 mt-1"></i>
+                                <span>Elevators to all floors</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-restroom text-primary mr-3 mt-1"></i>
+                                <span>Accessible restrooms</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Tour Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">EXPLORE OUR FACILITY</span>
+                    <h2 class="text-3xl font-bold text-dark mb-6 font-montserrat">Take a <span class="text-gradient">Virtual Tour</span></h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Get a glimpse of our state-of-the-art facility before your visit</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Image 1 -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg card-hover">
+                        <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Reception Area" class="w-full h-64 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg">Reception Area</h3>
+                            <p class="text-gray-600 text-sm">Our welcoming front desk and waiting area</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Image 2 -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg card-hover">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Treatment Room" class="w-full h-64 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg">Treatment Room</h3>
+                            <p class="text-gray-600 text-sm">Private space for personalized therapy sessions</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Image 3 -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg card-hover">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Exercise Area" class="w-full h-64 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg">Exercise Area</h3>
+                            <p class="text-gray-600 text-sm">Fully equipped space for rehabilitation exercises</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10">
+                    <a href="#" class="inline-block bg-white border border-primary text-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-blue-50 transition transform hover:-translate-y-1">
+                        View Full Gallery <i class="fas fa-images ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 font-montserrat">Ready to Visit Our Center?</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto" style="color:#4361ee">Book an appointment or contact us for more information</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="index.html#appointment" class="bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-gray-100 transition inline-block transform hover:-translate-y-1" style="display: inline-block !important; color:black">
+                    Book Appointment <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="index.html#contact" class="bg-accent text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-opacity-90 transition inline-block transform hover:-translate-y-1" style="display: inline-block !important; background-color: #4cc9f0 !important;">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2023 StrideWellStudio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const openMenuBtn = document.querySelector('.open-menu');
+            const closeMenuBtn = document.querySelector('.close-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (openMenuBtn && closeMenuBtn && mobileMenu) {
+                openMenuBtn.addEventListener('click', function() {
+                    mobileMenu.style.transform = 'translateX(0)';
+                });
+                
+                closeMenuBtn.addEventListener('click', function() {
+                    mobileMenu.style.transform = 'translateX(100%)';
+                });
+                
+                // Close menu when clicking on a link
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.style.transform = 'translateX(100%)';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Management - StrideWellStudio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Doctor</p>
+                </div>
+            </div>
+            <a href="doctor-dashboard.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Dashboard
+            </a>
+            <a href="doctor-my-patients.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-users mr-2 text-primary"></i> My Patients
+            </a>
+            <a href="doctor-subscription-management.html" class="block py-3 px-4 rounded-lg bg-blue-50 text-primary mb-2">
+                <i class="fas fa-credit-card mr-2 text-primary"></i> Subscription Management
+            </a>
+            <a href="doctor-appointments.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-calendar-alt mr-2 text-primary"></i> Appointments
+            </a>
+            <a href="doctor-exercise-programs.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dumbbell mr-2 text-primary"></i> Exercise Programs
+            </a>
+            <a href="doctor-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-cog mr-2 text-primary"></i> Settings
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-primary"></i> Back to Home
+            </a>
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">Dr. Sarah Johnson</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Doctor</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="doctor-dashboard.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="doctor-my-patients.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>My Patients</span>
+                    </a>
+                    <a href="doctor-subscription-management.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg font-medium">
+                        <i class="fas fa-credit-card mr-3"></i>
+                        <span>Subscription Management</span>
+                    </a>
+                    <a href="doctor-appointments.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-calendar-alt mr-3"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="doctor-exercise-programs.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>Exercise Programs</span>
+                    </a>
+                    <a href="doctor-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors mb-4">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Back to Home</span>
+                </a>
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">Subscription Management</h1>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-primary transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center mr-2">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">Dr. Sarah Johnson</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Subscription Management Content -->
+            <div class="p-6">
+                <!-- Current Subscription Plans -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Current Subscription Plans</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Monthly Plan -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">Monthly Plan</h3>
+                                    <p class="text-gray-500 text-sm">Basic rehabilitation services</p>
+                                </div>
+                                <span class="bg-blue-100 text-primary text-xs font-semibold px-3 py-1 rounded-full">Popular</span>
+                            </div>
+                            
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-3xl font-bold text-gray-900" id="monthly-price">$29</span>
+                                <span class="text-gray-500 ml-1">/month</span>
+                            </div>
+                            
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Access to all exercise videos</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">1 virtual consultation per month</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Basic progress tracking</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Email support</span>
+                                </li>
+                            </ul>
+                            
+                            <button class="edit-plan-btn w-full py-2 border border-primary text-primary rounded-lg hover:bg-blue-50 transition-colors font-medium" data-plan="monthly" data-current-price="29">
+                                Edit Plan
+                            </button>
+                        </div>
+                        
+                        <!-- Half Yearly Plan -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">Half Yearly Plan</h3>
+                                    <p class="text-gray-500 text-sm">Enhanced rehabilitation services</p>
+                                </div>
+                                <span class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">Best Value</span>
+                            </div>
+                            
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-3xl font-bold text-gray-900" id="half-yearly-price">$149</span>
+                                <span class="text-gray-500 ml-1">/6 months</span>
+                            </div>
+                            
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">All Monthly Plan features</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">2 virtual consultations per month</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Advanced progress tracking</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Priority email & chat support</span>
+                                </li>
+                            </ul>
+                            
+                            <button class="edit-plan-btn w-full py-2 border border-primary text-primary rounded-lg hover:bg-blue-50 transition-colors font-medium" data-plan="half-yearly" data-current-price="149">
+                                Edit Plan
+                            </button>
+                        </div>
+                        
+                        <!-- Yearly Plan -->
+                        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">Yearly Plan</h3>
+                                    <p class="text-gray-500 text-sm">Premium rehabilitation services</p>
+                                </div>
+                                <span class="bg-purple-100 text-purple-600 text-xs font-semibold px-3 py-1 rounded-full">Premium</span>
+                            </div>
+                            
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-3xl font-bold text-gray-900" id="yearly-price">$279</span>
+                                <span class="text-gray-500 ml-1">/year</span>
+                            </div>
+                            
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">All Half Yearly Plan features</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Unlimited virtual consultations</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">Personalized exercise programs</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span class="text-gray-600">24/7 priority support</span>
+                                </li>
+                            </ul>
+                            
+                            <button class="edit-plan-btn w-full py-2 border border-primary text-primary rounded-lg hover:bg-blue-50 transition-colors font-medium" data-plan="yearly" data-current-price="279">
+                                Edit Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subscription Analytics -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Subscription Analytics</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <!-- Total Subscribers -->
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Subscribers</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">247</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-users text-primary text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center">
+                                <span class="text-green-500 flex items-center text-sm font-medium">
+                                    <i class="fas fa-arrow-up mr-1"></i> 12%
+                                </span>
+                                <span class="text-gray-500 text-sm ml-2">vs last month</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Monthly Revenue -->
+                        <div class="bg-green-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Monthly Revenue</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">$8,742</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center">
+                                <span class="text-green-500 flex items-center text-sm font-medium">
+                                    <i class="fas fa-arrow-up mr-1"></i> 8.3%
+                                </span>
+                                <span class="text-gray-500 text-sm ml-2">vs last month</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Most Popular Plan -->
+                        <div class="bg-purple-50 rounded-xl p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Most Popular Plan</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">Monthly</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                                    <i class="fas fa-crown text-purple-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center">
+                                <span class="text-purple-600 text-sm font-medium">58% of subscribers</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Subscription Distribution Chart -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Subscription Distribution</h3>
+                        <div class="h-64 flex items-end justify-around">
+                            <div class="flex flex-col items-center">
+                                <div class="w-20 bg-primary rounded-t-lg" style="height: 58%;"></div>
+                                <p class="mt-2 text-sm font-medium text-gray-700">Monthly</p>
+                                <p class="text-xs text-gray-500">58%</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-20 bg-green-500 rounded-t-lg" style="height: 27%;"></div>
+                                <p class="mt-2 text-sm font-medium text-gray-700">Half Yearly</p>
+                                <p class="text-xs text-gray-500">27%</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-20 bg-purple-500 rounded-t-lg" style="height: 15%;"></div>
+                                <p class="mt-2 text-sm font-medium text-gray-700">Yearly</p>
+                                <p class="text-xs text-gray-500">15%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Subscription Activity -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Recent Subscription Activity</h2>
+                        <button class="text-primary hover:text-blue-700 transition-colors font-medium">
+                            View All
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Patient</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">John Doe</p>
+                                                <p class="text-sm text-gray-500">john.doe@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">Monthly</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">$29</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Successful</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        May 12, 2023
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Emily Wilson</p>
+                                                <p class="text-sm text-gray-500">emily.w@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">Half Yearly</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">$149</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Successful</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        May 10, 2023
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Michael Brown</p>
+                                                <p class="text-sm text-gray-500">michael.b@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">Yearly</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">$279</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Successful</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        May 8, 2023
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">Sarah Johnson</p>
+                                                <p class="text-sm text-gray-500">sarah.j@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">Monthly</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">$29</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        May 7, 2023
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-800">David Lee</p>
+                                                <p class="text-sm text-gray-500">david.l@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">Half Yearly</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-gray-700">$149</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Failed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        May 5, 2023
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Plan Modal -->
+    <div id="edit-plan-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800" id="modal-title">Edit Monthly Plan</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="edit-plan-form">
+                <div class="mb-4">
+                    <label for="plan-name" class="block text-sm font-medium text-gray-700 mb-1">Plan Name</label>
+                    <input type="text" id="plan-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="Monthly Plan" readonly>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="plan-price" class="block text-sm font-medium text-gray-700 mb-1">Price ($)</label>
+                    <input type="number" id="plan-price" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="29">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="plan-description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea id="plan-description" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Basic rehabilitation services</textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Features</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="Access to all exercise videos">
+                        </div>
+                        <div class="flex items-center">
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="1 virtual consultation per month">
+                        </div>
+                        <div class="flex items-center">
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="Basic progress tracking">
+                        </div>
+                        <div class="flex items-center">
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="Email support">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancel-edit" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" id="save-plan-changes" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const openMenuBtn = document.querySelector('.open-menu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Redirect if not logged in or not a doctor
+            if (!currentUser || !currentUser.loggedIn || currentUser.role !== 'doctor') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Update user information
+            const userName = currentUser.firstName ?
+                `${currentUser.firstName} ${currentUser.lastName}` :
+                currentUser.name || currentUser.email.split('@')[0];
+                
+            // Update sidebar user info
+            document.getElementById('sidebar-user-name').textContent = userName;
+            document.getElementById('sidebar-user-role').textContent = currentUser.role || 'User';
+            
+            // Update mobile menu user info
+            document.getElementById('mobile-user-name').textContent = userName;
+            document.getElementById('mobile-user-role').textContent = currentUser.role || 'User';
+        });
+        
+        // Edit Plan Modal
+        const editPlanBtns = document.querySelectorAll('.edit-plan-btn');
+        const editPlanModal = document.getElementById('edit-plan-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const cancelEditBtn = document.getElementById('cancel-edit');
+        const modalTitle = document.getElementById('modal-title');
+        const planNameInput = document.getElementById('plan-name');
+        const planPriceInput = document.getElementById('plan-price');
+        const planDescriptionInput = document.getElementById('plan-description');
+        const editPlanForm = document.getElementById('edit-plan-form');
+        
+        let currentPlan = '';
+        
+        editPlanBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentPlan = btn.dataset.plan;
+                const currentPrice = btn.dataset.currentPrice;
+                
+                // Set modal title and form values based on plan
+                if (currentPlan === 'monthly') {
+                    modalTitle.textContent = 'Edit Monthly Plan';
+                    planNameInput.value = 'Monthly Plan';
+                    planPriceInput.value = currentPrice;
+                    planDescriptionInput.value = 'Basic rehabilitation services';
+                } else if (currentPlan === 'half-yearly') {
+                    modalTitle.textContent = 'Edit Half Yearly Plan';
+                    planNameInput.value = 'Half Yearly Plan';
+                    planPriceInput.value = currentPrice;
+                    planDescriptionInput.value = 'Enhanced rehabilitation services';
+                } else if (currentPlan === 'yearly') {
+                    modalTitle.textContent = 'Edit Yearly Plan';
+                    planNameInput.value = 'Yearly Plan';
+                    planPriceInput.value = currentPrice;
+                    planDescriptionInput.value = 'Premium rehabilitation services';
+                }
+                
+                // Show modal
+                editPlanModal.classList.remove('hidden');
+            });
+        });
+        
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            editPlanModal.classList.add('hidden');
+        });
+        
+        cancelEditBtn.addEventListener('click', () => {
+            editPlanModal.classList.add('hidden');
+        });
+        
+        // Save plan changes
+        editPlanForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const newPrice = planPriceInput.value;
+            
+            // Update price on the page
+            if (currentPlan === 'monthly') {
+                document.getElementById('monthly-price').textContent = '$' + newPrice;
+            } else if (currentPlan === 'half-yearly') {
+                document.getElementById('half-yearly-price').textContent = '$' + newPrice;
+            } else if (currentPlan === 'yearly') {
+                document.getElementById('yearly-price').textContent = '$' + newPrice;
+            }
+            
+            // Update data-current-price attribute
+            document.querySelector(`[data-plan="${currentPlan}"]`).dataset.currentPrice = newPrice;
+            
+            // Update subscription prices across the website
+            updateSubscriptionPrices(currentPlan, newPrice);
+            
+            // Close modal
+            editPlanModal.classList.add('hidden');
+            
+            // Show success message
+            alert(`${planNameInput.value} price updated successfully to $${newPrice}`);
+        });
+        
+        // Function to update subscription prices across the website
+        function updateSubscriptionPrices(plan, price) {
+            // In a real application, this would make an API call to update prices in the database
+            // and then update all instances of the price across the website
+            
+            // For demonstration purposes, we'll just log the change
+            console.log(`Updated ${plan} plan price to $${price}`);
+            
+            // This would trigger updates to all pages that display subscription prices
+            // localStorage could be used to store the updated prices temporarily
+            localStorage.setItem(`${plan}Price`, price);
+        }
+        
+        // Logout functionality
+        function handleLogout() {
+            // Clear user data
+            localStorage.removeItem('currentUser');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+        
+        // Add logout event listeners
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+    </script>
+</body>
+</html>

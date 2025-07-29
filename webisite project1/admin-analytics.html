@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Admin Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1d4ed8',
+                        accent: '#10b981',
+                        light: '#f0f9ff',
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-2xl p-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button class="close-menu absolute top-4 right-4 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-12">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center mr-3">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="mobile-user-name">Admin User</p>
+                    <p class="text-sm text-gray-500" id="mobile-user-role">Administrator</p>
+                </div>
+            </div>
+            <a href="admin-dashboard-pages.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-tachometer-alt mr-2 text-purple-600"></i> Dashboard
+            </a>
+            <a href="admin-doctors.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-user-md mr-2 text-purple-600"></i> Doctors
+            </a>
+            <a href="admin-patients.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-users mr-2 text-purple-600"></i> Patients
+            </a>
+            <a href="admin-subscription-plans.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dollar-sign mr-2 text-purple-600"></i> Subscription Plans
+            </a>
+            <a href="admin-exercise-programs.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-dumbbell mr-2 text-purple-600"></i> Exercise Programs
+            </a>
+            <a href="admin-analytics.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2 active">
+                <i class="fas fa-chart-line mr-2 text-purple-600"></i> Analytics
+            </a>
+            <a href="admin-settings.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-cog mr-2 text-purple-600"></i> Settings
+            </a>
+            <a href="index.html" class="block py-3 px-4 rounded-lg hover:bg-blue-50 mb-2">
+                <i class="fas fa-home mr-2 text-purple-600"></i> Back to Home
+            </a>
+        </div>
+        <div class="mt-auto pt-8">
+            <button id="mobile-logout-btn" class="block w-full border border-red-500 text-red-500 py-3 rounded-lg font-semibold text-center hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 p-6">
+            <div class="flex items-center mb-8">
+                <div class="bg-primary w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <span class="ml-3 font-bold text-xl text-dark">StrideWell<span class="text-primary">Studio</span></span>
+            </div>
+            
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-dark" id="sidebar-user-name">Admin User</p>
+                    <p class="text-sm text-gray-500" id="sidebar-user-role">Administrator</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1">
+                <div class="space-y-2">
+                    <a href="admin-dashboard-pages.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="admin-doctors.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-user-md mr-3"></i>
+                        <span>Doctors</span>
+                    </a>
+                    <a href="admin-patients.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>Patients</span>
+                    </a>
+                    <a href="admin-subscription-plans.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dollar-sign mr-3"></i>
+                        <span>Subscription Plans</span>
+                    </a>
+                    <a href="admin-exercise-programs.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-dumbbell mr-3"></i>
+                        <span>Exercise Programs</span>
+                    </a>
+                    <a href="admin-analytics.html" class="flex items-center px-4 py-3 text-purple-600 bg-purple-50 rounded-lg font-medium">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="admin-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-home mr-3"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="mt-auto pt-8">
+                <button id="sidebar-logout-btn" class="w-full flex items-center justify-center px-4 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="md:hidden text-gray-600 mr-4 open-menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-800">Analytics Dashboard</h1>
+                    </div>
+                    
+                    <!-- Auth Buttons (shown before login) -->
+                    <div class="flex items-center space-x-4" id="header-auth-buttons">
+                        <a href="login.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition font-medium">Login</a>
+                        <a href="signup.html" class="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition font-medium">Sign Up</a>
+                    </div>
+                    
+                    <!-- User Profile (shown after login) -->
+                    <div class="flex items-center space-x-4" id="header-user-profile">
+                        <div class="relative">
+                            <button class="text-gray-600 hover:text-purple-600 transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-2">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 hidden sm:inline-block" id="header-user-name">Admin User</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Business Analytics</h2>
+                        <p class="text-gray-600">Monitor key performance indicators and business metrics</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-3">
+                        <div class="relative">
+                            <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-purple-600">
+                                <option value="7">Last 7 days</option>
+                                <option value="30" selected>Last 30 days</option>
+                                <option value="90">Last 90 days</option>
+                                <option value="365">Last year</option>
+                                <option value="custom">Custom range</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                        <button class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-download mr-2"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <!-- Revenue Card -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">Total Revenue</h3>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                12.5%
+                            </span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <p class="text-2xl font-bold text-gray-900">$48,295</p>
+                            <p class="ml-2 text-sm text-gray-500">this month</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500 rounded-full" style="width: 78%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>Target: $62,000</span>
+                                <span>78% achieved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Patients Card -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">New Patients</h3>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                8.3%
+                            </span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <p class="text-2xl font-bold text-gray-900">142</p>
+                            <p class="ml-2 text-sm text-gray-500">this month</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>Target: 167</span>
+                                <span>85% achieved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Subscriptions Card -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">Active Subscriptions</h3>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                5.2%
+                            </span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <p class="text-2xl font-bold text-gray-900">1,248</p>
+                            <p class="ml-2 text-sm text-gray-500">total</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 rounded-full" style="width: 92%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>Target: 1,350</span>
+                                <span>92% achieved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Churn Rate Card -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">Churn Rate</h3>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                1.2%
+                            </span>
+                        </div>
+                        <div class="flex items-baseline">
+                            <p class="text-2xl font-bold text-gray-900">3.8%</p>
+                            <p class="ml-2 text-sm text-gray-500">this month</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-red-500 rounded-full" style="width: 38%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <span>Target: < 3.0%</span>
+                                <span>38% over target</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Revenue Chart -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-gray-800">Revenue Trends</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600">Monthly</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Quarterly</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Yearly</button>
+                            </div>
+                        </div>
+                        <div class="h-80">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Subscription Plans Chart -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-gray-800">Subscription Distribution</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600">All Plans</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">By Region</button>
+                            </div>
+                        </div>
+                        <div class="h-80 flex items-center justify-center">
+                            <div class="w-full max-w-md">
+                                <canvas id="subscriptionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Demographics & Doctor Performance -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Patient Demographics -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-gray-800">Patient Demographics</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600">Age</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Gender</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Location</button>
+                            </div>
+                        </div>
+                        <div class="h-80">
+                            <canvas id="demographicsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Performance -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-gray-800">Doctor Performance</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600">Revenue</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Patients</button>
+                                <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Ratings</button>
+                            </div>
+                        </div>
+                        <div class="h-80">
+                            <canvas id="doctorPerformanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Program Analytics -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 mb-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-800">Exercise Program Analytics</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600">Popularity</button>
+                            <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Completion Rate</button>
+                            <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">User Ratings</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program Name</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enrollments</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completion Rate</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avg. Rating</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">Core Strength Builder</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Strength</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">156</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <span class="text-gray-600 mr-2">78%</span>
+                                            <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                                <div class="h-full bg-green-500 rounded-full" style="width: 78%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center text-gray-600">
+                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                            <span>4.7</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            12%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">Cardio Blast</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Cardio</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">203</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <span class="text-gray-600 mr-2">65%</span>
+                                            <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                                <div class="h-full bg-yellow-500 rounded-full" style="width: 65%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center text-gray-600">
+                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                            <span>4.2</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            8%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">Flexibility & Mobility</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Flexibility</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">178</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <span class="text-gray-600 mr-2">82%</span>
+                                            <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                                <div class="h-full bg-green-500 rounded-full" style="width: 82%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center text-gray-600">
+                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                            <span>4.8</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            15%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">Knee Rehabilitation</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Rehabilitation</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">92</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <span class="text-gray-600 mr-2">91%</span>
+                                            <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                                <div class="h-full bg-green-500 rounded-full" style="width: 91%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center text-gray-600">
+                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                            <span>4.9</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            5%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">Tennis Performance</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">Sports</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <span class="text-gray-600 mr-2">0%</span>
+                                            <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                                <div class="h-full bg-gray-500 rounded-full" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center text-gray-600">
+                                            <i class="fas fa-minus text-gray-400 mr-1"></i>
+                                            <span>N/A</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center text-gray-600">
+                                            <i class="fas fa-minus mr-1"></i>
+                                            N/A
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- User Engagement Metrics -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-800">User Engagement Metrics</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600">Weekly</button>
+                            <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Monthly</button>
+                            <button class="px-3 py-1 text-xs font-medium rounded-full text-gray-500 hover:bg-gray-100">Quarterly</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Active Users -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-sm font-medium text-gray-500">Active Users</h4>
+                                <span class="inline-flex items-center text-green-600 text-xs font-medium">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    18%
+                                </span>
+                            </div>
+                            <div class="flex items-baseline mb-4">
+                                <p class="text-xl font-bold text-gray-900">876</p>
+                                <p class="ml-2 text-xs text-gray-500">daily average</p>
+                            </div>
+                            <div class="flex space-x-1 h-10">
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 40%"></div>
+                                </div>
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 65%"></div>
+                                </div>
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 50%"></div>
+                                </div>
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 70%"></div>
+                                </div>
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 85%"></div>
+                                </div>
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 75%"></div>
+                                </div>
+                                <div class="w-1/7 bg-purple-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-purple-500 rounded-sm" style="height: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Session Duration -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-sm font-medium text-gray-500">Avg. Session Duration</h4>
+                                <span class="inline-flex items-center text-green-600 text-xs font-medium">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    5%
+                                </span>
+                            </div>
+                            <div class="flex items-baseline mb-4">
+                                <p class="text-xl font-bold text-gray-900">12:45</p>
+                                <p class="ml-2 text-xs text-gray-500">minutes</p>
+                            </div>
+                            <div class="flex space-x-1 h-10">
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 60%"></div>
+                                </div>
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 70%"></div>
+                                </div>
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 65%"></div>
+                                </div>
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 80%"></div>
+                                </div>
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 75%"></div>
+                                </div>
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 85%"></div>
+                                </div>
+                                <div class="w-1/7 bg-blue-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-blue-500 rounded-sm" style="height: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Completion Rate -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-sm font-medium text-gray-500">Program Completion Rate</h4>
+                                <span class="inline-flex items-center text-green-600 text-xs font-medium">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    3%
+                                </span>
+                            </div>
+                            <div class="flex items-baseline mb-4">
+                                <p class="text-xl font-bold text-gray-900">72%</p>
+                                <p class="ml-2 text-xs text-gray-500">average</p>
+                            </div>
+                            <div class="flex space-x-1 h-10">
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 65%"></div>
+                                </div>
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 60%"></div>
+                                </div>
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 70%"></div>
+                                </div>
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 75%"></div>
+                                </div>
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 72%"></div>
+                                </div>
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 78%"></div>
+                                </div>
+                                <div class="w-1/7 bg-green-100 rounded-sm relative group">
+                                    <div class="absolute bottom-0 w-full bg-green-500 rounded-sm" style="height: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.open-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('translate-x-full');
+        });
+        
+        document.querySelector('.close-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.add('translate-x-full');
+        });
+
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            // Initially hide user profile and show auth buttons
+            document.getElementById('header-user-profile').classList.add('hidden');
+            document.getElementById('header-auth-buttons').classList.remove('hidden');
+            
+            if (!currentUser || !currentUser.loggedIn || currentUser.role !== 'admin') {
+                // Redirect to login if not logged in as admin
+                if (confirm('You need to be logged in as an administrator. Go to login page?')) {
+                    window.location.href = 'login.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+                return;
+            }
+            
+            // User is logged in as admin, show profile and hide auth buttons
+            document.getElementById('header-user-profile').classList.remove('hidden');
+            document.getElementById('header-auth-buttons').classList.add('hidden');
+            
+            // Update user info in the UI
+            const userName = currentUser.firstName ? 
+                `${currentUser.firstName} ${currentUser.lastName}` : 
+                currentUser.name || currentUser.email.split('@')[0];
+            
+            // Update sidebar user info
+            document.getElementById('sidebar-user-name').textContent = userName;
+            document.getElementById('sidebar-user-role').textContent = 'Administrator';
+            
+            // Update mobile menu user info
+            document.getElementById('mobile-user-name').textContent = userName;
+            document.getElementById('mobile-user-role').textContent = 'Administrator';
+            
+            // Update header user info
+            document.getElementById('header-user-name').textContent = userName;
+
+            // Initialize Charts
+            initializeCharts();
+        });
+
+        // Logout functionality
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('sidebar-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+
+        // Initialize Charts
+        function initializeCharts() {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [32000, 36000, 28000, 40000, 42000, 38000, 44000, 46000, 42000, 48000, 52000, 48000],
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Target',
+                        data: [35000, 35000, 35000, 40000, 40000, 40000, 45000, 45000, 45000, 50000, 50000, 50000],
+                        borderColor: '#d1d5db',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Subscription Chart
+            const subscriptionCtx = document.getElementById('subscriptionChart').getContext('2d');
+            const subscriptionChart = new Chart(subscriptionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Basic', 'Premium', 'Family', 'Corporate'],
+                    datasets: [{
+                        data: [35, 45, 15, 5],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#8b5cf6',
+                            '#ec4899',
+                            '#10b981'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Demographics Chart
+            const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
+            const demographicsChart = new Chart(demographicsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+                    datasets: [{
+                        label: 'Patients',
+                        data: [120, 250, 180, 140, 90, 60],
+                        backgroundColor: '#8b5cf6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Doctor Performance Chart
+            const doctorPerformanceCtx = document.getElementById('doctorPerformanceChart').getContext('2d');
+            const doctorPerformanceChart = new Chart(doctorPerformanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Dr. Johnson', 'Dr. Chen', 'Dr. Rodriguez', 'Dr. Wilson', 'Dr. Thompson'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [12500, 9800, 11200, 8500, 10300],
+                        backgroundColor: '#8b5cf6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
